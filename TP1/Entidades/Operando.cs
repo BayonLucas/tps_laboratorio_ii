@@ -10,7 +10,7 @@ namespace Entidades
     {
         private double numero;
 
-        #region Constructores
+        #region Constructores 
         public Operando()
         { }
         public Operando(double numero) : this()
