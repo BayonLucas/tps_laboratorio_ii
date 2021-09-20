@@ -44,16 +44,18 @@ namespace Entidades
             }
             return false;
         }
-        public string BinarioDecimal(string binario) //11011 = 1x2^4+1x2^3+0x2^2+1x2^1+1x2^0
+        public string BinarioDecimal(string binario)
         {
             int exponente = 0;
             int aux;
             double nDec = 0;
+            
             if (EsBinario(binario))
             {
                 for (int i = binario.Length - 1; i >= 0; i--)
                 {
-                    aux = (int)binario[i] * 2;
+                    int.TryParse(binario[i].ToString(), out int auxIntChar);
+                    aux = auxIntChar * 2;
                     nDec += Math.Pow(aux, exponente);
                     exponente++;
                 }
@@ -63,33 +65,31 @@ namespace Entidades
         }
         public string DecimalBinario(double d)
         {
-            string strBinario = "";
-
+            StringBuilder sb = new StringBuilder();
             if (!double.IsNaN(d))
             {
                 d = Math.Abs(d);
-                while (d > 1)
+                while (d >= 1)
                 {
                     if ((int)d % 2 == 0)
                     {
-                        strBinario.Insert(0, "0");
+                        sb.Insert(0,'0');
                     }
                     else
                     {
-                        strBinario.Insert(0, "1");
+                        sb.Insert(0, '1');
                     }
                     d = d / 2;
                 }
-                return strBinario;
+                return sb.ToString();
             }
             return "Valor Inválido";
         }
         public string DecimalBinario(string s)
         {
-            string ret;
-            double dec= ValidarOperando(s);
+            double dec = ValidarOperando(s);
             
-            return ret = DecimalBinario(dec);
+            return DecimalBinario(dec);
         }
 
         #region Sobrecargas
