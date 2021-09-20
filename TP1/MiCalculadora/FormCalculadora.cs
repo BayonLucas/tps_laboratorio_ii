@@ -56,7 +56,7 @@ namespace MiCalculadora
             Limpiar();
         }
 
-        private void btnOperar_Click(object sender, EventArgs e)
+        private void btnOperar_Click(object sender, EventArgs e) 
         {
             double resultado;
             if (txtNumero1.Text != "" && txtNumero2.Text != "")
