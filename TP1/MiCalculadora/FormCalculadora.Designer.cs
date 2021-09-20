@@ -126,6 +126,7 @@ namespace MiCalculadora
             this.txtNumero2.Size = new System.Drawing.Size(146, 27);
             this.txtNumero2.TabIndex = 3;
             this.txtNumero2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtNumero2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero2_KeyPress);
             // 
             // lblResultado
             // 
