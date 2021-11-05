@@ -14,11 +14,14 @@ namespace SistemaContable
     public partial class frmMenu : Form
     {
         public RegistroContable registroContable;
-        
+        FrmCompra compra /*= new FrmCompra(registroContable)*/;
+
         public frmMenu()
         {
             InitializeComponent();
             this.registroContable = new RegistroContable();
+            compra = new FrmCompra(registroContable);
+            this.compra.MdiParent = this;
         }
 
         private void logInToolStripMenuItem_Click(object sender, EventArgs e)
@@ -38,6 +41,12 @@ namespace SistemaContable
 
         private void frmMenu_Load(object sender, EventArgs e)
         {
+        }
+
+        private void cargarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //FrmCompra compra = new FrmCompra(registroContable);
+            compra.Show();
         }
     }
 }

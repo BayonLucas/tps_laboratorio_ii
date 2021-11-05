@@ -1,7 +1,7 @@
 ﻿
 namespace SistemaContable
 {
-    partial class FrmCargarCompra
+    partial class FrmCompra
     {
         /// <summary>
         /// Required designer variable.
@@ -30,41 +30,44 @@ namespace SistemaContable
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtbListaCompras = new System.Windows.Forms.RichTextBox();
             this.txtEmisor = new System.Windows.Forms.TextBox();
             this.txtCuitEmisor = new System.Windows.Forms.TextBox();
             this.lblCuitEmisor = new System.Windows.Forms.Label();
             this.lblSitFiscalEmisor = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.txtPtoVenta = new System.Windows.Forms.TextBox();
             this.txtNroComprobante = new System.Windows.Forms.TextBox();
             this.lblNroComprobante = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.gpbEnte = new System.Windows.Forms.GroupBox();
+            this.cmbSitFiscal = new System.Windows.Forms.ComboBox();
             this.gpbDatosCompra = new System.Windows.Forms.GroupBox();
-            this.lblImporte = new System.Windows.Forms.Label();
-            this.lblAlicuota = new System.Windows.Forms.Label();
-            this.lblTotal = new System.Windows.Forms.Label();
-            this.lblConcepto = new System.Windows.Forms.Label();
-            this.txtImporte = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.cmbAlicuota = new System.Windows.Forms.ComboBox();
-            this.txtTotal = new System.Windows.Forms.TextBox();
             this.cmbConcepto = new System.Windows.Forms.ComboBox();
+            this.txtTotal = new System.Windows.Forms.TextBox();
+            this.cmbAlicuota = new System.Windows.Forms.ComboBox();
+            this.txtImporte = new System.Windows.Forms.TextBox();
+            this.lblConcepto = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.lblAlicuota = new System.Windows.Forms.Label();
+            this.lblImporte = new System.Windows.Forms.Label();
             this.btnCargar = new System.Windows.Forms.Button();
             this.gpbEnte.SuspendLayout();
             this.gpbDatosCompra.SuspendLayout();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // rtbListaCompras
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 223);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(776, 215);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.rtbListaCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbListaCompras.Location = new System.Drawing.Point(12, 223);
+            this.rtbListaCompras.Name = "rtbListaCompras";
+            this.rtbListaCompras.ReadOnly = true;
+            this.rtbListaCompras.Size = new System.Drawing.Size(940, 215);
+            this.rtbListaCompras.TabIndex = 0;
+            this.rtbListaCompras.Text = "";
             // 
             // txtEmisor
             // 
@@ -104,13 +107,15 @@ namespace SistemaContable
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // dateTimePicker1
+            // dtpFecha
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(12, 11);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(122, 27);
-            this.dateTimePicker1.TabIndex = 9;
+            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFecha.Location = new System.Drawing.Point(12, 11);
+            this.dtpFecha.MaxDate = new System.DateTime(2021, 11, 4, 23, 35, 39, 0);
+            this.dtpFecha.Name = "dtpFecha";
+            this.dtpFecha.Size = new System.Drawing.Size(124, 27);
+            this.dtpFecha.TabIndex = 9;
+            this.dtpFecha.Value = new System.DateTime(2021, 11, 4, 0, 0, 0, 0);
             // 
             // txtPtoVenta
             // 
@@ -146,7 +151,9 @@ namespace SistemaContable
             // 
             // gpbEnte
             // 
-            this.gpbEnte.Controls.Add(this.comboBox1);
+            this.gpbEnte.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpbEnte.Controls.Add(this.cmbSitFiscal);
             this.gpbEnte.Controls.Add(this.label1);
             this.gpbEnte.Controls.Add(this.txtEmisor);
             this.gpbEnte.Controls.Add(this.txtCuitEmisor);
@@ -154,13 +161,24 @@ namespace SistemaContable
             this.gpbEnte.Controls.Add(this.lblSitFiscalEmisor);
             this.gpbEnte.Location = new System.Drawing.Point(12, 48);
             this.gpbEnte.Name = "gpbEnte";
-            this.gpbEnte.Size = new System.Drawing.Size(776, 63);
+            this.gpbEnte.Size = new System.Drawing.Size(940, 63);
             this.gpbEnte.TabIndex = 17;
             this.gpbEnte.TabStop = false;
             this.gpbEnte.Text = "Ente";
             // 
+            // cmbSitFiscal
+            // 
+            this.cmbSitFiscal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSitFiscal.FormattingEnabled = true;
+            this.cmbSitFiscal.Location = new System.Drawing.Point(614, 19);
+            this.cmbSitFiscal.Name = "cmbSitFiscal";
+            this.cmbSitFiscal.Size = new System.Drawing.Size(151, 28);
+            this.cmbSitFiscal.TabIndex = 14;
+            // 
             // gpbDatosCompra
             // 
+            this.gpbDatosCompra.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gpbDatosCompra.Controls.Add(this.cmbConcepto);
             this.gpbDatosCompra.Controls.Add(this.txtTotal);
             this.gpbDatosCompra.Controls.Add(this.cmbAlicuota);
@@ -171,110 +189,109 @@ namespace SistemaContable
             this.gpbDatosCompra.Controls.Add(this.lblImporte);
             this.gpbDatosCompra.Location = new System.Drawing.Point(12, 118);
             this.gpbDatosCompra.Name = "gpbDatosCompra";
-            this.gpbDatosCompra.Size = new System.Drawing.Size(776, 99);
+            this.gpbDatosCompra.Size = new System.Drawing.Size(940, 99);
             this.gpbDatosCompra.TabIndex = 18;
             this.gpbDatosCompra.TabStop = false;
             this.gpbDatosCompra.Text = "Datos Compra";
             // 
-            // lblImporte
+            // cmbConcepto
             // 
-            this.lblImporte.AutoSize = true;
-            this.lblImporte.Location = new System.Drawing.Point(15, 34);
-            this.lblImporte.Name = "lblImporte";
-            this.lblImporte.Size = new System.Drawing.Size(69, 20);
-            this.lblImporte.TabIndex = 0;
-            this.lblImporte.Text = "Importe: ";
-            // 
-            // lblAlicuota
-            // 
-            this.lblAlicuota.AutoSize = true;
-            this.lblAlicuota.Location = new System.Drawing.Point(270, 34);
-            this.lblAlicuota.Name = "lblAlicuota";
-            this.lblAlicuota.Size = new System.Drawing.Size(67, 20);
-            this.lblAlicuota.TabIndex = 1;
-            this.lblAlicuota.Text = "Alicuota:";
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(465, 33);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(45, 20);
-            this.lblTotal.TabIndex = 2;
-            this.lblTotal.Text = "Total:";
-            // 
-            // lblConcepto
-            // 
-            this.lblConcepto.AutoSize = true;
-            this.lblConcepto.Location = new System.Drawing.Point(15, 68);
-            this.lblConcepto.Name = "lblConcepto";
-            this.lblConcepto.Size = new System.Drawing.Size(76, 20);
-            this.lblConcepto.TabIndex = 3;
-            this.lblConcepto.Text = "Concepto:";
-            // 
-            // txtImporte
-            // 
-            this.txtImporte.Location = new System.Drawing.Point(90, 31);
-            this.txtImporte.Name = "txtImporte";
-            this.txtImporte.Size = new System.Drawing.Size(125, 27);
-            this.txtImporte.TabIndex = 4;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(614, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(151, 28);
-            this.comboBox1.TabIndex = 14;
-            // 
-            // cmbAlicuota
-            // 
-            this.cmbAlicuota.FormattingEnabled = true;
-            this.cmbAlicuota.Location = new System.Drawing.Point(343, 30);
-            this.cmbAlicuota.Name = "cmbAlicuota";
-            this.cmbAlicuota.Size = new System.Drawing.Size(74, 28);
-            this.cmbAlicuota.TabIndex = 5;
+            this.cmbConcepto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConcepto.FormattingEnabled = true;
+            this.cmbConcepto.Location = new System.Drawing.Point(92, 65);
+            this.cmbConcepto.Name = "cmbConcepto";
+            this.cmbConcepto.Size = new System.Drawing.Size(151, 28);
+            this.cmbConcepto.TabIndex = 7;
             // 
             // txtTotal
             // 
-            this.txtTotal.Location = new System.Drawing.Point(516, 30);
+            this.txtTotal.Location = new System.Drawing.Point(516, 25);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(125, 27);
             this.txtTotal.TabIndex = 6;
             // 
-            // cmbConcepto
+            // cmbAlicuota
             // 
-            this.cmbConcepto.FormattingEnabled = true;
-            this.cmbConcepto.Location = new System.Drawing.Point(90, 68);
-            this.cmbConcepto.Name = "cmbConcepto";
-            this.cmbConcepto.Size = new System.Drawing.Size(151, 28);
-            this.cmbConcepto.TabIndex = 7;
+            this.cmbAlicuota.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAlicuota.FormattingEnabled = true;
+            this.cmbAlicuota.Location = new System.Drawing.Point(343, 25);
+            this.cmbAlicuota.Name = "cmbAlicuota";
+            this.cmbAlicuota.Size = new System.Drawing.Size(74, 28);
+            this.cmbAlicuota.TabIndex = 5;
+            this.cmbAlicuota.SelectedIndexChanged += new System.EventHandler(this.cmbAlicuota_SelectedIndexChanged);
+            this.cmbAlicuota.SelectedValueChanged += new System.EventHandler(this.cmbAlicuota_SelectedValueChanged);
+            // 
+            // txtImporte
+            // 
+            this.txtImporte.Location = new System.Drawing.Point(90, 26);
+            this.txtImporte.Name = "txtImporte";
+            this.txtImporte.Size = new System.Drawing.Size(125, 27);
+            this.txtImporte.TabIndex = 4;
+            // 
+            // lblConcepto
+            // 
+            this.lblConcepto.AutoSize = true;
+            this.lblConcepto.Location = new System.Drawing.Point(17, 65);
+            this.lblConcepto.Name = "lblConcepto";
+            this.lblConcepto.Size = new System.Drawing.Size(76, 20);
+            this.lblConcepto.TabIndex = 3;
+            this.lblConcepto.Text = "Concepto:";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(465, 28);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(45, 20);
+            this.lblTotal.TabIndex = 2;
+            this.lblTotal.Text = "Total:";
+            // 
+            // lblAlicuota
+            // 
+            this.lblAlicuota.AutoSize = true;
+            this.lblAlicuota.Location = new System.Drawing.Point(270, 29);
+            this.lblAlicuota.Name = "lblAlicuota";
+            this.lblAlicuota.Size = new System.Drawing.Size(67, 20);
+            this.lblAlicuota.TabIndex = 1;
+            this.lblAlicuota.Text = "Alicuota:";
+            // 
+            // lblImporte
+            // 
+            this.lblImporte.AutoSize = true;
+            this.lblImporte.Location = new System.Drawing.Point(15, 29);
+            this.lblImporte.Name = "lblImporte";
+            this.lblImporte.Size = new System.Drawing.Size(69, 20);
+            this.lblImporte.TabIndex = 0;
+            this.lblImporte.Text = "Importe: ";
             // 
             // btnCargar
             // 
-            this.btnCargar.Location = new System.Drawing.Point(683, 11);
+            this.btnCargar.Location = new System.Drawing.Point(728, 15);
             this.btnCargar.Name = "btnCargar";
             this.btnCargar.Size = new System.Drawing.Size(94, 29);
             this.btnCargar.TabIndex = 19;
             this.btnCargar.Text = "Cargar";
             this.btnCargar.UseVisualStyleBackColor = true;
-            this.btnCargar.Visible = false;
+            this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
             // 
-            // FrmCargarCompra
+            // FrmCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(964, 450);
             this.Controls.Add(this.btnCargar);
             this.Controls.Add(this.gpbDatosCompra);
             this.Controls.Add(this.gpbEnte);
             this.Controls.Add(this.lblNroComprobante);
             this.Controls.Add(this.txtNroComprobante);
             this.Controls.Add(this.txtPtoVenta);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.richTextBox1);
-            this.Name = "FrmCargarCompra";
+            this.Controls.Add(this.dtpFecha);
+            this.Controls.Add(this.rtbListaCompras);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "FrmCompra";
             this.Text = "Cargar Compra";
             this.Load += new System.EventHandler(this.FrmCargarCompra_Load);
             this.gpbEnte.ResumeLayout(false);
@@ -288,13 +305,13 @@ namespace SistemaContable
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtbListaCompras;
         private System.Windows.Forms.TextBox txtEmisor;
         private System.Windows.Forms.TextBox txtCuitEmisor;
         private System.Windows.Forms.Label lblCuitEmisor;
         private System.Windows.Forms.Label lblSitFiscalEmisor;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpFecha;
         private System.Windows.Forms.TextBox txtPtoVenta;
         private System.Windows.Forms.TextBox txtNroComprobante;
         private System.Windows.Forms.Label lblNroComprobante;
@@ -306,7 +323,7 @@ namespace SistemaContable
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblAlicuota;
         private System.Windows.Forms.Label lblImporte;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbSitFiscal;
         private System.Windows.Forms.ComboBox cmbConcepto;
         private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.ComboBox cmbAlicuota;

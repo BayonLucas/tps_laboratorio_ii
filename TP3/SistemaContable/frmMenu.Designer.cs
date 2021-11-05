@@ -32,8 +32,16 @@ namespace SistemaContable
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.smiLogIn = new System.Windows.Forms.ToolStripMenuItem();
             this.smiArchivo = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smiCompra = new System.Windows.Forms.ToolStripMenuItem();
+            this.cargarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smiVenta = new System.Windows.Forms.ToolStripMenuItem();
+            this.emitirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.anularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smiInformes = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -49,7 +57,7 @@ namespace SistemaContable
             this.smiInformes});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1091, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -62,24 +70,84 @@ namespace SistemaContable
             // 
             // smiArchivo
             // 
+            this.smiArchivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importarToolStripMenuItem,
+            this.exportarToolStripMenuItem,
+            this.guardarToolStripMenuItem});
             this.smiArchivo.Name = "smiArchivo";
             this.smiArchivo.Size = new System.Drawing.Size(73, 24);
             this.smiArchivo.Text = "Archivo";
             this.smiArchivo.Visible = false;
             // 
+            // importarToolStripMenuItem
+            // 
+            this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.importarToolStripMenuItem.Text = "Importar";
+            // 
+            // exportarToolStripMenuItem
+            // 
+            this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.exportarToolStripMenuItem.Text = "Exportar";
+            // 
+            // guardarToolStripMenuItem
+            // 
+            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.guardarToolStripMenuItem.Text = "Guardar";
+            // 
             // smiCompra
             // 
+            this.smiCompra.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cargarToolStripMenuItem,
+            this.modificarToolStripMenuItem,
+            this.eliminarToolStripMenuItem});
             this.smiCompra.Name = "smiCompra";
             this.smiCompra.Size = new System.Drawing.Size(76, 24);
             this.smiCompra.Text = "Compra";
             this.smiCompra.Visible = false;
             // 
+            // cargarToolStripMenuItem
+            // 
+            this.cargarToolStripMenuItem.Name = "cargarToolStripMenuItem";
+            this.cargarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.cargarToolStripMenuItem.Text = "Cargar";
+            this.cargarToolStripMenuItem.Click += new System.EventHandler(this.cargarToolStripMenuItem_Click);
+            // 
+            // modificarToolStripMenuItem
+            // 
+            this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.modificarToolStripMenuItem.Text = "Modificar";
+            // 
+            // eliminarToolStripMenuItem
+            // 
+            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.eliminarToolStripMenuItem.Text = "Eliminar";
+            // 
             // smiVenta
             // 
+            this.smiVenta.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.emitirToolStripMenuItem,
+            this.anularToolStripMenuItem});
             this.smiVenta.Name = "smiVenta";
             this.smiVenta.Size = new System.Drawing.Size(60, 24);
             this.smiVenta.Text = "Venta";
             this.smiVenta.Visible = false;
+            // 
+            // emitirToolStripMenuItem
+            // 
+            this.emitirToolStripMenuItem.Name = "emitirToolStripMenuItem";
+            this.emitirToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.emitirToolStripMenuItem.Text = "Emitir";
+            // 
+            // anularToolStripMenuItem
+            // 
+            this.anularToolStripMenuItem.Name = "anularToolStripMenuItem";
+            this.anularToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.anularToolStripMenuItem.Text = "Anular";
             // 
             // smiInformes
             // 
@@ -92,7 +160,8 @@ namespace SistemaContable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1091, 565);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -114,5 +183,13 @@ namespace SistemaContable
         private System.Windows.Forms.ToolStripMenuItem smiCompra;
         private System.Windows.Forms.ToolStripMenuItem smiVenta;
         private System.Windows.Forms.ToolStripMenuItem smiInformes;
+        private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cargarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem emitirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem anularToolStripMenuItem;
     }
 }

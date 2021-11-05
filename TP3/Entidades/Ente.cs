@@ -71,7 +71,7 @@ namespace Entidades
             {
                 sb.Append($"{e.RazonSocial} | ");
                 sb.Append($"{e.Cuit} | ");
-                sb.Append($"{e.SitFiscal} | ");
+                sb.Append($"{e.SitFiscal}");
             }
 
             return sb.ToString();

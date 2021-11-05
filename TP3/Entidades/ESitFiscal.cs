@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public enum ESitFiscal { ResponsableInscripto, Monotributista, ConsumidorFinal };
+    public enum ESitFiscal { Responsable_Inscripto, Monotributista, Consumidor_Final };
 
 }

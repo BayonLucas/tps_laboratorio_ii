@@ -56,7 +56,7 @@ namespace Entidades
         {
             get
             {
-                return (this.Importe * (this.Alicuota / 100)/* - this.Impuesto*/);
+                return (this.importe + (this.Importe * (this.Alicuota / 100)));
             }
         }
         public Ente EnteReceptor

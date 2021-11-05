@@ -151,7 +151,7 @@ namespace Entidades
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"{this.Fecha.ToString("HH:mm:ss")} | ");
+            sb.Append($"{this.Fecha.ToString("dd/MM/yy")} | ");
             sb.Append($"{(string)this.Ente} | ");
             sb.Append($"{this.DatosComprobante}");
 
