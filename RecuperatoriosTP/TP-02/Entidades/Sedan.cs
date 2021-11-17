@@ -19,11 +19,9 @@ namespace Entidades
         /// <param name="marca"></param>
         /// <param name="chasis"></param>
         /// <param name="color"></param>
-        public Sedan(EMarca marca, string chasis, ConsoleColor color)
-            : base(chasis, marca, color)
-        {
-            this.tipo = ETipo.CuatroPuertas;
-        }
+        public Sedan(EMarca marca, string chasis, ConsoleColor color) : this(marca, chasis, color, ETipo.CuatroPuertas)
+        {        }
+
         /// <summary>
         /// Se asigna el tipo por parametro
         /// </summary>
@@ -31,7 +29,7 @@ namespace Entidades
         /// <param name="chasis"></param>
         /// <param name="color"></param>
         /// <param name="tipo"></param>
-        public Sedan(EMarca marca, string chasis, ConsoleColor color, ETipo tipo) : this(marca, chasis, color) 
+        public Sedan(EMarca marca, string chasis, ConsoleColor color, ETipo tipo) : base(chasis, marca, color) 
         {
             this.tipo = tipo;
         }

@@ -92,21 +92,21 @@ namespace SistemaContable
             this.txtRazonSocial.Location = new System.Drawing.Point(170, 52);
             this.txtRazonSocial.Name = "txtRazonSocial";
             this.txtRazonSocial.Size = new System.Drawing.Size(253, 27);
-            this.txtRazonSocial.TabIndex = 4;
+            this.txtRazonSocial.TabIndex = 1;
             // 
             // txtCuit
             // 
             this.txtCuit.Location = new System.Drawing.Point(170, 85);
             this.txtCuit.Name = "txtCuit";
             this.txtCuit.Size = new System.Drawing.Size(253, 27);
-            this.txtCuit.TabIndex = 5;
+            this.txtCuit.TabIndex = 2;
             // 
             // btnIngresar
             // 
             this.btnIngresar.Location = new System.Drawing.Point(205, 160);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(94, 29);
-            this.btnIngresar.TabIndex = 7;
+            this.btnIngresar.TabIndex = 4;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = true;
             this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
@@ -117,7 +117,7 @@ namespace SistemaContable
             this.cmbSitFiscal.Location = new System.Drawing.Point(170, 118);
             this.cmbSitFiscal.Name = "cmbSitFiscal";
             this.cmbSitFiscal.Size = new System.Drawing.Size(253, 28);
-            this.cmbSitFiscal.TabIndex = 8;
+            this.cmbSitFiscal.TabIndex = 3;
             // 
             // FrmLogIn
             // 

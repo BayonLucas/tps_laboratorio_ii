@@ -47,7 +47,7 @@ namespace TP_02_2018
 
             // Quito 2 items y muestro
             taller -= c1;
-            taller -= new Ciclomotor(Vehiculo.EMarca.Honda, "ASD913", ConsoleColor.Red);
+            //taller -= new Ciclomotor(Vehiculo.EMarca.Honda, "ASD913", ConsoleColor.Red);
             taller -= new Ciclomotor(Vehiculo.EMarca.HarleyDavidson, "LEM666", ConsoleColor.Red);
 
             Console.WriteLine(taller.ToString());

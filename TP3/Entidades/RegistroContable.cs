@@ -47,33 +47,33 @@ namespace Entidades
             }
             return false;
         }
-        public static bool operator !=(RegistroContable rc, Compras f)
+        public static bool operator !=(RegistroContable rc, Compras c)
         {
-            return !(rc == f);
+            return !(rc == c);
         }
-        public static bool operator +(RegistroContable rc, Compras c)
+        public static RegistroContable operator +(RegistroContable rc, Compras c)
         {
             if (rc is not null && c is not null)
             {
                 if (rc != c)
                 {
                     rc.Compras.Add(c);
-                    return true;
+                    //return true;
                 }
             }
-            return false;
+            return rc;
         }
-        public static bool operator -(RegistroContable rc, Compras c)
+        public static RegistroContable operator -(RegistroContable rc, Compras c)
         {
             if (rc is not null && c is not null)
             {
                 if (rc == c)
                 {
                     rc.Compras.Remove(c);
-                    return true;
+                    //return true;
                 }
             }
-            return false;
+            return rc;
         }
         public static bool operator ==(RegistroContable rc, Factura f)
         {
@@ -89,33 +89,33 @@ namespace Entidades
             }
             return false;
         }
-        public static bool operator !=(RegistroContable rc, Factura c)
+        public static bool operator !=(RegistroContable rc, Factura f)
         {
-            return !(rc == c);
+            return !(rc == f);
         }
-        public static bool operator +(RegistroContable rc, Factura f)
+        public static RegistroContable operator +(RegistroContable rc, Factura f)
         { 
             if(rc is not null && f is not null)
             {
                 if(rc != f)
                 {
                     rc.Ventas.Add(f);
-                    return true;
+                    //return true;
                 }
             }
-            return false;
+            return rc;
         }
-        public static bool operator -(RegistroContable rc, Factura f)
+        public static RegistroContable operator -(RegistroContable rc, Factura f)
         {
             if (rc is not null && f is not null)
             {
                 if (rc == f)
                 {
                     rc.Ventas.Remove(f);
-                    return true;
+                    //return true;
                 }
             }
-            return false;
+            return rc;
         }
 
 

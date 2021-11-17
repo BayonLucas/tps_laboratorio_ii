@@ -102,6 +102,7 @@ namespace Entidades
             }
             return taller;
         }
+
         /// <summary>
         /// Quitará un elemento de la lista
         /// </summary>

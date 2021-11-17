@@ -14,14 +14,12 @@ namespace SistemaContable
     public partial class frmMenu : Form
     {
         public RegistroContable registroContable;
-        FrmCompra compra /*= new FrmCompra(registroContable)*/;
+        FrmCompra compra;
 
         public frmMenu()
         {
             InitializeComponent();
             this.registroContable = new RegistroContable();
-            compra = new FrmCompra(registroContable);
-            this.compra.MdiParent = this;
         }
 
         private void logInToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,8 +43,58 @@ namespace SistemaContable
 
         private void cargarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //FrmCompra compra = new FrmCompra(registroContable);
-            compra.Show();
+            if((compra = (FrmCompra)IsFormAlreadyOpen(typeof(FrmCompra))) == null)
+            {
+                this.compra = new FrmCompra(registroContable, "Cargar");
+                this.compra.MdiParent = this;
+                compra.Show();
+            }
+            else
+            {
+                compra.BringToFront();
+            }
         }
+
+        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if ((compra = (FrmCompra)IsFormAlreadyOpen(typeof(FrmCompra))) == null)
+            {
+                this.compra = new FrmCompra(registroContable, "Modificar");
+                this.compra.MdiParent = this;
+                compra.Show();
+            }
+            else
+            {
+                compra.BringToFront();
+            }
+        }
+
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if ((compra = (FrmCompra)IsFormAlreadyOpen(typeof(FrmCompra))) == null)
+            {
+                this.compra = new FrmCompra(registroContable, "Eliminar");
+                this.compra.MdiParent = this;
+                compra.Show();
+            }
+            else
+            {
+                compra.BringToFront();
+            }
+        }
+
+        //Experimento
+        public static Form IsFormAlreadyOpen(Type FormType)
+        {
+            foreach (Form OpenForm in System.Windows.Forms.Application.OpenForms)
+            {
+                if (OpenForm.GetType() == FormType)
+                    return OpenForm;
+            }
+
+            return null;
+        }
+        
+
     }
 }

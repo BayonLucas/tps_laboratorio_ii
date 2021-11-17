@@ -15,11 +15,10 @@ namespace SistemaContable
     {
 
         private RegistroContable registro;
-        //private frmMenu menu;
         public FrmLogIn(RegistroContable registro)
         {
             InitializeComponent();
-            this.registro = registro;
+             this.registro = registro;
         }
 
         private void frmPrincipal_Load(object sender, EventArgs e)

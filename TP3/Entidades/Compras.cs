@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public enum EConcepto { Bien_de_uso, Servicio, Bien_de_consumo, Varios}
     public class Compras : Comprobante
     {
         private float alicuota;
@@ -97,15 +96,19 @@ namespace Entidades
             StringBuilder sb = new StringBuilder();
 
             sb.Append($"{base.MostrarDatos()} | ");
-            sb.Append($"{(string)this.EnteReceptor} | ");
-            sb.Append($"Importe: {this.Importe} | ");
-            sb.Append($"IVA: {this.Alicuota} | ");
+            //sb.Append($"{(string)this.EnteReceptor} | ");
+            //sb.Append($"Importe: {this.Importe} | ");
+            //sb.Append($"IVA: {this.Alicuota} | ");
             sb.Append($"Total: {this.CalculoTotal} | ");
             sb.Append($"Concepto: {this.Concepto}");
 
             return sb.ToString();
         }
 
+        public override string ToString()
+        {
+            return this.MostrarDatos();
+        }
 
     }
 }

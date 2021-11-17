@@ -35,7 +35,7 @@ namespace Entidades
                 }
             }
         }
-        public string NroComrpobante
+        public string NroComprobante
         {
             get
             {
@@ -83,7 +83,7 @@ namespace Entidades
         {
             get
             {
-                string aux = String.Format(this.PtoVenta + "-" + this.NroComrpobante);
+                string aux = String.Format(this.PtoVenta + "-" + this.NroComprobante);
                 return aux;
             }
         }
@@ -93,7 +93,7 @@ namespace Entidades
             this.Fecha = fecha;
             this.enteEmisor = enteEmisor;
             this.PtoVenta = ptoVenta;
-            this.NroComrpobante = nroComprobante;
+            this.NroComprobante = nroComprobante;
         }
 
         public bool PtoVentaCtrl(string ptoV)
