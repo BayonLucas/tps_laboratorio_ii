@@ -1,0 +1,15 @@
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\obj\Debug\net5.0\Archivos.csproj.AssemblyReference.cache
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\obj\Debug\net5.0\Archivos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\obj\Debug\net5.0\Archivos.AssemblyInfoInputs.cache
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\obj\Debug\net5.0\Archivos.AssemblyInfo.cs
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\obj\Debug\net5.0\Archivos.csproj.CoreCompileInputs.cache
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\bin\Debug\net5.0\Archivos.deps.json
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\bin\Debug\net5.0\Archivos.dll
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\bin\Debug\net5.0\ref\Archivos.dll
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\bin\Debug\net5.0\Archivos.pdb
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\bin\Debug\net5.0\Entidades.dll
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\bin\Debug\net5.0\Entidades.pdb
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\obj\Debug\net5.0\Archivos.csproj.CopyComplete
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\obj\Debug\net5.0\Archivos.dll
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\obj\Debug\net5.0\ref\Archivos.dll
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Archivos\obj\Debug\net5.0\Archivos.pdb
