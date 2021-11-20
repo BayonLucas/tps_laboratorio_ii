@@ -22,8 +22,11 @@ namespace Entidades
             {   
                 if(!(string.IsNullOrWhiteSpace(value)))
                 {
+                    string aux;
                     //Aca deberia de extraer un max de 20 caracteres.
-                    this.razonSocial = value.ToUpper();
+                    aux = EmprolijarString(value);
+                    aux = aux.Replace(" ", "");
+                    this.razonSocial = aux;
                 }
             }
         }
@@ -59,7 +62,7 @@ namespace Entidades
 
         public Ente(string razonSocial, string cuit, ESitFiscal sitFiscal)
         {
-            this.RazonSocial = razonSocial;
+            this.razonSocial = razonSocial;
             this.Cuit = cuit;
             this.SitFiscal = sitFiscal;
         }
@@ -152,9 +155,33 @@ namespace Entidades
             return ret;
         }
 
+        public override string ToString()
+        {
+            return $"{this.RazonSocial} - {this.Cuit}";
+        }
 
-
-
+        public string EmprolijarString(string str)
+        {
+            char[] strChar = null;
+            if (!string.IsNullOrEmpty(str))
+            {
+                str = str.ToLower();
+                strChar = str.ToCharArray();
+                for(int i = 0; i<str.Length; i++)
+                {
+                    if(i == 0 || strChar[i-1] == ' ')
+                    {
+                        strChar[i] = char.ToUpper(strChar[i]);
+                    }
+                }
+            }
+            string aux = null;
+            for (int i = 0; i < strChar.Length; i++)
+            {
+                aux = aux + strChar[i];
+            }
+            return aux;
+        }
 
     }
 }

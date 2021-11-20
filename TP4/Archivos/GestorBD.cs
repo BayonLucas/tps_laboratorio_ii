@@ -9,7 +9,10 @@ using Entidades;
 
 namespace Archivos
 {
-    public static class GestorBD //<T> where T:class
+
+    
+
+    public static class GestorBD 
     {
         private static SqlConnection conexion;
         private static SqlCommand command;
@@ -20,6 +23,7 @@ namespace Archivos
             command = new SqlCommand();
             command.Connection = conexion;
         }
+
 
         public static List<Ente> CargarListaUsuarios()
         {
@@ -57,16 +61,41 @@ namespace Archivos
 
             return listaUsuarios;
         }
+        public static void GenerarUsuario(Ente usuario)
+        {
+            if(usuario is not null)
+            {
+                try
+                {
+                    conexion.Open();
 
+                    command.CommandText = "INSERT INTO dbo.Usuarios (RAZONSOCIAL, CUIT, SITUACIONFISCAL) VALUES (@razonSocial, @cuit, @situacionFiscal)";
+                    command.Parameters.AddWithValue("@razonSocial", usuario.RazonSocial);
+                    command.Parameters.AddWithValue("@cuit", usuario.Cuit);
+                    command.Parameters.AddWithValue("@situacionFiscal", usuario.SitFiscal.ToString());
 
-        public static void GenerarTablaVentas(string nombreUsuario)
+                    command.ExecuteNonQuery();
+                }
+                catch (DataBasesException ex)
+                {
+                    ex = new DataBasesException("Hubo problemas con la carga de la lista desde la BD", null);
+                    throw ex;
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+        }
+
+        public static void GenerarTablaVentas(Ente usuario)
         {
             try
             {
-                command.CommandText = $"CREATE TABLE [dbo].[{nombreUsuario+".Ventas"}]([cuitUsuario][varchar](12) NOT NULL,[ptoVenta] " +
+                command.CommandText = $"CREATE TABLE [dbo].[{usuario.RazonSocial+ "Ventas"}]([cuitUsuario][varchar](12) NOT NULL,[ptoVenta] " +
                     $"[varchar](5) NOT NULL,[nroComprobante] [int] IDENTITY(1, 1) NOT NULL, [fecha] [datetime] NOT NULL, " +
                     $"[importe] [float] NOT NULL, [alicuota] [float] NOT NULL, [razonSocialReceptor] [varchar](25) NOT NULL, " +
-                    $"[cuitReceptor] [varchar](12) NOT NULL, [sitFiscalReceptor] [varchar](20) NOT NULL,[anulado] [bit] NOT NULL) ON[PRIMARY] GO";
+                    $"[cuitReceptor] [varchar](12) NOT NULL, [sitFiscalReceptor] [varchar](20) NOT NULL,[anulado] [bit] NOT NULL) ON[PRIMARY]";
                 conexion.Open();
                 command.ExecuteNonQuery();
 
@@ -81,13 +110,13 @@ namespace Archivos
                 conexion.Close();
             }
         }
-        public static void GenerarTablaCompras(string nombreUsuario)
+        public static void GenerarTablaCompras(Ente usuario)
         {
             try
             {
-                command.CommandText = $"CREATE TABLE [dbo].[{nombreUsuario+".Compras"}]( [razonSocialEmisor][varchar](25) NOT NULL, [cuitEmisor] [varchar](12) NOT NULL, " +
-                    $"[sitFiscalEmisorr] [varchar](20) NOT NULL, [ptoVenta] [varchar](5) NOT NULL, [nroComprobante] [int] NOT NULL, [fecha] [datetime] NOT NULL, " +
-                    $"[importe] [float] NOT NULL, [alicuota] [float] NOT NULL, [concepto] [varchar](50) NOT NULL, [cuitUsuario] [varchar](12) NOT NULL) ON[PRIMARY] GO";
+                command.CommandText = $"CREATE TABLE [dbo].[{usuario.RazonSocial+ "Compras"}]( [razonSocialEmisor][varchar](25) NOT NULL, [cuitEmisor] [varchar](12) NOT NULL, " +
+                    $"[sitFiscalEmisor] [varchar](20) NOT NULL, [ptoVenta] [varchar](5) NOT NULL, [nroComprobante] [int] NOT NULL, [fecha] [datetime] NOT NULL, " +
+                    $"[importe] [float] NOT NULL, [alicuota] [float] NOT NULL, [concepto] [varchar](50) NOT NULL, [cuitUsuario] [varchar](12) NOT NULL) ON[PRIMARY]";
                 conexion.Open();
                 command.ExecuteNonQuery();
 
@@ -107,7 +136,8 @@ namespace Archivos
             List<Compra> listaCompras = new List<Compra>();
             try
             {
-                command.CommandText = $"SELECT * FROM dbo.{usuario .RazonSocial + ".Compras"}";
+                command.CommandText = $"SELECT RAZONSOCIALEMISOR, CUITEMISOR, sitFiscalEmisor, ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, CONCEPTO " +
+                    $"FROM {usuario.RazonSocial}Compras";
                 conexion.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
@@ -115,7 +145,7 @@ namespace Archivos
                 while (reader.Read())
                 {
                     Ente auxEnteEmisor = new Ente(reader["RAZONSOCIALEMISOR"].ToString(), reader["CUITEMISOR"].ToString(), 
-                        (ESitFiscal)Enum.Parse(typeof(ESitFiscal), reader["SITFISCALEMISOR"].ToString()));
+                        (ESitFiscal)Enum.Parse(typeof(ESitFiscal), reader["sitFiscalEmisor"].ToString()));
                     string auxPtoVenta = reader["ptoVenta"].ToString();
                     string auxNroComprobante = reader["NROCOMPROBANTE"].ToString();
                     DateTime auxFecha = DateTime.Parse(reader["FECHA"].ToString());
@@ -148,7 +178,9 @@ namespace Archivos
             List<Factura> listaVentas = new List<Factura>();
             try
             {
-                command.CommandText = $"SELECT * FROM dbo.{usuario.RazonSocial + ".Ventas"}";
+                //command.CommandText = $"SELECT * FROM dbo.{usuario.RazonSocial + ".Ventas"}";
+                command.CommandText = $"SELECT ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, RAZONSOCIALRECEPTOR, CUITRECEPTOR, SITFISCALRECEPTOR, ANULADO " +
+                    $"FROM {usuario.RazonSocial}Ventas";
                 conexion.Open();
 
                 SqlDataReader reader = command.ExecuteReader();

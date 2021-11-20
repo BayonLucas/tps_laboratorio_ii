@@ -16,14 +16,24 @@ namespace SistemaContable
     {
         private RegistroContable registro;
         private List<Ente> usuarios;
-        private frmMenu menu;
         
+        public RegistroContable GetInstance
+        {
+            get
+            {
+                if(this.registro is null)
+                {
+                    this.registro = new RegistroContable();
+                }
+                return this.registro;
+            }
+        }
 
 
-
-        public FrmLog()
+        public FrmLog(RegistroContable registroContable)
         {
             InitializeComponent();
+            this.registro = registroContable;
 
         }
 
@@ -32,37 +42,49 @@ namespace SistemaContable
             cmbSitFiscal.DataSource = Enum.GetValues(typeof(ESitFiscal));
             this.usuarios = GestorBD.CargarListaUsuarios();
             this.cmbUsuarios.DataSource = this.usuarios;
-
+            this.cmbUsuarios.SelectedIndex = -1;
+            this.cmbSitFiscal.SelectedIndex = -1;
             this.cmbUsuarios.Enabled = true;
             this.txtRazonSocial.Enabled = false;
             this.txtCuit.Enabled = false;
             this.cmbSitFiscal.Enabled = false;
-            this.chbNuevoUsuario.Checked = false;
+            if(this.usuarios.Count == 0)
+            {
+                this.chbNuevoUsuario.Checked = true;
+            }
+            else
+            {
+                this.chbNuevoUsuario.Checked = false;
+            }
         }
 
         private void chbNuevoUsuario_CheckedChanged(object sender, EventArgs e)
         {
             this.Refrescar();
-            this.cmbUsuarios.Enabled = false;
-            this.txtRazonSocial.Enabled = true;
-            this.txtCuit.Enabled = true;
-            this.cmbSitFiscal.Enabled = true;
+            if(chbNuevoUsuario.Checked == true)
+            {
+                this.cmbUsuarios.Enabled = false;
+                this.txtRazonSocial.Enabled = true;
+                this.txtCuit.Enabled = true;
+                this.cmbSitFiscal.Enabled = true;
+            }
+            else
+            {
+                this.cmbUsuarios.Enabled = true;
+                this.txtRazonSocial.Enabled = false;
+                this.txtCuit.Enabled = false;
+                this.cmbSitFiscal.Enabled = false;
+            }
+           
         }
-
-        public void Refrescar()
-        {
-            this.txtRazonSocial.Text = string.Empty;
-            this.txtCuit.Text = string.Empty;
-            this.cmbSitFiscal.SelectedIndex = -1;
-            this.cmbUsuarios.SelectedIndex = -1;
-        }
-
         private void cmbUsuarios_SelectedValueChanged(object sender, EventArgs e)
         {
             Ente aux = (Ente)this.cmbUsuarios.SelectedItem;
-            this.txtRazonSocial.Text = aux.RazonSocial;
-            this.txtCuit.Text = aux.Cuit;
-            switch (aux.SitFiscal)
+            if(aux is not null)
+            {
+                this.txtRazonSocial.Text = aux.RazonSocial;
+                this.txtCuit.Text = aux.Cuit;
+                switch (aux.SitFiscal)
             {
                 case ESitFiscal.Responsable_Inscripto:
                     this.cmbSitFiscal.SelectedItem = ESitFiscal.Responsable_Inscripto;
@@ -74,37 +96,60 @@ namespace SistemaContable
                     this.cmbSitFiscal.SelectedItem = ESitFiscal.Consumidor_Final;
                     break;
             }
+            }
+            else
+            {
+                this.txtRazonSocial.Text = string.Empty;
+                this.txtCuit.Text = string.Empty;
+                this.cmbSitFiscal.SelectedIndex = -1;
+            }
         }
-
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            Ente usuarioElegido;
-            if (this.chbNuevoUsuario.Checked == false)
+            if(txtRazonSocial.Text != string.Empty && txtCuit.Text !=string.Empty && cmbSitFiscal.SelectedItem is not null)
             {
-                usuarioElegido = (Ente)this.cmbUsuarios.SelectedItem;
-                if(usuarioElegido is not null)
+                Ente usuarioElegido;
+                if (this.chbNuevoUsuario.Checked == false)
                 {
-                    this.registro = new RegistroContable(usuarioElegido, GestorBD.CargarListaVentas(usuarioElegido),
-                        GestorBD.CargarListaCompras(usuarioElegido));
+                    usuarioElegido = (Ente)this.cmbUsuarios.SelectedItem;
+                    if(usuarioElegido is not null)
+                    {
+                        this.registro = new RegistroContable(usuarioElegido, GestorBD.CargarListaVentas(usuarioElegido),
+                            GestorBD.CargarListaCompras(usuarioElegido));
+                    }
+                }
+                else
+                {
+                    usuarioElegido = new Ente(this.txtRazonSocial.Text, this.txtCuit.Text, (ESitFiscal)cmbSitFiscal.SelectedItem);
+                    if(usuarioElegido is not null)
+                    {
+                        GestorBD.GenerarUsuario(usuarioElegido);
+                        GestorBD.GenerarTablaVentas(usuarioElegido);
+                        GestorBD.GenerarTablaCompras(usuarioElegido);
+                        this.registro = new RegistroContable(usuarioElegido, GestorBD.CargarListaVentas(usuarioElegido),
+                            GestorBD.CargarListaCompras(usuarioElegido));
+                    }
+                }
+                if (this.registro is not null)
+                {
+                    this.Close();
                 }
             }
             else
             {
-                usuarioElegido = new Ente(this.txtRazonSocial.Text, this.txtCuit.Text, (ESitFiscal)cmbSitFiscal.SelectedItem);
-                if(usuarioElegido is not null)
-                {
-                    GestorBD.GenerarTablaVentas(usuarioElegido.RazonSocial);
-                    GestorBD.GenerarTablaCompras(usuarioElegido.RazonSocial);
-                    this.registro = new RegistroContable(usuarioElegido, GestorBD.CargarListaVentas(usuarioElegido),
-                        GestorBD.CargarListaCompras(usuarioElegido));
-                }
+                lblError.Visible = true;
             }
-            if(this.registro is not null)
-            {
-                this.menu = new frmMenu(this.registro);
-                this.Visible = false;
-                this.menu.ShowDialog();
-            }
+        }
+    
+    
+    
+        public void Refrescar()
+        {
+            this.txtRazonSocial.Text = string.Empty;
+            this.txtCuit.Text = string.Empty;
+            this.cmbSitFiscal.SelectedIndex = -1;
+            this.cmbUsuarios.SelectedIndex = -1;
+            lblError.Visible = false;
         }
     }
 }

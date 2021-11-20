@@ -100,14 +100,14 @@ namespace SistemaContable
             // 
             // dtpFecha
             // 
-            this.dtpFecha.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(12, 11);
-            this.dtpFecha.MaxDate = new System.DateTime(2021, 11, 17, 1, 14, 8, 0);
+            this.dtpFecha.MaxDate = new System.DateTime(2021, 11, 20, 0, 0, 0, 0);
+            this.dtpFecha.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(124, 27);
             this.dtpFecha.TabIndex = 1;
-            this.dtpFecha.Value = new System.DateTime(2021, 11, 4, 0, 0, 0, 0);
+            this.dtpFecha.Value = new System.DateTime(2021, 11, 20, 0, 0, 0, 0);
             // 
             // txtPtoVenta
             // 
@@ -115,6 +115,7 @@ namespace SistemaContable
             this.txtPtoVenta.Name = "txtPtoVenta";
             this.txtPtoVenta.Size = new System.Drawing.Size(80, 27);
             this.txtPtoVenta.TabIndex = 2;
+            this.txtPtoVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtNroComprobante
             // 
@@ -122,6 +123,7 @@ namespace SistemaContable
             this.txtNroComprobante.Name = "txtNroComprobante";
             this.txtNroComprobante.Size = new System.Drawing.Size(125, 27);
             this.txtNroComprobante.TabIndex = 3;
+            this.txtNroComprobante.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblNroComprobante
             // 
@@ -153,7 +155,7 @@ namespace SistemaContable
             this.gpbEnte.Controls.Add(this.lblSitFiscalEmisor);
             this.gpbEnte.Location = new System.Drawing.Point(12, 69);
             this.gpbEnte.Name = "gpbEnte";
-            this.gpbEnte.Size = new System.Drawing.Size(1116, 63);
+            this.gpbEnte.Size = new System.Drawing.Size(1192, 63);
             this.gpbEnte.TabIndex = 17;
             this.gpbEnte.TabStop = false;
             this.gpbEnte.Text = "Ente";
@@ -181,7 +183,7 @@ namespace SistemaContable
             this.gpbDatosCompra.Controls.Add(this.lblImporte);
             this.gpbDatosCompra.Location = new System.Drawing.Point(12, 138);
             this.gpbDatosCompra.Name = "gpbDatosCompra";
-            this.gpbDatosCompra.Size = new System.Drawing.Size(1116, 99);
+            this.gpbDatosCompra.Size = new System.Drawing.Size(1192, 99);
             this.gpbDatosCompra.TabIndex = 18;
             this.gpbDatosCompra.TabStop = false;
             this.gpbDatosCompra.Text = "Datos Compra";
@@ -259,7 +261,8 @@ namespace SistemaContable
             // 
             // btnCargar
             // 
-            this.btnCargar.Location = new System.Drawing.Point(934, 9);
+            this.btnCargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCargar.Location = new System.Drawing.Point(1010, 9);
             this.btnCargar.Name = "btnCargar";
             this.btnCargar.Size = new System.Drawing.Size(94, 29);
             this.btnCargar.TabIndex = 19;
@@ -277,13 +280,14 @@ namespace SistemaContable
             this.lstListaCompras.ItemHeight = 20;
             this.lstListaCompras.Location = new System.Drawing.Point(12, 243);
             this.lstListaCompras.Name = "lstListaCompras";
-            this.lstListaCompras.Size = new System.Drawing.Size(1116, 244);
+            this.lstListaCompras.Size = new System.Drawing.Size(1192, 324);
             this.lstListaCompras.TabIndex = 20;
             this.lstListaCompras.SelectedValueChanged += new System.EventHandler(this.lstListaCompras_SelectedValueChanged);
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(934, 9);
+            this.btnEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEliminar.Location = new System.Drawing.Point(1010, 9);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(94, 29);
             this.btnEliminar.TabIndex = 21;
@@ -293,18 +297,21 @@ namespace SistemaContable
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(934, 9);
+            this.btnModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificar.Location = new System.Drawing.Point(1010, 9);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(94, 29);
             this.btnModificar.TabIndex = 22;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // lblEstadoBoton
             // 
+            this.lblEstadoBoton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEstadoBoton.AutoSize = true;
             this.lblEstadoBoton.ForeColor = System.Drawing.Color.Red;
-            this.lblEstadoBoton.Location = new System.Drawing.Point(895, 41);
+            this.lblEstadoBoton.Location = new System.Drawing.Point(971, 41);
             this.lblEstadoBoton.Name = "lblEstadoBoton";
             this.lblEstadoBoton.Size = new System.Drawing.Size(175, 20);
             this.lblEstadoBoton.TabIndex = 23;
@@ -316,7 +323,7 @@ namespace SistemaContable
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1140, 491);
+            this.ClientSize = new System.Drawing.Size(1216, 583);
             this.Controls.Add(this.lblEstadoBoton);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnEliminar);
@@ -332,6 +339,7 @@ namespace SistemaContable
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCompra";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cargar Compra";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmCargarCompra_Load);

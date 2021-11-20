@@ -13,23 +13,9 @@ namespace SistemaContable
 {
     public partial class FrmCompra : Form
     {
-        private static FrmCompra frmCompra;
-
         private RegistroContable registro;
         private string optionSelected;
 
-        // test singleton
-        public FrmCompra GetInstance
-        {
-            get
-            {
-                if(frmCompra is null)
-                {
-                    frmCompra = new FrmCompra(this.registro);
-                }
-                return frmCompra;
-            }
-        }
         public string GetOption
         {
             get
@@ -42,17 +28,15 @@ namespace SistemaContable
             }
         }
 
-
-
-        public FrmCompra(RegistroContable registro)
+        public FrmCompra() :this(null, string.Empty)
+        {     }
+        public FrmCompra(RegistroContable registro) :this(registro, string.Empty)
+        {     }
+        public FrmCompra(RegistroContable registro, string optionSelected) 
         {
             InitializeComponent();
-            this.registro = registro;
-        }
-        public FrmCompra(RegistroContable registro, string optionSelected) : this(registro)
-        {
             this.optionSelected = optionSelected;
-            
+            this.registro = registro;
         }
 
         private void FrmCargarCompra_Load(object sender, EventArgs e)
@@ -76,16 +60,16 @@ namespace SistemaContable
                     this.btnEliminar.Visible = false;
                     break;
                 case "Modificar":
-                    this.dtpFecha.Enabled = true;
-                    this.txtPtoVenta.Enabled = true;
-                    this.txtNroComprobante.Enabled = true;
-                    this.txtEmisor.Enabled = true;
-                    this.txtCuitEmisor.Enabled = true;
-                    this.txtImporte.Enabled = true;
+                    this.dtpFecha.Enabled = false;
+                    this.txtPtoVenta.Enabled = false;
+                    this.txtNroComprobante.Enabled = false;
+                    this.txtEmisor.Enabled = false;
+                    this.txtCuitEmisor.Enabled = false;
+                    this.txtImporte.Enabled = false;
                     this.txtTotal.Enabled = false;
-                    this.cmbAlicuota.Enabled = true;
-                    this.cmbConcepto.Enabled = true;
-                    this.cmbSitFiscal.Enabled = true;
+                    this.cmbAlicuota.Enabled = false;
+                    this.cmbConcepto.Enabled = false;
+                    this.cmbSitFiscal.Enabled = false;
                     this.lstListaCompras.Enabled = true;
                     this.btnCargar.Visible = false;
                     this.btnModificar.Visible = true; 
@@ -117,21 +101,15 @@ namespace SistemaContable
         }
 
 
-
-
-
-
-
-
-
-
+        #region Botones
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
             if (ValidarDatosIngresados())
             {
                 this.registro.Compras.Add(new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
-                    this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue));
+                    this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
+                    this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue));
                 
                 this.Refrescar();
             }
@@ -140,6 +118,27 @@ namespace SistemaContable
                 this.lblEstadoBoton.Visible = true;
             }
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            //se puede mejorar
+            foreach (Compra item in registro.Compras)
+            {
+                if (item == (Compra)lstListaCompras.SelectedItem)
+                {
+                    if(MessageBox.Show("Desea modificar los datos de esta compra?", "Modificar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        this.registro.Compras.Add(new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
+                        this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
+                        this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue));
+                        registro -= item;
+                        this.Refrescar();
+                        break;
+                    }
+                }
+            }
+        }
+
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             foreach(Compra item in registro.Compras)
@@ -156,11 +155,7 @@ namespace SistemaContable
             }
         }
 
-
-
-
-
-
+        #endregion
 
         private void cmbAlicuota_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -180,9 +175,27 @@ namespace SistemaContable
         {
             Compra aux = (Compra)this.lstListaCompras.SelectedItem;
             if(aux is not null)
-                this.MostrarDatosCompra(aux);
+                this.MostrarDatos(aux);
+            if(this.optionSelected == "Modificar")
+            {
+                this.dtpFecha.Enabled = true;
+                this.txtPtoVenta.Enabled = true;
+                this.txtNroComprobante.Enabled = true;
+                this.txtEmisor.Enabled = true;
+                this.txtCuitEmisor.Enabled = true;
+                this.txtImporte.Enabled = true;
+                this.txtTotal.Enabled = true;
+                this.cmbAlicuota.Enabled = true;
+                this.cmbConcepto.Enabled = true;
+                this.cmbSitFiscal.Enabled = true;
+                this.lstListaCompras.Enabled = true;
+            }
         }
-        public void MostrarDatosCompra(Compra c1)
+
+
+
+        #region Métodos 
+        public void MostrarDatos(Compra c1)
         {
             this.dtpFecha.Value = c1.Fecha;
             this.txtPtoVenta.Text = c1.PtoVenta;
@@ -241,5 +254,12 @@ namespace SistemaContable
             return ret;
         }
 
+
+
+
+
+        #endregion
+
+    
     }
 }

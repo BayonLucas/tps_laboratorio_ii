@@ -79,20 +79,20 @@ namespace Entidades
                 this.enteReceptor = value;
             }
         }
-        public Factura(Ente enteEmisor, string ptoVenta, string nroComprobante, DateTime fecha, float importe, float alicuota, Ente enteRecepto) 
-            : base(enteEmisor, ptoVenta, nroComprobante, fecha)
+       
+  
+        public Factura(Ente enteEmisor, string ptoVenta, string nroComprobante, DateTime fecha, float importe, float alicuota, Ente enteRecepto, bool anulado)
+           : base(enteEmisor, ptoVenta, nroComprobante, fecha)
         {
-            this.Anulado = false;
+            this.Anulado = anulado;
             this.Importe = importe;
             this.Alicuota = alicuota;
             this.total = this.CalculoTotal;
             this.enteReceptor = enteRecepto;
         }
-        public Factura(Ente enteEmisor, string ptoVenta, string nroComprobante, DateTime fecha, float importe, float alicuota, Ente enteRecepto, bool anulado)
-            : this(enteEmisor, ptoVenta, nroComprobante, fecha, importe, alicuota, enteRecepto)
-        {
-            this.Anulado = anulado;
-        }
+        public Factura(Ente enteEmisor, string ptoVenta, string nroComprobante, DateTime fecha, float importe, float alicuota, Ente enteRecepto)
+           : this(enteEmisor, ptoVenta, nroComprobante, fecha, importe, alicuota, enteRecepto, false)
+        {        }
 
         public override string MostrarDatos()
         {
@@ -103,6 +103,19 @@ namespace Entidades
             sb.Append($"Importe: {this.Importe} | ");
             sb.Append($"IVA: {this.Alicuota} | ");
             sb.Append($"Total: {this.CalculoTotal}");
+
+            return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append($"{(string)this.EnteReceptor} | ");
+            sb.Append($"Importe: {this.Importe} | ");
+            sb.Append($"IVA: {this.Alicuota} | ");
+            sb.Append($"Total: {this.CalculoTotal}");
+            sb.Append($"Estado: {this.Anulado}");
 
             return sb.ToString();
         }

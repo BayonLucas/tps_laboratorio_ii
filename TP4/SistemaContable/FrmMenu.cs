@@ -15,39 +15,44 @@ namespace SistemaContable
     {
         private RegistroContable registroContable;
         private FrmCompra compra;
+        private FrmVentas ventas;
+        private FrmLog logIn;
       
 
-        public frmMenu(RegistroContable registroContable)
+        public frmMenu()
         {
             InitializeComponent();
-            this.registroContable = registroContable;
-        }
-
-        private void logInToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FrmLogIn frmLog = new FrmLogIn(registroContable);
-            frmLog.ShowDialog();
-            if(this.registroContable.Usuario is not null)
-            {
-                smiLogIn.Enabled = false;
-                smiArchivo.Visible = true;
-                smiCompra.Visible = true;
-                smiVenta.Visible = true;
-                smiInformes.Visible = true;
-                this.Text = $"Registro Contable: {this.registroContable.Usuario.RazonSocial} - {this.registroContable.Usuario.Cuit}";
-            }
         }
 
         private void frmMenu_Load(object sender, EventArgs e)
         {
+            this.Visible = false;
+            logIn = new FrmLog(this.registroContable);
+            logIn.ShowDialog();
+
+            this.registroContable = logIn.GetInstance;
+            if (this.registroContable.Usuario is not null)
+            {
+                this.Visible = true;
+                this.Text = $"Registro Contable: {this.registroContable.Usuario.RazonSocial} - {this.registroContable.Usuario.Cuit}";
+            }
+            else
+            {
+                this.Close();
+            }
+            this.compra = new FrmCompra(this.registroContable);
+            this.ventas = new FrmVentas(this.registroContable);
         }
 
+
+        #region Botones Compras
         private void cargarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if((compra = (FrmCompra)IsFormAlreadyOpen(typeof(FrmCompra))) == null)
+            if((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
             {
-                //this.compra = new FrmCompra(registroContable, "Cargar");
-                this.compra = compra.GetInstance;
+                if (this.compra.IsDisposed)
+                    this.compra = new FrmCompra(this.registroContable);
+
                 this.compra.GetOption = "Cargar";
                 this.compra.MdiParent = this;
                 compra.Show();
@@ -60,13 +65,17 @@ namespace SistemaContable
 
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((compra = (FrmCompra)IsFormAlreadyOpen(typeof(FrmCompra))) == null)
+            if ((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
             {
-                //this.compra = new FrmCompra(registroContable, "Modificar");
-                this.compra = compra.GetInstance;
-                this.compra.GetOption = "Modificar";
-                this.compra.MdiParent = this;
-                compra.Show();
+                if(!(this.registroContable.Compras.Count == 0))
+                {
+                    if (this.compra.IsDisposed)
+                        this.compra = new FrmCompra(this.registroContable);
+
+                    this.compra.GetOption = "Modificar";
+                    this.compra.MdiParent = this;
+                    compra.Show();
+                }
             }
             else
             {
@@ -76,21 +85,67 @@ namespace SistemaContable
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((compra = (FrmCompra)IsFormAlreadyOpen(typeof(FrmCompra))) == null)
+            if ((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
             {
-                //this.compra = new FrmCompra(registroContable, "Eliminar");
-                this.compra = compra.GetInstance;
-                this.compra.GetOption = "Eliminar";
-                this.compra.MdiParent = this;
-                compra.Show();
+                if (!(this.registroContable.Compras.Count == 0))
+                {
+                    if (this.compra.IsDisposed)
+                        this.compra = new FrmCompra(this.registroContable);
+
+                    this.compra.GetOption = "Eliminar";
+                    this.compra.MdiParent = this;
+                    compra.Show();
+                }
             }
             else
             {
                 compra.BringToFront();
             }
         }
+        #endregion
 
-        //Experimento
+        #region Botones Ventas
+
+        private void emitirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if ((IsFormAlreadyOpen(typeof(FrmVentas))) == null)
+            {
+                if (this.ventas.IsDisposed)
+                    this.ventas = new FrmVentas(this.registroContable);
+
+                this.ventas.GetOption = "Emitir";
+                this.ventas.MdiParent = this;
+                ventas.Show();
+            }
+            else
+            {
+                ventas.BringToFront();
+            }
+        }
+
+        private void anularToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if ((IsFormAlreadyOpen(typeof(FrmVentas))) == null)
+            {
+                if (!(this.registroContable.Ventas.Count == 0))
+                {
+                    if (this.ventas.IsDisposed)
+                        this.ventas = new FrmVentas(this.registroContable);
+
+                    this.ventas.GetOption = "Anular";
+                    this.ventas.MdiParent = this;
+                    ventas.Show();
+                }
+            }
+            else
+            {
+                ventas.BringToFront();
+            }
+        }
+
+        #endregion
+
+
         public static Form IsFormAlreadyOpen(Type FormType)
         {
             foreach (Form OpenForm in System.Windows.Forms.Application.OpenForms)
@@ -101,7 +156,8 @@ namespace SistemaContable
 
             return null;
         }
-        
+
+
 
     }
 }

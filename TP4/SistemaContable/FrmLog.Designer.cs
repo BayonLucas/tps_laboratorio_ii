@@ -40,14 +40,17 @@ namespace SistemaContable
             this.lblUsuarios = new System.Windows.Forms.Label();
             this.lblCuit = new System.Windows.Forms.Label();
             this.lblSitFiscal = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblBienvenida
             // 
             this.lblBienvenida.AutoSize = true;
+            this.lblBienvenida.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.lblBienvenida.Location = new System.Drawing.Point(13, 13);
             this.lblBienvenida.Name = "lblBienvenida";
-            this.lblBienvenida.Size = new System.Drawing.Size(83, 20);
+            this.lblBienvenida.Size = new System.Drawing.Size(89, 20);
             this.lblBienvenida.TabIndex = 0;
             this.lblBienvenida.Text = "Bienvenido";
             // 
@@ -64,7 +67,7 @@ namespace SistemaContable
             // chbNuevoUsuario
             // 
             this.chbNuevoUsuario.AutoSize = true;
-            this.chbNuevoUsuario.Location = new System.Drawing.Point(301, 9);
+            this.chbNuevoUsuario.Location = new System.Drawing.Point(314, 9);
             this.chbNuevoUsuario.Name = "chbNuevoUsuario";
             this.chbNuevoUsuario.Size = new System.Drawing.Size(128, 24);
             this.chbNuevoUsuario.TabIndex = 2;
@@ -140,11 +143,24 @@ namespace SistemaContable
             this.lblSitFiscal.TabIndex = 10;
             this.lblSitFiscal.Text = "Situación Fiscal:";
             // 
-            // Log
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(130, 301);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(183, 20);
+            this.lblError.TabIndex = 11;
+            this.lblError.Text = "*Complete todos los datos*";
+            this.lblError.Visible = false;
+            // 
+            // FrmLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 323);
+            this.ClientSize = new System.Drawing.Size(454, 330);
+            this.Controls.Add(this.lblError);
             this.Controls.Add(this.lblSitFiscal);
             this.Controls.Add(this.lblCuit);
             this.Controls.Add(this.lblUsuarios);
@@ -157,7 +173,10 @@ namespace SistemaContable
             this.Controls.Add(this.cmbUsuarios);
             this.Controls.Add(this.lblBienvenida);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Log";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "FrmLog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro Contable - Log";
             this.Load += new System.EventHandler(this.Log_Load);
             this.ResumeLayout(false);
@@ -178,5 +197,6 @@ namespace SistemaContable
         private System.Windows.Forms.Label lblUsuarios;
         private System.Windows.Forms.Label lblCuit;
         private System.Windows.Forms.Label lblSitFiscal;
+        private System.Windows.Forms.Label lblError;
     }
 }

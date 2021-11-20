@@ -30,9 +30,7 @@ namespace SistemaContable
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.smiLogIn = new System.Windows.Forms.ToolStripMenuItem();
             this.smiArchivo = new System.Windows.Forms.ToolStripMenuItem();
-            this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smiCompra = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,51 +48,35 @@ namespace SistemaContable
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.smiLogIn,
             this.smiArchivo,
             this.smiCompra,
             this.smiVenta,
             this.smiInformes});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1397, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1216, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // smiLogIn
-            // 
-            this.smiLogIn.Name = "smiLogIn";
-            this.smiLogIn.Size = new System.Drawing.Size(64, 24);
-            this.smiLogIn.Text = "Log In";
-            this.smiLogIn.Click += new System.EventHandler(this.logInToolStripMenuItem_Click);
             // 
             // smiArchivo
             // 
             this.smiArchivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importarToolStripMenuItem,
             this.exportarToolStripMenuItem,
             this.guardarToolStripMenuItem});
             this.smiArchivo.Name = "smiArchivo";
             this.smiArchivo.Size = new System.Drawing.Size(73, 24);
             this.smiArchivo.Text = "Archivo";
-            this.smiArchivo.Visible = false;
-            // 
-            // importarToolStripMenuItem
-            // 
-            this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
-            this.importarToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
-            this.importarToolStripMenuItem.Text = "Importar";
             // 
             // exportarToolStripMenuItem
             // 
             this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
-            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
             this.exportarToolStripMenuItem.Text = "Exportar";
             // 
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
             this.guardarToolStripMenuItem.Text = "Guardar";
             // 
             // smiCompra
@@ -106,26 +88,25 @@ namespace SistemaContable
             this.smiCompra.Name = "smiCompra";
             this.smiCompra.Size = new System.Drawing.Size(76, 24);
             this.smiCompra.Text = "Compra";
-            this.smiCompra.Visible = false;
             // 
             // cargarToolStripMenuItem
             // 
             this.cargarToolStripMenuItem.Name = "cargarToolStripMenuItem";
-            this.cargarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.cargarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.cargarToolStripMenuItem.Text = "Cargar";
             this.cargarToolStripMenuItem.Click += new System.EventHandler(this.cargarToolStripMenuItem_Click);
             // 
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.modificarToolStripMenuItem.Text = "Modificar";
             this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
@@ -137,33 +118,33 @@ namespace SistemaContable
             this.smiVenta.Name = "smiVenta";
             this.smiVenta.Size = new System.Drawing.Size(60, 24);
             this.smiVenta.Text = "Venta";
-            this.smiVenta.Visible = false;
             // 
             // emitirToolStripMenuItem
             // 
             this.emitirToolStripMenuItem.Name = "emitirToolStripMenuItem";
-            this.emitirToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.emitirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.emitirToolStripMenuItem.Text = "Emitir";
+            this.emitirToolStripMenuItem.Click += new System.EventHandler(this.emitirToolStripMenuItem_Click);
             // 
             // anularToolStripMenuItem
             // 
             this.anularToolStripMenuItem.Name = "anularToolStripMenuItem";
-            this.anularToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.anularToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.anularToolStripMenuItem.Text = "Anular";
+            this.anularToolStripMenuItem.Click += new System.EventHandler(this.anularToolStripMenuItem_Click);
             // 
             // smiInformes
             // 
             this.smiInformes.Name = "smiInformes";
             this.smiInformes.Size = new System.Drawing.Size(81, 24);
             this.smiInformes.Text = "Informes";
-            this.smiInformes.Visible = false;
             // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1397, 583);
+            this.ClientSize = new System.Drawing.Size(1216, 583);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -180,12 +161,10 @@ namespace SistemaContable
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem smiLogIn;
         private System.Windows.Forms.ToolStripMenuItem smiArchivo;
         private System.Windows.Forms.ToolStripMenuItem smiCompra;
         private System.Windows.Forms.ToolStripMenuItem smiVenta;
         private System.Windows.Forms.ToolStripMenuItem smiInformes;
-        private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cargarToolStripMenuItem;
