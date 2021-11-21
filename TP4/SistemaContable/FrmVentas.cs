@@ -63,7 +63,7 @@ namespace SistemaContable
                     this.txtRazonSocialReceptor.Enabled = false;
                     this.txtCuitReceptor.Enabled = false;
                     this.cmbSitFiscalReceptor.Enabled = false;
-                    this.lblImporte.Enabled = false;
+                    this.txtImporte.Enabled = false;
                     this.txtCuitReceptor.Enabled = false;
                     this.btnEmitir.Visible = false;
                     this.btnAnular.Visible = true;
@@ -100,7 +100,8 @@ namespace SistemaContable
             {
                 if (item == (Factura)lstListaVentas.SelectedItem)
                 {
-                    if(item.Anulado != true)
+                    this.MostrarDatos(item);
+                    if(item.Anulado == false)
                     {
                         if (MessageBox.Show("Desea anular esta factura?", "Anular", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {

@@ -92,21 +92,21 @@ namespace SistemaContable
             // cargarToolStripMenuItem
             // 
             this.cargarToolStripMenuItem.Name = "cargarToolStripMenuItem";
-            this.cargarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cargarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.cargarToolStripMenuItem.Text = "Cargar";
             this.cargarToolStripMenuItem.Click += new System.EventHandler(this.cargarToolStripMenuItem_Click);
             // 
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.modificarToolStripMenuItem.Text = "Modificar";
             this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
@@ -122,14 +122,14 @@ namespace SistemaContable
             // emitirToolStripMenuItem
             // 
             this.emitirToolStripMenuItem.Name = "emitirToolStripMenuItem";
-            this.emitirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.emitirToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.emitirToolStripMenuItem.Text = "Emitir";
             this.emitirToolStripMenuItem.Click += new System.EventHandler(this.emitirToolStripMenuItem_Click);
             // 
             // anularToolStripMenuItem
             // 
             this.anularToolStripMenuItem.Name = "anularToolStripMenuItem";
-            this.anularToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.anularToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.anularToolStripMenuItem.Text = "Anular";
             this.anularToolStripMenuItem.Click += new System.EventHandler(this.anularToolStripMenuItem_Click);
             // 
@@ -146,9 +146,13 @@ namespace SistemaContable
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1216, 583);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro Contable";
             this.Load += new System.EventHandler(this.frmMenu_Load);
             this.menuStrip1.ResumeLayout(false);

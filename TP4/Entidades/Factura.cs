@@ -114,7 +114,7 @@ namespace Entidades
             sb.Append($"{(string)this.EnteReceptor} | ");
             sb.Append($"Importe: {this.Importe} | ");
             sb.Append($"IVA: {this.Alicuota} | ");
-            sb.Append($"Total: {this.CalculoTotal}");
+            sb.Append($"Total: {this.CalculoTotal} | ");
             sb.Append($"Estado: {this.Anulado}");
 
             return sb.ToString();

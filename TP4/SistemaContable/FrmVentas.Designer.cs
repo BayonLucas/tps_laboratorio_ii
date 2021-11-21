@@ -33,7 +33,6 @@ namespace SistemaContable
             this.lblCuitUsuario = new System.Windows.Forms.Label();
             this.lblSitFiscalUsuario = new System.Windows.Forms.Label();
             this.btnEmitir = new System.Windows.Forms.Button();
-            this.lstListaVentas = new System.Windows.Forms.ListBox();
             this.txtPtoVenta = new System.Windows.Forms.TextBox();
             this.txtNroComprobante = new System.Windows.Forms.TextBox();
             this.lblRazonSocialReceptor = new System.Windows.Forms.Label();
@@ -52,6 +51,7 @@ namespace SistemaContable
             this.btnAnular = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
             this.lblNroComprobante = new System.Windows.Forms.Label();
+            this.lstListaVentas = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // lblRazonSocialUsuario
@@ -94,19 +94,6 @@ namespace SistemaContable
             this.btnEmitir.Text = "Emitir";
             this.btnEmitir.UseVisualStyleBackColor = true;
             this.btnEmitir.Click += new System.EventHandler(this.btnEmitir_Click);
-            // 
-            // lstListaVentas
-            // 
-            this.lstListaVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstListaVentas.FormattingEnabled = true;
-            this.lstListaVentas.ItemHeight = 20;
-            this.lstListaVentas.Location = new System.Drawing.Point(-7284, -9072);
-            this.lstListaVentas.Name = "lstListaVentas";
-            this.lstListaVentas.Size = new System.Drawing.Size(8488, 8384);
-            this.lstListaVentas.TabIndex = 4;
-            this.lstListaVentas.SelectedValueChanged += new System.EventHandler(this.lstListaVentas_SelectedValueChanged);
             // 
             // txtPtoVenta
             // 
@@ -268,12 +255,24 @@ namespace SistemaContable
             this.lblNroComprobante.TabIndex = 22;
             this.lblNroComprobante.Text = "Nro. Comprobante:";
             // 
+            // lstListaVentas
+            // 
+            this.lstListaVentas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstListaVentas.FormattingEnabled = true;
+            this.lstListaVentas.ItemHeight = 20;
+            this.lstListaVentas.Location = new System.Drawing.Point(12, 282);
+            this.lstListaVentas.Name = "lstListaVentas";
+            this.lstListaVentas.Size = new System.Drawing.Size(1192, 284);
+            this.lstListaVentas.TabIndex = 23;
+            // 
             // FrmVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1216, 583);
+            this.Controls.Add(this.lstListaVentas);
             this.Controls.Add(this.lblNroComprobante);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.btnAnular);
@@ -292,7 +291,6 @@ namespace SistemaContable
             this.Controls.Add(this.lblRazonSocialReceptor);
             this.Controls.Add(this.txtNroComprobante);
             this.Controls.Add(this.txtPtoVenta);
-            this.Controls.Add(this.lstListaVentas);
             this.Controls.Add(this.btnEmitir);
             this.Controls.Add(this.lblSitFiscalUsuario);
             this.Controls.Add(this.lblCuitUsuario);
@@ -314,7 +312,6 @@ namespace SistemaContable
         private System.Windows.Forms.Label lblCuitUsuario;
         private System.Windows.Forms.Label lblSitFiscalUsuario;
         private System.Windows.Forms.Button btnEmitir;
-        private System.Windows.Forms.ListBox lstListaVentas;
         private System.Windows.Forms.TextBox txtPtoVenta;
         private System.Windows.Forms.TextBox txtNroComprobante;
         private System.Windows.Forms.Label lblRazonSocialReceptor;
@@ -333,5 +330,6 @@ namespace SistemaContable
         private System.Windows.Forms.Button btnAnular;
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Label lblNroComprobante;
+        private System.Windows.Forms.ListBox lstListaVentas;
     }
 }
