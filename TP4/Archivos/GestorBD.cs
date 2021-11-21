@@ -24,6 +24,28 @@ namespace Archivos
             command.Connection = conexion;
         }
 
+        public static bool ProbarConexion()
+        {
+            bool rta = true;
+
+            try
+            {
+                conexion.Open();
+            }
+            catch (Exception)
+            {
+                rta = false;
+            }
+            finally
+            {
+                if (conexion.State == ConnectionState.Open)
+                {
+                    conexion.Close();
+                }
+            }
+
+            return rta;
+        }
 
         public static List<Ente> CargarListaUsuarios()
         {
@@ -49,10 +71,9 @@ namespace Archivos
                     }
                 }
             }
-            catch (DataBasesException ex)
+            catch (Exception ex)
             {
-                ex = new DataBasesException("Hubo problemas con la carga de la lista desde la BD", null);
-                throw ex;
+                throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
             }
             finally
             {
@@ -76,10 +97,9 @@ namespace Archivos
 
                     command.ExecuteNonQuery();
                 }
-                catch (DataBasesException ex)
+                catch (Exception ex)
                 {
-                    ex = new DataBasesException("Hubo problemas con la carga de la lista desde la BD", null);
-                    throw ex;
+                    throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
                 }
                 finally
                 {
@@ -87,23 +107,21 @@ namespace Archivos
                 }
             }
         }
-
         public static void GenerarTablaVentas(Ente usuario)
         {
             try
             {
                 command.CommandText = $"CREATE TABLE [dbo].[{usuario.RazonSocial+ "Ventas"}]([cuitUsuario][varchar](12) NOT NULL,[ptoVenta] " +
-                    $"[varchar](5) NOT NULL,[nroComprobante] [int] IDENTITY(1, 1) NOT NULL, [fecha] [datetime] NOT NULL, " +
+                    $"[varchar](5) NOT NULL,[nroComprobante] [int] NOT NULL, [fecha] [datetime] NOT NULL, " +
                     $"[importe] [float] NOT NULL, [alicuota] [float] NOT NULL, [razonSocialReceptor] [varchar](25) NOT NULL, " +
                     $"[cuitReceptor] [varchar](12) NOT NULL, [sitFiscalReceptor] [varchar](20) NOT NULL,[anulado] [bit] NOT NULL) ON[PRIMARY]";
                 conexion.Open();
                 command.ExecuteNonQuery();
 
             }
-            catch (DataBasesException ex)
+            catch (Exception ex)
             {
-                ex = new DataBasesException("Hubo problemas con la creación de la tabla del usuario", null);
-                throw ex;
+                throw new DataBasesException("Hubo problemas con la creación de la tabla del usuario", ex); ;
             }
             finally
             {
@@ -121,9 +139,9 @@ namespace Archivos
                 command.ExecuteNonQuery();
 
             }
-            catch (DataBasesException ex)
+            catch (Exception ex)
             {
-                ex = new DataBasesException("Hubo problemas con la creación de la tabla del usuario", null);
+                ex = new DataBasesException("Hubo problemas con la creación de la tabla del usuario", ex);
                 throw ex;
             }
             finally
@@ -161,10 +179,9 @@ namespace Archivos
                     }
                 }
             }
-            catch (DataBasesException ex)
+            catch (Exception ex)
             {
-                ex = new DataBasesException("Hubo problemas con la carga de la lista desde la BD", null);
-                throw ex;
+                throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
             }
             finally
             {
@@ -178,7 +195,6 @@ namespace Archivos
             List<Factura> listaVentas = new List<Factura>();
             try
             {
-                //command.CommandText = $"SELECT * FROM dbo.{usuario.RazonSocial + ".Ventas"}";
                 command.CommandText = $"SELECT ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, RAZONSOCIALRECEPTOR, CUITRECEPTOR, SITFISCALRECEPTOR, ANULADO " +
                     $"FROM {usuario.RazonSocial}Ventas";
                 conexion.Open();
@@ -203,10 +219,9 @@ namespace Archivos
                     }
                 }
             }
-            catch (DataBasesException ex)
+            catch (Exception ex)
             {
-                ex = new DataBasesException("Hubo problemas con la carga de la lista desde la BD", null);
-                throw ex;
+                throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
             }
             finally
             {
@@ -216,69 +231,68 @@ namespace Archivos
             return listaVentas;
         }
 
-
-        /*
-        public static List<T> CargarListaComprobantes()
+        public static bool CargarVenta(Factura f)
         {
-            List<T> listaProductos = new List<T>();
-
+            bool ret = false;
             try
             {
-                command.CommandText = "SELECT RAZONSOCIAL, CUIT, SITUACIONFISCAL FROM USUARIOS";
                 conexion.Open();
+                command.Parameters.Clear();
+                command.CommandText = $"INSERT INTO dbo.{f.Ente.RazonSocial}Ventas (cuitUsuario, ptoVenta, nroComprobante, fecha, importe, alicuota, " +
+                    $"razonSocialReceptor, cuitReceptor, sitFiscalReceptor, anulado) VALUES (@cuitUsuario, @ptoVenta, @nroComprobante, @fecha, @importe, " +
+                    $"@alicuota, @razonSocialReceptor, @cuitReceptor, @sitFiscalReceptor, @anulado)";
+                command.Parameters.AddWithValue("@cuitUsuario", f.Ente.Cuit);
+                command.Parameters.AddWithValue("@ptoVenta", f.PtoVenta);
+                command.Parameters.AddWithValue("@nroComprobante", f.NroComprobante);
+                command.Parameters.AddWithValue("@fecha", f.Fecha);
+                command.Parameters.AddWithValue("@importe", f.Importe);
+                command.Parameters.AddWithValue("@alicuota", f.Alicuota);
+                command.Parameters.AddWithValue("@razonSocialReceptor", f.EnteReceptor.RazonSocial);
+                command.Parameters.AddWithValue("@cuitReceptor", f.EnteReceptor.Cuit);
+                command.Parameters.AddWithValue("@sitFiscalReceptor", f.EnteReceptor.SitFiscal);
+                command.Parameters.AddWithValue("@anulado", f.Anulado);
 
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
+                if(command.ExecuteNonQuery() == 1)
                 {
-                    string auxRazonSocial = reader["RAZONSOCIAL"].ToString();
-                    int auxCuit = int.Parse(reader["CUIT"].ToString());
-                    string auxSituacionFiscal = reader["DESCRIPCION"].ToString();
-
-                    Producto auxP = new Producto(auxCodigo, auxDescripcion, auxStock, auxPrecio);
-                    if (!(auxP is null))
-                    {
-                        listaProductos.Add(auxP);
-                    }
+                    ret = true;
                 }
             }
-            catch (ComiqueriaException)
+            catch (Exception ex)
             {
-                ComiqueriaException ex = new ComiqueriaException("Hubo problemas con la carga de la lista desde la BD", null);
-                throw ex;
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
             }
             finally
             {
                 conexion.Close();
             }
-
-            return listaProductos;
+            return ret;
         }
-*/
-        /*
-        public static void CargarProducto(string nuevaDescripcion, double nuevoPrecio, int nuevoStock)
+        public static bool ModificarVenta(Ente e, Factura f)
         {
+            bool ret = false;
             try
             {
                 conexion.Open();
 
-                command.CommandText = "INSERT INTO PRODUCTOS (DESCRIPCION, PRECIO, STOCK) VALUES (@descripcion, @precio, @stock)";
-                command.Parameters.AddWithValue("@descripcion", nuevaDescripcion);
-                command.Parameters.AddWithValue("@precio", nuevoPrecio);
-                command.Parameters.AddWithValue("@stock", nuevoStock);
+                command.CommandText = $"UPDATE dbo.{e.RazonSocial}Ventas SET anulado = 1 WHERE ptoVenta = {f.PtoVenta} AND nroComprobante = {f.NroComprobante} " +
+                    $"AND cuitReceptor = {f.EnteReceptor.Cuit}";
 
-                command.ExecuteNonQuery();
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    ret = true;
+                }
             }
-            catch (ComiqueriaException)
+            catch (Exception ex)
             {
-                throw;
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
             }
             finally
             {
                 conexion.Close();
             }
+            return ret;
         }
-*/
+   
 
     }
 }

@@ -23,9 +23,13 @@ namespace Entidades
                 if(!(string.IsNullOrWhiteSpace(value)))
                 {
                     string aux;
-                    //Aca deberia de extraer un max de 20 caracteres.
+                    //Aca deberia de extraer un max de 25 caracteres.
                     aux = EmprolijarString(value);
                     aux = aux.Replace(" ", "");
+                    while(aux.Length<24)
+                    {
+                        aux += " ";
+                    }
                     this.razonSocial = aux;
                 }
             }

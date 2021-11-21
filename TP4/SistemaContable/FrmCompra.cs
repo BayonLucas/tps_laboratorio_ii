@@ -44,6 +44,7 @@ namespace SistemaContable
             switch (this.GetOption)
             {
                 case "Cargar":
+                    this.Text = "Cargar Compra";
                     this.dtpFecha.Enabled = true;
                     this.txtPtoVenta.Enabled = true;
                     this.txtNroComprobante.Enabled = true;
@@ -60,6 +61,7 @@ namespace SistemaContable
                     this.btnEliminar.Visible = false;
                     break;
                 case "Modificar":
+                    this.Text = "Modificar Compra";
                     this.dtpFecha.Enabled = false;
                     this.txtPtoVenta.Enabled = false;
                     this.txtNroComprobante.Enabled = false;
@@ -76,6 +78,7 @@ namespace SistemaContable
                     this.btnEliminar.Visible = false;
                     break;
                 case "Eliminar":
+                    this.Text = "Eliminar Compra";
                     this.dtpFecha.Enabled = false;
                     this.txtPtoVenta.Enabled = false;
                     this.txtNroComprobante.Enabled = false;
@@ -92,6 +95,8 @@ namespace SistemaContable
                     this.btnEliminar.Visible = true;
                     break;
             }
+            this.dtpFecha.MaxDate = DateTime.Now;
+            this.dtpFecha.MinDate = DateTime.Now.AddDays(-10);
             this.cmbSitFiscal.DataSource = Enum.GetValues(typeof(ESitFiscal));
             this.cmbAlicuota.Items.Add(21);
             this.cmbAlicuota.Items.Add(27);
@@ -215,8 +220,19 @@ namespace SistemaContable
                     break;
             }
             this.txtImporte.Text = c1.Importe.ToString();
-            //this.cmbAlicuota.SelectedItem = c1.Alicuota;
-            this.txtTotal.Text = c1.CalculoTotal.ToString();
+            switch ((int)c1.Alicuota)
+            {
+                case 21:
+                    this.cmbAlicuota.SelectedIndex = 0;
+                    break;
+                case 27:
+                    this.cmbAlicuota.SelectedIndex = 1;
+                    break;
+                case 10:
+                    this.cmbAlicuota.SelectedIndex = 2;
+                    break;
+            }
+            //this.txtTotal.Text = c1.CalculoTotal.ToString();
             this.cmbConcepto.SelectedItem = c1.Concepto;
         }
         private void CalculoTotal()

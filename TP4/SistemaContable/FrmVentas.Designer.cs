@@ -265,6 +265,7 @@ namespace SistemaContable
             this.lstListaVentas.Name = "lstListaVentas";
             this.lstListaVentas.Size = new System.Drawing.Size(1192, 284);
             this.lstListaVentas.TabIndex = 23;
+            this.lstListaVentas.SelectedValueChanged += new System.EventHandler(this.lstListaVentas_SelectedValueChanged_1);
             // 
             // FrmVentas
             // 

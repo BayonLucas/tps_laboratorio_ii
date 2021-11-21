@@ -156,8 +156,5 @@ namespace SistemaContable
 
             return null;
         }
-
-
-
     }
 }

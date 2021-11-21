@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
+using Archivos;
 
 namespace SistemaContable
 {
@@ -40,6 +41,7 @@ namespace SistemaContable
         }
 
 
+
         private void FrmVentas_Load(object sender, EventArgs e)
         {
             this.lblRazonSocialUsuario.Text = this.registroContable.Usuario.RazonSocial;
@@ -48,6 +50,7 @@ namespace SistemaContable
             switch (this.GetOption)
             {
                 case "Emitir":
+                    this.Text = "Emitir Venta";
                     this.dtpFecha.Enabled = true;
                     this.txtRazonSocialReceptor.Enabled = true;
                     this.txtCuitReceptor.Enabled = true;
@@ -59,6 +62,7 @@ namespace SistemaContable
                     this.lstListaVentas.Enabled = false;
                     break;
                 case "Anular":
+                    this.Text = "Anular Venta";
                     this.dtpFecha.Enabled = false;
                     this.txtRazonSocialReceptor.Enabled = false;
                     this.txtCuitReceptor.Enabled = false;
@@ -68,6 +72,8 @@ namespace SistemaContable
                     this.btnEmitir.Visible = false;
                     this.btnAnular.Visible = true;
                     this.lstListaVentas.Enabled = true;
+                    this.cmbAlicuota.Enabled = false;
+
                     break;
             }
             this.cmbSitFiscalReceptor.DataSource = Enum.GetValues(typeof(ESitFiscal));
@@ -76,17 +82,25 @@ namespace SistemaContable
             this.cmbAlicuota.Items.Add(10.5);
             this.Refrescar();
 
-
+            this.dtpFecha.MaxDate = DateTime.Now.AddDays(10);
+            this.dtpFecha.Value = DateTime.Now;
         }
+
 
 
         private void btnEmitir_Click(object sender, EventArgs e)
         {
             if(ValidarDatosIngresados())
             {
-                this.registroContable.Ventas.Add(new Factura(this.registroContable.Usuario, "99", this.txtNroComprobante.Text/*UltimoNroComprobante(this.registroContable.Ventas).ToString()*/, dtpFecha.Value,
-                    float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text), 
-                    new Ente(txtRazonSocialReceptor.Text, txtCuitReceptor.Text, (ESitFiscal)this.cmbSitFiscalReceptor.SelectedValue), false));
+                Factura fc = new Factura(this.registroContable.Usuario, "99", this.txtNroComprobante.Text, dtpFecha.Value,
+                    float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
+                    new Ente(txtRazonSocialReceptor.Text, txtCuitReceptor.Text, (ESitFiscal)this.cmbSitFiscalReceptor.SelectedValue), false);
+                this.registroContable.Ventas.Add(fc);
+                if(!GestorBD.CargarVenta(fc))
+                {
+                    DataBasesException ex = new DataBasesException("Error al agregar la venta a la Base de Datos");
+                    throw ex;
+                }
                 this.Refrescar();
             }
             else
@@ -106,6 +120,7 @@ namespace SistemaContable
                         if (MessageBox.Show("Desea anular esta factura?", "Anular", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
                             item.Anulado = true;
+                            GestorBD.ModificarVenta(this.registroContable.Usuario, item);
                             this.Refrescar();
                             break;
                         }
@@ -113,8 +128,6 @@ namespace SistemaContable
                 }
             }
         }
-
-
 
 
 
@@ -131,6 +144,7 @@ namespace SistemaContable
             this.lstListaVentas.DataSource = null;
             this.lstListaVentas.DataSource = this.registroContable.Ventas;
             this.lblError.Visible = false;
+            this.dtpFecha.Value = DateTime.Now;
         }
         private void CalculoTotal()
         {
@@ -166,6 +180,8 @@ namespace SistemaContable
         }
         private void MostrarDatos(Factura f1)
         {
+            this.txtRazonSocialReceptor.Text = f1.EnteReceptor.RazonSocial;
+            this.txtCuitReceptor.Text = f1.EnteReceptor.Cuit;
             this.dtpFecha.Value = f1.Fecha;
             this.txtPtoVenta.Text = f1.PtoVenta;
             this.txtNroComprobante.Text = f1.NroComprobante;
@@ -182,7 +198,19 @@ namespace SistemaContable
                     this.cmbSitFiscalReceptor.SelectedItem = ESitFiscal.Consumidor_Final;
                     break;
             }
-            this.txtTotal.Text = f1.CalculoTotal.ToString();
+            switch((int)f1.Alicuota)
+            {
+                case 21:
+                    this.cmbAlicuota.SelectedIndex = 0;
+                    break;
+                case 27:
+                    this.cmbAlicuota.SelectedIndex = 1;
+                    break;
+                case 10:
+                    this.cmbAlicuota.SelectedIndex = 2;
+                    break;
+            }
+            //this.txtTotal.Text = f1.CalculoTotal.ToString();
         }
 
 
@@ -201,16 +229,19 @@ namespace SistemaContable
                 this.CalculoTotal();
             }
         }
-        private void lstListaVentas_SelectedValueChanged(object sender, EventArgs e)
+        private void lstListaVentas_SelectedValueChanged_1(object sender, EventArgs e)
         {
-            Factura auxFc = (Factura)this.lstListaVentas.SelectedItem;
-            if(auxFc is not null && auxFc.Anulado != true)
+            if(this.GetOption == "Anular")
             {
-                this.MostrarDatos(auxFc);
-            }
-            else
-            {
-                this.Refrescar();
+                Factura auxFc = (Factura)this.lstListaVentas.SelectedItem;
+                if (auxFc is not null && auxFc.Anulado != true)
+                {
+                    this.MostrarDatos(auxFc);
+                }
+                else
+                {
+                    this.Refrescar();
+                }
             }
         }
     }
