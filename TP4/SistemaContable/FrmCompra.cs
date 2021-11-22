@@ -142,7 +142,7 @@ namespace SistemaContable
                         GestorBD.CargarCompra(compra);
                         registro -= item;
                         //Acá debo eliminar el item
-
+                        GestorBD.EliminarCompra(item);
                         this.Refrescar();
                         break;
                     }
