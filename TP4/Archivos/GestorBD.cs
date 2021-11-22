@@ -267,14 +267,14 @@ namespace Archivos
             }
             return ret;
         }
-        public static bool ModificarVenta(Ente e, Factura f)
+        public static bool ModificarVenta(Factura f)
         {
             bool ret = false;
             try
             {
                 conexion.Open();
 
-                command.CommandText = $"UPDATE dbo.{e.RazonSocial}Ventas SET anulado = 1 WHERE ptoVenta = {f.PtoVenta} AND nroComprobante = {f.NroComprobante} " +
+                command.CommandText = $"UPDATE dbo.{f.Ente.RazonSocial}Ventas SET anulado = 1 WHERE ptoVenta = {f.PtoVenta} AND nroComprobante = {f.NroComprobante} " +
                     $"AND cuitReceptor = {f.EnteReceptor.Cuit}";
 
                 if (command.ExecuteNonQuery() > 0)
@@ -292,7 +292,78 @@ namespace Archivos
             }
             return ret;
         }
-   
 
+        public static bool CargarCompra(Compra c)
+        {
+            bool ret = false;
+            try
+            {
+                conexion.Open();
+                command.Parameters.Clear();
+                command.CommandText = $"INSERT INTO dbo.{c.EnteReceptor.RazonSocial}Compras (razonSocialEmisor, cuitEmisor, sitFiscalEmisor, ptoVenta, nroComprobante, fecha, " +
+                    $"importe, alicuota, concepto, cuitUsuario) VALUES (@razonSocialEmisor, @cuitEmisor, @sitFiscalEmisor, @ptoVenta, @nroComprobante, " +
+                    $"@fecha, @importe, @alicuota, @concepto, @cuitUsuario)";
+                command.Parameters.AddWithValue("@razonSocialEmisor", c.Ente.RazonSocial);
+                command.Parameters.AddWithValue("@cuitEmisor", c.Ente.Cuit);
+                command.Parameters.AddWithValue("@sitFiscalEmisor", c.Ente.SitFiscal);
+                command.Parameters.AddWithValue("@ptoVenta", c.PtoVenta);
+                command.Parameters.AddWithValue("@nroComprobante", c.NroComprobante);
+                command.Parameters.AddWithValue("@fecha", c.Fecha);
+                command.Parameters.AddWithValue("@importe", c.Importe);
+                command.Parameters.AddWithValue("@alicuota", c.Alicuota);
+                command.Parameters.AddWithValue("@concepto", c.Concepto);
+                command.Parameters.AddWithValue("@cuitUsuario", c.EnteReceptor.Cuit);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    ret = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return ret;
+        }
+        public static bool EliminarCompra(Compra c)
+        {
+            bool ret = false;
+            try
+            {
+                conexion.Open();
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@razonSocialEmisor", c.Ente.RazonSocial);
+                command.Parameters.AddWithValue("@cuitEmisor", c.Ente.Cuit);
+                command.Parameters.AddWithValue("@sitFiscalEmisor", c.Ente.SitFiscal);
+                command.Parameters.AddWithValue("@ptoVenta", c.PtoVenta);
+                command.Parameters.AddWithValue("@nroComprobante", c.NroComprobante);
+                command.Parameters.AddWithValue("@fecha", c.Fecha.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@importe", c.Importe);
+                command.Parameters.AddWithValue("@alicuota", c.Alicuota);
+                command.Parameters.AddWithValue("@concepto", c.Concepto);
+                command.Parameters.AddWithValue("@cuitUsuario", c.EnteReceptor.Cuit);
+                command.CommandText = $"DELETE FROM dbo.{c.EnteReceptor.RazonSocial}Compras WHERE razonSocialEmisor = @razonSocialEmisor AND cuitEmisor = @cuitEmisor AND " +
+                    $"sitFiscalEmisor = @sitFiscalEmisor AND ptoVenta = @ptoVenta AND nroComprobante = @nroComprobante AND fecha = @fecha AND importe = @importe AND " +
+                    $"alicuota = @alicuota AND concepto = @concepto AND cuitUsuario = @cuitUsuario";
+
+                if(command.ExecuteNonQuery() == 1)
+                {
+                    ret = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return ret;
+        }
     }
 }

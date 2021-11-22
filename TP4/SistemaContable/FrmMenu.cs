@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
+using Archivos;
 
 namespace SistemaContable
 {
@@ -155,6 +156,32 @@ namespace SistemaContable
             }
 
             return null;
+        }
+
+        private void GuardarComoJsonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach(Factura item in this.registroContable.Ventas)
+            {
+                JsonSerial.SerializarJson<Factura>(Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Ventas"), item);
+            }
+            foreach(Compra item in this.registroContable.Compras)
+            {
+                JsonSerial.SerializarJson<Compra>(Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Compras"), item);
+            }
+            MessageBox.Show("El guardado del archivo a Json se realizó con exito", "Guardar como Json", MessageBoxButtons.OK);
+        }
+
+        private void GuardarComoXmlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Factura item in this.registroContable.Ventas)
+            {
+                XmlSerial.SerializarAXm<Factura>(item, Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Ventas"));
+            }
+            foreach(Compra item in this.registroContable.Compras)
+            {
+                XmlSerial.SerializarAXm<Compra>(item, Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Compras"));
+            }
+            MessageBox.Show("El guardado del archivo a XML se realizó con exito", "Guardar como Json", MessageBoxButtons.OK);
         }
     }
 }

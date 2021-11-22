@@ -120,7 +120,7 @@ namespace SistemaContable
                         if (MessageBox.Show("Desea anular esta factura?", "Anular", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
                             item.Anulado = true;
-                            GestorBD.ModificarVenta(this.registroContable.Usuario, item);
+                            GestorBD.ModificarVenta(item);
                             this.Refrescar();
                             break;
                         }

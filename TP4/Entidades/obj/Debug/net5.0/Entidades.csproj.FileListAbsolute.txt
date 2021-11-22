@@ -21,3 +21,4 @@ C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio
 C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Entidades\obj\Debug\net5.0\Entidades.dll
 C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Entidades\obj\Debug\net5.0\ref\Entidades.dll
 C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Entidades\obj\Debug\net5.0\Entidades.pdb
+C:\Users\lucas\Desktop\Documents\UTN\2do Cuatri\Prog II y Lab II\tps_laboratorio_ii\TP4\Entidades\obj\Debug\net5.0\Entidades.csproj.AssemblyReference.cache

@@ -31,8 +31,8 @@ namespace SistemaContable
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.smiArchivo = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GuardarComoJsonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GuardarComoXmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smiCompra = new System.Windows.Forms.ToolStripMenuItem();
             this.cargarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,23 +61,25 @@ namespace SistemaContable
             // smiArchivo
             // 
             this.smiArchivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportarToolStripMenuItem,
-            this.guardarToolStripMenuItem});
+            this.GuardarComoJsonToolStripMenuItem,
+            this.GuardarComoXmlToolStripMenuItem});
             this.smiArchivo.Name = "smiArchivo";
             this.smiArchivo.Size = new System.Drawing.Size(73, 24);
             this.smiArchivo.Text = "Archivo";
             // 
-            // exportarToolStripMenuItem
+            // GuardarComoJsonToolStripMenuItem
             // 
-            this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
-            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.exportarToolStripMenuItem.Text = "Guardar como Json";
+            this.GuardarComoJsonToolStripMenuItem.Name = "GuardarComoJsonToolStripMenuItem";
+            this.GuardarComoJsonToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.GuardarComoJsonToolStripMenuItem.Text = "Guardar como Json";
+            this.GuardarComoJsonToolStripMenuItem.Click += new System.EventHandler(this.GuardarComoJsonToolStripMenuItem_Click);
             // 
-            // guardarToolStripMenuItem
+            // GuardarComoXmlToolStripMenuItem
             // 
-            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.guardarToolStripMenuItem.Text = "Guardar como XML";
+            this.GuardarComoXmlToolStripMenuItem.Name = "GuardarComoXmlToolStripMenuItem";
+            this.GuardarComoXmlToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.GuardarComoXmlToolStripMenuItem.Text = "Guardar como XML";
+            this.GuardarComoXmlToolStripMenuItem.Click += new System.EventHandler(this.GuardarComoXmlToolStripMenuItem_Click);
             // 
             // smiCompra
             // 
@@ -92,21 +94,21 @@ namespace SistemaContable
             // cargarToolStripMenuItem
             // 
             this.cargarToolStripMenuItem.Name = "cargarToolStripMenuItem";
-            this.cargarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cargarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.cargarToolStripMenuItem.Text = "Cargar";
             this.cargarToolStripMenuItem.Click += new System.EventHandler(this.cargarToolStripMenuItem_Click);
             // 
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.modificarToolStripMenuItem.Text = "Modificar";
             this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
@@ -169,8 +171,8 @@ namespace SistemaContable
         private System.Windows.Forms.ToolStripMenuItem smiCompra;
         private System.Windows.Forms.ToolStripMenuItem smiVenta;
         private System.Windows.Forms.ToolStripMenuItem smiInformes;
-        private System.Windows.Forms.ToolStripMenuItem exportarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GuardarComoJsonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GuardarComoXmlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cargarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;

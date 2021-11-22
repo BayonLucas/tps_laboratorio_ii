@@ -55,7 +55,9 @@ namespace Entidades
         {
             get
             {
-                return (this.importe + (this.Importe * (this.Alicuota / 100)));
+                float aux = this.Importe;
+                //return (this.importe + (this.Importe * (this.Alicuota / 100)));
+                return aux.CalcularTotal(this.Alicuota);
             }
         }
         public Ente EnteReceptor

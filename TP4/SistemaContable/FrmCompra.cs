@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
+using Archivos;
 
 namespace SistemaContable
 {
@@ -112,10 +113,11 @@ namespace SistemaContable
         {
             if (ValidarDatosIngresados())
             {
-                this.registro.Compras.Add(new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
+                Compra compra = new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
                     this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
-                    this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue));
-                
+                    this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue);
+                this.registro.Compras.Add(compra);
+                GestorBD.CargarCompra(compra);
                 this.Refrescar();
             }
             else
@@ -133,10 +135,14 @@ namespace SistemaContable
                 {
                     if(MessageBox.Show("Desea modificar los datos de esta compra?", "Modificar", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        this.registro.Compras.Add(new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
+                        Compra compra = new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
                         this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
-                        this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue));
+                        this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue);
+                        this.registro.Compras.Add(compra);
+                        GestorBD.CargarCompra(compra);
                         registro -= item;
+                        //Acá debo eliminar el item
+
                         this.Refrescar();
                         break;
                     }
@@ -153,6 +159,7 @@ namespace SistemaContable
                     if(MessageBox.Show("Desea eliminar esta compra?", "Eliminar", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         registro -= item;
+                        GestorBD.EliminarCompra(item);
                         this.Refrescar();
                         break;
                     }
