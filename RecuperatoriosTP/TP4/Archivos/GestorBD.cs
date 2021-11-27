@@ -231,6 +231,54 @@ namespace Archivos
             return listaVentas;
         }
 
+        public static List<Compra> BuscarComprasSegun(Ente usuario, string concepto, decimal anio)
+        {
+            List<Compra> listaCompras = new List<Compra>();
+            try
+            {
+                command.CommandText = $"SELECT RAZONSOCIALEMISOR, CUITEMISOR, sitFiscalEmisor, ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, CONCEPTO " +
+                    $"FROM {usuario.RazonSocial}Compras WHERE concepto = {concepto} AND FECHA = ";
+                conexion.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Ente auxEnteEmisor = new Ente(reader["RAZONSOCIALEMISOR"].ToString(), reader["CUITEMISOR"].ToString(),
+                        (ESitFiscal)Enum.Parse(typeof(ESitFiscal), reader["sitFiscalEmisor"].ToString()));
+                    string auxPtoVenta = reader["ptoVenta"].ToString();
+                    string auxNroComprobante = reader["NROCOMPROBANTE"].ToString();
+                    DateTime auxFecha = DateTime.Parse(reader["FECHA"].ToString());
+                    float auxImporte = float.Parse(reader["IMPORTE"].ToString());
+                    float auxAlicuota = float.Parse(reader["ALICUOTA"].ToString());
+                    string auxConcepto = reader["CONCEPTO"].ToString();
+
+                    Compra auxCompra = new Compra(auxEnteEmisor, auxPtoVenta, auxNroComprobante, auxFecha, auxImporte, auxAlicuota, usuario,
+                        (EConcepto)Enum.Parse(typeof(EConcepto), auxConcepto));
+                    if (!(auxCompra is null))
+                    {
+                        listaCompras.Add(auxCompra);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return listaCompras;
+        }
+
+
+
+
+
+
+
         public static bool CargarVenta(Factura f)
         {
             bool ret = false;
@@ -365,5 +413,10 @@ namespace Archivos
             }
             return ret;
         }
+    
+    
+    
+    
+    
     }
 }

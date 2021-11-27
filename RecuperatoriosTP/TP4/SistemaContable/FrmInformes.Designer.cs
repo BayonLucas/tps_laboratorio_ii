@@ -30,6 +30,7 @@ namespace SistemaContable
         private void InitializeComponent()
         {
             this.gpbCreditoDebitoFiscal = new System.Windows.Forms.GroupBox();
+            this.lvlInforme = new System.Windows.Forms.Label();
             this.lblTotalSitFiscal = new System.Windows.Forms.Label();
             this.lblDebitoFsical = new System.Windows.Forms.Label();
             this.lblCreditoFiscal = new System.Windows.Forms.Label();
@@ -39,21 +40,22 @@ namespace SistemaContable
             this.cmbMes = new System.Windows.Forms.ComboBox();
             this.chbMes = new System.Windows.Forms.CheckBox();
             this.btnInformarAFIP = new System.Windows.Forms.Button();
-            this.gpbConsumos = new System.Windows.Forms.GroupBox();
+            this.gpbGastos = new System.Windows.Forms.GroupBox();
+            this.cmbConcepto = new System.Windows.Forms.ComboBox();
+            this.lblVarios = new System.Windows.Forms.Label();
+            this.rtbComprasConceptos = new System.Windows.Forms.RichTextBox();
+            this.prbVarios = new System.Windows.Forms.ProgressBar();
+            this.prbBienDeConsumo = new System.Windows.Forms.ProgressBar();
+            this.prbServicios = new System.Windows.Forms.ProgressBar();
+            this.prbBienDeUso = new System.Windows.Forms.ProgressBar();
             this.lblBienDeConsumo = new System.Windows.Forms.Label();
             this.lblServicios = new System.Windows.Forms.Label();
             this.lblBienDeUso = new System.Windows.Forms.Label();
-            this.prbBienDeUso = new System.Windows.Forms.ProgressBar();
-            this.prbServicios = new System.Windows.Forms.ProgressBar();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.lblVarios = new System.Windows.Forms.Label();
-            this.lvlInforme = new System.Windows.Forms.Label();
-            this.rtbComprasConceptos = new System.Windows.Forms.RichTextBox();
-            this.cmbConcepto = new System.Windows.Forms.ComboBox();
+            this.picGif = new System.Windows.Forms.PictureBox();
             this.gpbCreditoDebitoFiscal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAño)).BeginInit();
-            this.gpbConsumos.SuspendLayout();
+            this.gpbGastos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picGif)).BeginInit();
             this.SuspendLayout();
             // 
             // gpbCreditoDebitoFiscal
@@ -69,10 +71,20 @@ namespace SistemaContable
             this.gpbCreditoDebitoFiscal.Controls.Add(this.chbMes);
             this.gpbCreditoDebitoFiscal.Location = new System.Drawing.Point(12, 12);
             this.gpbCreditoDebitoFiscal.Name = "gpbCreditoDebitoFiscal";
-            this.gpbCreditoDebitoFiscal.Size = new System.Drawing.Size(921, 220);
+            this.gpbCreditoDebitoFiscal.Size = new System.Drawing.Size(933, 220);
             this.gpbCreditoDebitoFiscal.TabIndex = 0;
             this.gpbCreditoDebitoFiscal.TabStop = false;
             this.gpbCreditoDebitoFiscal.Text = "Crédito/Débito Fiscal";
+            // 
+            // lvlInforme
+            // 
+            this.lvlInforme.AutoSize = true;
+            this.lvlInforme.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lvlInforme.Location = new System.Drawing.Point(320, 30);
+            this.lvlInforme.Name = "lvlInforme";
+            this.lvlInforme.Size = new System.Drawing.Size(70, 20);
+            this.lvlInforme.TabIndex = 10;
+            this.lvlInforme.Text = "Informe:";
             // 
             // lblTotalSitFiscal
             // 
@@ -126,6 +138,7 @@ namespace SistemaContable
             this.nudAño.Name = "nudAño";
             this.nudAño.Size = new System.Drawing.Size(209, 27);
             this.nudAño.TabIndex = 3;
+            this.nudAño.ValueChanged += new System.EventHandler(this.nudAño_ValueChanged);
             // 
             // cmbMes
             // 
@@ -168,107 +181,24 @@ namespace SistemaContable
             this.btnInformarAFIP.Text = "Informar AFIP";
             this.btnInformarAFIP.UseVisualStyleBackColor = true;
             // 
-            // gpbConsumos
+            // gpbGastos
             // 
-            this.gpbConsumos.Controls.Add(this.cmbConcepto);
-            this.gpbConsumos.Controls.Add(this.lblVarios);
-            this.gpbConsumos.Controls.Add(this.rtbComprasConceptos);
-            this.gpbConsumos.Controls.Add(this.progressBar2);
-            this.gpbConsumos.Controls.Add(this.progressBar1);
-            this.gpbConsumos.Controls.Add(this.prbServicios);
-            this.gpbConsumos.Controls.Add(this.prbBienDeUso);
-            this.gpbConsumos.Controls.Add(this.lblBienDeConsumo);
-            this.gpbConsumos.Controls.Add(this.lblServicios);
-            this.gpbConsumos.Controls.Add(this.lblBienDeUso);
-            this.gpbConsumos.Location = new System.Drawing.Point(12, 238);
-            this.gpbConsumos.Name = "gpbConsumos";
-            this.gpbConsumos.Size = new System.Drawing.Size(921, 333);
-            this.gpbConsumos.TabIndex = 2;
-            this.gpbConsumos.TabStop = false;
-            this.gpbConsumos.Text = "Informe de Gastos por conceptos por año";
-            // 
-            // lblBienDeConsumo
-            // 
-            this.lblBienDeConsumo.AutoSize = true;
-            this.lblBienDeConsumo.Location = new System.Drawing.Point(22, 179);
-            this.lblBienDeConsumo.Name = "lblBienDeConsumo";
-            this.lblBienDeConsumo.Size = new System.Drawing.Size(125, 20);
-            this.lblBienDeConsumo.TabIndex = 2;
-            this.lblBienDeConsumo.Text = "Bien de Consumo";
-            // 
-            // lblServicios
-            // 
-            this.lblServicios.AutoSize = true;
-            this.lblServicios.Location = new System.Drawing.Point(22, 107);
-            this.lblServicios.Name = "lblServicios";
-            this.lblServicios.Size = new System.Drawing.Size(67, 20);
-            this.lblServicios.TabIndex = 1;
-            this.lblServicios.Text = "Servicios";
-            // 
-            // lblBienDeUso
-            // 
-            this.lblBienDeUso.AutoSize = true;
-            this.lblBienDeUso.Location = new System.Drawing.Point(22, 40);
-            this.lblBienDeUso.Name = "lblBienDeUso";
-            this.lblBienDeUso.Size = new System.Drawing.Size(88, 20);
-            this.lblBienDeUso.TabIndex = 0;
-            this.lblBienDeUso.Text = "Bien de Uso";
-            // 
-            // prbBienDeUso
-            // 
-            this.prbBienDeUso.Location = new System.Drawing.Point(22, 63);
-            this.prbBienDeUso.Name = "prbBienDeUso";
-            this.prbBienDeUso.Size = new System.Drawing.Size(253, 29);
-            this.prbBienDeUso.TabIndex = 3;
-            // 
-            // prbServicios
-            // 
-            this.prbServicios.Location = new System.Drawing.Point(22, 130);
-            this.prbServicios.Name = "prbServicios";
-            this.prbServicios.Size = new System.Drawing.Size(253, 29);
-            this.prbServicios.TabIndex = 4;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(22, 202);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(253, 29);
-            this.progressBar1.TabIndex = 5;
-            // 
-            // progressBar2
-            // 
-            this.progressBar2.Location = new System.Drawing.Point(22, 274);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(253, 29);
-            this.progressBar2.TabIndex = 6;
-            // 
-            // lblVarios
-            // 
-            this.lblVarios.AutoSize = true;
-            this.lblVarios.Location = new System.Drawing.Point(22, 251);
-            this.lblVarios.Name = "lblVarios";
-            this.lblVarios.Size = new System.Drawing.Size(49, 20);
-            this.lblVarios.TabIndex = 7;
-            this.lblVarios.Text = "Varios";
-            // 
-            // lvlInforme
-            // 
-            this.lvlInforme.AutoSize = true;
-            this.lvlInforme.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lvlInforme.Location = new System.Drawing.Point(320, 30);
-            this.lvlInforme.Name = "lvlInforme";
-            this.lvlInforme.Size = new System.Drawing.Size(70, 20);
-            this.lvlInforme.TabIndex = 10;
-            this.lvlInforme.Text = "Informe:";
-            // 
-            // rtbComprasConceptos
-            // 
-            this.rtbComprasConceptos.Enabled = false;
-            this.rtbComprasConceptos.Location = new System.Drawing.Point(281, 57);
-            this.rtbComprasConceptos.Name = "rtbComprasConceptos";
-            this.rtbComprasConceptos.Size = new System.Drawing.Size(634, 270);
-            this.rtbComprasConceptos.TabIndex = 3;
-            this.rtbComprasConceptos.Text = "";
+            this.gpbGastos.Controls.Add(this.cmbConcepto);
+            this.gpbGastos.Controls.Add(this.lblVarios);
+            this.gpbGastos.Controls.Add(this.rtbComprasConceptos);
+            this.gpbGastos.Controls.Add(this.prbVarios);
+            this.gpbGastos.Controls.Add(this.prbBienDeConsumo);
+            this.gpbGastos.Controls.Add(this.prbServicios);
+            this.gpbGastos.Controls.Add(this.prbBienDeUso);
+            this.gpbGastos.Controls.Add(this.lblBienDeConsumo);
+            this.gpbGastos.Controls.Add(this.lblServicios);
+            this.gpbGastos.Controls.Add(this.lblBienDeUso);
+            this.gpbGastos.Location = new System.Drawing.Point(12, 238);
+            this.gpbGastos.Name = "gpbGastos";
+            this.gpbGastos.Size = new System.Drawing.Size(933, 333);
+            this.gpbGastos.TabIndex = 2;
+            this.gpbGastos.TabStop = false;
+            this.gpbGastos.Text = "Informe de Gastos Anuales por conceptos ";
             // 
             // cmbConcepto
             // 
@@ -278,12 +208,94 @@ namespace SistemaContable
             this.cmbConcepto.Size = new System.Drawing.Size(217, 28);
             this.cmbConcepto.TabIndex = 4;
             // 
+            // lblVarios
+            // 
+            this.lblVarios.AutoSize = true;
+            this.lblVarios.Location = new System.Drawing.Point(16, 251);
+            this.lblVarios.Name = "lblVarios";
+            this.lblVarios.Size = new System.Drawing.Size(49, 20);
+            this.lblVarios.TabIndex = 7;
+            this.lblVarios.Text = "Varios";
+            // 
+            // rtbComprasConceptos
+            // 
+            this.rtbComprasConceptos.Enabled = false;
+            this.rtbComprasConceptos.Location = new System.Drawing.Point(281, 57);
+            this.rtbComprasConceptos.Name = "rtbComprasConceptos";
+            this.rtbComprasConceptos.Size = new System.Drawing.Size(646, 270);
+            this.rtbComprasConceptos.TabIndex = 3;
+            this.rtbComprasConceptos.Text = "";
+            // 
+            // prbVarios
+            // 
+            this.prbVarios.Location = new System.Drawing.Point(16, 274);
+            this.prbVarios.Name = "prbVarios";
+            this.prbVarios.Size = new System.Drawing.Size(253, 29);
+            this.prbVarios.TabIndex = 6;
+            // 
+            // prbBienDeConsumo
+            // 
+            this.prbBienDeConsumo.Location = new System.Drawing.Point(16, 202);
+            this.prbBienDeConsumo.Name = "prbBienDeConsumo";
+            this.prbBienDeConsumo.Size = new System.Drawing.Size(253, 29);
+            this.prbBienDeConsumo.TabIndex = 5;
+            // 
+            // prbServicios
+            // 
+            this.prbServicios.Location = new System.Drawing.Point(16, 130);
+            this.prbServicios.Name = "prbServicios";
+            this.prbServicios.Size = new System.Drawing.Size(253, 29);
+            this.prbServicios.TabIndex = 4;
+            // 
+            // prbBienDeUso
+            // 
+            this.prbBienDeUso.Location = new System.Drawing.Point(16, 63);
+            this.prbBienDeUso.Name = "prbBienDeUso";
+            this.prbBienDeUso.Size = new System.Drawing.Size(253, 29);
+            this.prbBienDeUso.TabIndex = 3;
+            // 
+            // lblBienDeConsumo
+            // 
+            this.lblBienDeConsumo.AutoSize = true;
+            this.lblBienDeConsumo.Location = new System.Drawing.Point(16, 179);
+            this.lblBienDeConsumo.Name = "lblBienDeConsumo";
+            this.lblBienDeConsumo.Size = new System.Drawing.Size(125, 20);
+            this.lblBienDeConsumo.TabIndex = 2;
+            this.lblBienDeConsumo.Text = "Bien de Consumo";
+            // 
+            // lblServicios
+            // 
+            this.lblServicios.AutoSize = true;
+            this.lblServicios.Location = new System.Drawing.Point(16, 107);
+            this.lblServicios.Name = "lblServicios";
+            this.lblServicios.Size = new System.Drawing.Size(67, 20);
+            this.lblServicios.TabIndex = 1;
+            this.lblServicios.Text = "Servicios";
+            // 
+            // lblBienDeUso
+            // 
+            this.lblBienDeUso.AutoSize = true;
+            this.lblBienDeUso.Location = new System.Drawing.Point(16, 40);
+            this.lblBienDeUso.Name = "lblBienDeUso";
+            this.lblBienDeUso.Size = new System.Drawing.Size(88, 20);
+            this.lblBienDeUso.TabIndex = 0;
+            this.lblBienDeUso.Text = "Bien de Uso";
+            // 
+            // picGif
+            // 
+            this.picGif.Location = new System.Drawing.Point(951, 249);
+            this.picGif.Name = "picGif";
+            this.picGif.Size = new System.Drawing.Size(253, 322);
+            this.picGif.TabIndex = 3;
+            this.picGif.TabStop = false;
+            // 
             // FrmInformes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 583);
-            this.Controls.Add(this.gpbConsumos);
+            this.Controls.Add(this.picGif);
+            this.Controls.Add(this.gpbGastos);
             this.Controls.Add(this.btnInformarAFIP);
             this.Controls.Add(this.gpbCreditoDebitoFiscal);
             this.MaximizeBox = false;
@@ -296,8 +308,9 @@ namespace SistemaContable
             this.gpbCreditoDebitoFiscal.ResumeLayout(false);
             this.gpbCreditoDebitoFiscal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAño)).EndInit();
-            this.gpbConsumos.ResumeLayout(false);
-            this.gpbConsumos.PerformLayout();
+            this.gpbGastos.ResumeLayout(false);
+            this.gpbGastos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picGif)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -314,17 +327,18 @@ namespace SistemaContable
         private System.Windows.Forms.Label lblDebitoFsical;
         private System.Windows.Forms.Label lblCreditoFiscal;
         private System.Windows.Forms.Button btnInformarAFIP;
-        private System.Windows.Forms.GroupBox gpbConsumos;
+        private System.Windows.Forms.GroupBox gpbGastos;
         private System.Windows.Forms.Label lblBienDeConsumo;
         private System.Windows.Forms.Label lblServicios;
         private System.Windows.Forms.Label lblBienDeUso;
         private System.Windows.Forms.Label lblVarios;
-        private System.Windows.Forms.ProgressBar progressBar2;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar prbVarios;
+        private System.Windows.Forms.ProgressBar prbBienDeConsumo;
         private System.Windows.Forms.ProgressBar prbServicios;
         private System.Windows.Forms.ProgressBar prbBienDeUso;
         private System.Windows.Forms.Label lvlInforme;
         private System.Windows.Forms.RichTextBox rtbComprasConceptos;
         private System.Windows.Forms.ComboBox cmbConcepto;
+        private System.Windows.Forms.PictureBox picGif;
     }
 }

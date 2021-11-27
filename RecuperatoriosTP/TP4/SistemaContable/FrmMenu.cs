@@ -19,6 +19,7 @@ namespace SistemaContable
         private FrmCompra compra;
         private FrmVentas ventas;
         private FrmLog logIn;
+        private FrmInformes informes;
       
 
         public frmMenu()
@@ -44,6 +45,7 @@ namespace SistemaContable
             }
             this.compra = new FrmCompra(this.registroContable);
             this.ventas = new FrmVentas(this.registroContable);
+            this.informes = new FrmInformes(this.registroContable);
         }
 
 
@@ -196,6 +198,23 @@ namespace SistemaContable
 
         #endregion
 
+
+
+        private void smiInformes_Click(object sender, EventArgs e)
+        {
+            if ((IsFormAlreadyOpen(typeof(FrmInformes))) == null)
+            {
+                if (this.informes.IsDisposed)
+                    this.informes = new FrmInformes(this.registroContable);
+
+                this.informes.MdiParent = this;
+                informes.Show();
+            }
+            else
+            {
+                informes.BringToFront();
+            }
+        }
         public static Form IsFormAlreadyOpen(Type FormType)
         {
             foreach (Form OpenForm in System.Windows.Forms.Application.OpenForms)
@@ -206,5 +225,6 @@ namespace SistemaContable
 
             return null;
         }
+
     }
 }

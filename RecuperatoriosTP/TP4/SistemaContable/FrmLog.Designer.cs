@@ -90,7 +90,7 @@ namespace SistemaContable
             this.txtCuit.Name = "txtCuit";
             this.txtCuit.Size = new System.Drawing.Size(277, 27);
             this.txtCuit.TabIndex = 4;
-            this.txtCuit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCuit_KeyPress);
+            this.txtCuit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeypressValidator);
             // 
             // cmbSitFiscal
             // 

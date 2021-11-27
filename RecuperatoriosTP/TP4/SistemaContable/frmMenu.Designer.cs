@@ -70,14 +70,14 @@ namespace SistemaContable
             // GuardarComoJsonToolStripMenuItem
             // 
             this.GuardarComoJsonToolStripMenuItem.Name = "GuardarComoJsonToolStripMenuItem";
-            this.GuardarComoJsonToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.GuardarComoJsonToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
             this.GuardarComoJsonToolStripMenuItem.Text = "Guardar como Json";
             this.GuardarComoJsonToolStripMenuItem.Click += new System.EventHandler(this.GuardarComoJsonToolStripMenuItem_Click);
             // 
             // GuardarComoXmlToolStripMenuItem
             // 
             this.GuardarComoXmlToolStripMenuItem.Name = "GuardarComoXmlToolStripMenuItem";
-            this.GuardarComoXmlToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.GuardarComoXmlToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
             this.GuardarComoXmlToolStripMenuItem.Text = "Guardar como XML";
             this.GuardarComoXmlToolStripMenuItem.Click += new System.EventHandler(this.GuardarComoXmlToolStripMenuItem_Click);
             // 
@@ -140,6 +140,7 @@ namespace SistemaContable
             this.smiInformes.Name = "smiInformes";
             this.smiInformes.Size = new System.Drawing.Size(81, 24);
             this.smiInformes.Text = "Informes";
+            this.smiInformes.Click += new System.EventHandler(this.smiInformes_Click);
             // 
             // frmMenu
             // 

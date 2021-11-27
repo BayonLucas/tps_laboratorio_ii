@@ -97,7 +97,6 @@ namespace SistemaContable
                     break;
             }
             this.dtpFecha.MaxDate = DateTime.Now;
-            this.dtpFecha.MinDate = DateTime.Now.AddDays(-10);
             this.cmbSitFiscal.DataSource = Enum.GetValues(typeof(ESitFiscal));
             this.cmbAlicuota.Items.Add(21);
             this.cmbAlicuota.Items.Add(27);
@@ -227,6 +226,8 @@ namespace SistemaContable
             this.lstListaCompras.DataSource = null;
             this.lstListaCompras.DataSource = this.registro.Compras;
             this.lblEstadoBoton.Visible = false;
+            this.dtpFecha.Value = DateTime.Now;
+
         }
         public bool ValidarDatosIngresados()
         {
@@ -279,7 +280,14 @@ namespace SistemaContable
         }
 
 
+        private void KeypressValidator(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
 
-    
+
     }
 }

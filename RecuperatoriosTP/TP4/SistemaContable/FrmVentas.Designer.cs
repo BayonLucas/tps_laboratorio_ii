@@ -161,6 +161,7 @@ namespace SistemaContable
             this.txtCuitReceptor.Name = "txtCuitReceptor";
             this.txtCuitReceptor.Size = new System.Drawing.Size(148, 27);
             this.txtCuitReceptor.TabIndex = 2;
+            this.txtCuitReceptor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeypressValidator);
             // 
             // cmbSitFiscalReceptor
             // 
@@ -214,6 +215,7 @@ namespace SistemaContable
             this.txtImporte.Name = "txtImporte";
             this.txtImporte.Size = new System.Drawing.Size(147, 27);
             this.txtImporte.TabIndex = 4;
+            this.txtImporte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeypressValidator);
             // 
             // txtTotal
             // 

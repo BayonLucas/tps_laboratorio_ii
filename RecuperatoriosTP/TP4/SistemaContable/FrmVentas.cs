@@ -16,6 +16,7 @@ namespace SistemaContable
     {
         private RegistroContable registroContable;
         private string optionSelected;
+        
 
         public FrmVentas() : this(null)
         { }
@@ -95,7 +96,8 @@ namespace SistemaContable
                 Factura fc = new Factura(this.registroContable.Usuario, "99", this.txtNroComprobante.Text, dtpFecha.Value,
                     float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
                     new Ente(txtRazonSocialReceptor.Text, txtCuitReceptor.Text, (ESitFiscal)this.cmbSitFiscalReceptor.SelectedValue), false);
-                this.registroContable.Ventas.Add(fc);
+                this.registroContable += fc;
+                        //Generar evento que encapsule una serializacion XML de la Fc, la carga a la base de datos y la adhision a la lista del usuario
                 if(!GestorBD.CargarVenta(fc))
                 {
                     DataBasesException ex = new DataBasesException("Error al agregar la venta a la Base de Datos");
@@ -244,6 +246,15 @@ namespace SistemaContable
                 }
             }
         }
+
+        private void KeypressValidator(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
 
 
     }

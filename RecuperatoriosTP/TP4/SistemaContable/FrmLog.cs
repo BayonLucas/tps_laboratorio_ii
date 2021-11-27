@@ -12,6 +12,7 @@ using Archivos;
 
 namespace SistemaContable
 {
+    public delegate void DelKeyPress(object sender, KeyEventArgs e);
     public partial class FrmLog : Form
     {
         private RegistroContable registro;
@@ -152,7 +153,8 @@ namespace SistemaContable
             lblError.Visible = false;
         }
 
-        private void txtCuit_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void KeypressValidator(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {

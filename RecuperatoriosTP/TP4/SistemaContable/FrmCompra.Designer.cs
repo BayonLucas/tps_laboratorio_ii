@@ -75,6 +75,7 @@ namespace SistemaContable
             this.txtCuitEmisor.Name = "txtCuitEmisor";
             this.txtCuitEmisor.Size = new System.Drawing.Size(125, 27);
             this.txtCuitEmisor.TabIndex = 5;
+            this.txtCuitEmisor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeypressValidator);
             // 
             // lblCuitEmisor
             // 
@@ -119,6 +120,7 @@ namespace SistemaContable
             this.txtPtoVenta.Size = new System.Drawing.Size(80, 27);
             this.txtPtoVenta.TabIndex = 2;
             this.txtPtoVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPtoVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeypressValidator);
             // 
             // txtNroComprobante
             // 
@@ -128,6 +130,7 @@ namespace SistemaContable
             this.txtNroComprobante.Size = new System.Drawing.Size(125, 27);
             this.txtNroComprobante.TabIndex = 3;
             this.txtNroComprobante.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtNroComprobante.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeypressValidator);
             // 
             // lblNroComprobante
             // 
@@ -226,6 +229,7 @@ namespace SistemaContable
             this.txtImporte.Name = "txtImporte";
             this.txtImporte.Size = new System.Drawing.Size(125, 27);
             this.txtImporte.TabIndex = 7;
+            this.txtImporte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeypressValidator);
             // 
             // lblConcepto
             // 
