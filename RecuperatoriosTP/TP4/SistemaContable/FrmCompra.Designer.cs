@@ -288,7 +288,7 @@ namespace SistemaContable
             this.lstListaCompras.ItemHeight = 20;
             this.lstListaCompras.Location = new System.Drawing.Point(12, 243);
             this.lstListaCompras.Name = "lstListaCompras";
-            this.lstListaCompras.Size = new System.Drawing.Size(1192, 324);
+            this.lstListaCompras.Size = new System.Drawing.Size(1192, 304);
             this.lstListaCompras.TabIndex = 20;
             this.lstListaCompras.SelectedValueChanged += new System.EventHandler(this.lstListaCompras_SelectedValueChanged);
             // 

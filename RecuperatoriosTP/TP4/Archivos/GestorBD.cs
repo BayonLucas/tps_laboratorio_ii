@@ -155,7 +155,7 @@ namespace Archivos
             try
             {
                 command.CommandText = $"SELECT RAZONSOCIALEMISOR, CUITEMISOR, sitFiscalEmisor, ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, CONCEPTO " +
-                    $"FROM {usuario.RazonSocial}Compras";
+                    $"FROM {usuario.RazonSocial}Compras order by fecha";
                 conexion.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
@@ -230,14 +230,22 @@ namespace Archivos
 
             return listaVentas;
         }
-
-        public static List<Compra> BuscarComprasSegun(Ente usuario, string concepto, decimal anio)
+        
+        public static List<Compra> BuscarComprasSegun(Ente usuario, string concepto, decimal anio, string mes)
         {
             List<Compra> listaCompras = new List<Compra>();
             try
             {
-                command.CommandText = $"SELECT RAZONSOCIALEMISOR, CUITEMISOR, sitFiscalEmisor, ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, CONCEPTO " +
-                    $"FROM {usuario.RazonSocial}Compras WHERE concepto = {concepto} AND FECHA = ";
+                if(mes == string.Empty)
+                {
+                    command.CommandText = $"SELECT RAZONSOCIALEMISOR, CUITEMISOR, sitFiscalEmisor, ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, CONCEPTO " +
+                        $"FROM {usuario.RazonSocial}Compras WHERE concepto = {concepto} AND YEAR(FECHA) = {anio}";
+                }
+                else
+                {
+                    command.CommandText = $"SELECT RAZONSOCIALEMISOR, CUITEMISOR, sitFiscalEmisor, ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, CONCEPTO " +
+                        $"FROM {usuario.RazonSocial}Compras WHERE concepto = {concepto} AND YEAR(FECHA) = {anio} AND MONTH(mes) = {mes}";
+                }
                 conexion.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
@@ -272,7 +280,7 @@ namespace Archivos
 
             return listaCompras;
         }
-
+        
 
 
 

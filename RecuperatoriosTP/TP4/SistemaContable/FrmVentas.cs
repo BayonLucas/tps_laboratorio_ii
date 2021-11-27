@@ -84,7 +84,7 @@ namespace SistemaContable
             this.Refrescar();
 
             this.dtpFecha.MaxDate = DateTime.Now.AddDays(10);
-            this.dtpFecha.Value = DateTime.Now;
+            this.dtpFecha.Value = DateTime.Today;
         }
 
 
@@ -146,7 +146,7 @@ namespace SistemaContable
             this.lstListaVentas.DataSource = null;
             this.lstListaVentas.DataSource = this.registroContable.Ventas;
             this.lblError.Visible = false;
-            this.dtpFecha.Value = DateTime.Now;
+            this.dtpFecha.Value = DateTime.Today;
         }
         public void CalculoTotal()
         {

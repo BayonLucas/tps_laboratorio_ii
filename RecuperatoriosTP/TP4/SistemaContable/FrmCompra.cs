@@ -96,7 +96,7 @@ namespace SistemaContable
                     this.btnEliminar.Visible = true;
                     break;
             }
-            this.dtpFecha.MaxDate = DateTime.Now;
+            this.dtpFecha.MaxDate = DateTime.Today;
             this.cmbSitFiscal.DataSource = Enum.GetValues(typeof(ESitFiscal));
             this.cmbAlicuota.Items.Add(21);
             this.cmbAlicuota.Items.Add(27);
@@ -226,7 +226,7 @@ namespace SistemaContable
             this.lstListaCompras.DataSource = null;
             this.lstListaCompras.DataSource = this.registro.Compras;
             this.lblEstadoBoton.Visible = false;
-            this.dtpFecha.Value = DateTime.Now;
+            this.dtpFecha.Value = DateTime.Today;
 
         }
         public bool ValidarDatosIngresados()
@@ -260,22 +260,25 @@ namespace SistemaContable
         }
         private void lstListaCompras_SelectedValueChanged(object sender, EventArgs e)
         {
-            Compra aux = (Compra)this.lstListaCompras.SelectedItem;
-            if(aux is not null)
-                this.MostrarDatos(aux);
-            if(this.optionSelected == "Modificar")
+            if(this.GetOption == "Modificar" || this.GetOption == "Eliminar")
             {
-                this.dtpFecha.Enabled = true;
-                this.txtPtoVenta.Enabled = true;
-                this.txtNroComprobante.Enabled = true;
-                this.txtEmisor.Enabled = true;
-                this.txtCuitEmisor.Enabled = true;
-                this.txtImporte.Enabled = true;
-                this.txtTotal.Enabled = true;
-                this.cmbAlicuota.Enabled = true;
-                this.cmbConcepto.Enabled = true;
-                this.cmbSitFiscal.Enabled = true;
-                this.lstListaCompras.Enabled = true;
+                Compra aux = (Compra)this.lstListaCompras.SelectedItem;
+                if (aux is not null)
+                    this.MostrarDatos(aux);
+                if (this.optionSelected == "Modificar")
+                {
+                    this.dtpFecha.Enabled = true;
+                    this.txtPtoVenta.Enabled = true;
+                    this.txtNroComprobante.Enabled = true;
+                    this.txtEmisor.Enabled = true;
+                    this.txtCuitEmisor.Enabled = true;
+                    this.txtImporte.Enabled = true;
+                    this.txtTotal.Enabled = true;
+                    this.cmbAlicuota.Enabled = true;
+                    this.cmbConcepto.Enabled = true;
+                    this.cmbSitFiscal.Enabled = true;
+                    this.lstListaCompras.Enabled = true;
+                }
             }
         }
 
