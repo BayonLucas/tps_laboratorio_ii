@@ -18,14 +18,6 @@ namespace SistemaContable
         private RegistroContable registro;
         private List<Ente> usuarios;
 
-        CancellationTokenSource cancelTask;
-        //CancellationToken token;
-        public delegate void DelLoad();
-        public event DelLoad EventLoad;
-        private Task loadSimulator;
-
-
-
         public RegistroContable GetInstance
         {
             get
@@ -38,17 +30,10 @@ namespace SistemaContable
             }
         }
 
-
         public FrmLog(RegistroContable registroContable)
         {
             InitializeComponent();
             this.registro = registroContable;
-
-            //task y eventos
-            this.cancelTask = new CancellationTokenSource();
-            //this.token = cancelTask.Token;
-           
-
         }
 
         private void Log_Load(object sender, EventArgs e)
@@ -144,57 +129,18 @@ namespace SistemaContable
                             GestorBD.CargarListaCompras(usuarioElegido));
                     }
                 }
-                EventLoad += MostrarBotones;
-                // this.loadSimulator = new Task(() => this.cargarBotones(token));
-                this.loadSimulator = new Task(() => this.cargarBotones());
-                this.loadSimulator.Start();
 
-                //this.loadSimulator.Wait();
-                
-                //if (this.registro is not null)
-                //{
-                //    this.Close();
-                //}
+                if (this.registro is not null)
+                {
+                    this.Close();
+                }
             }
             else
             {
                 lblError.Visible = true;
             }
         }
-    
-        private void MostrarBotones()
-        {
-            this.picGif.Visible = true;
-            
-        }
-    
-        private void cargarBotones(/*CancellationToken cancelTaskToken*/)
-        {
-            int cuenta = 0;
-            //while(!cancelTaskToken.IsCancellationRequested)
-            while(true)
-            {
-                if(this.picGif.InvokeRequired && cuenta < 4)
-                {
-                    this.picGif.BeginInvoke((MethodInvoker)delegate ()
-                    {
-                        EventLoad.Invoke();
-                    });
-                    Thread.Sleep(1000);
-                    cuenta++;
-                }
-                else
-                {
-                    this.picGif.BeginInvoke((MethodInvoker)delegate ()
-                    {
-                        this.Close();
-                    });
-                break;
-                }
 
-            }
-        }
-    
         public void Refrescar()
         {
             this.txtRazonSocial.Text = string.Empty;
@@ -204,7 +150,6 @@ namespace SistemaContable
             lblError.Visible = false;
         }
 
-
         private void KeypressValidator(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
@@ -212,16 +157,5 @@ namespace SistemaContable
                 e.Handled = true;
             }
         }
-
-        private void FrmLog_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.cancelTask.Cancel();
-        }
-
-
-        //Eliminar usuario
-
-
-
     }
 }

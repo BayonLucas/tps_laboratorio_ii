@@ -25,9 +25,7 @@ namespace SistemaContable
         private Task IntroInformes;
 
         public FrmInformes() : this(null)
-        {
-            
-        }
+        {        }
         public FrmInformes(RegistroContable registroContable)
         {
             this.registroContable = registroContable;
@@ -55,42 +53,6 @@ namespace SistemaContable
         }
 
        
-
-        //public int CarcularPorcentaje(string concepto, int año)
-        //{
-        //    int contadorPorConcepto = 0;
-        //    int contadorPorAnio = 0;
-        //    int total = 0;
-        //    try
-        //    {
-        //        if(!string.IsNullOrEmpty(concepto) && año >= this.nudAño.Minimum)
-        //        {
-
-        //            foreach(Compra item in this.registroContable.Compras)
-        //            {
-        //                if(item.Fecha.Year == año)
-        //                {
-        //                    contadorPorAnio++;
-        //                }
-        //                if(concepto == item.Concepto.ToString() && item.Fecha.Year == año)
-        //                {
-        //                    contadorPorConcepto++;
-        //                }
-        //            }
-        //            total = contadorPorConcepto / contadorPorAnio * 100; 
-
-        //        }
-        //    }
-        //    catch (DivideByZeroException)
-        //    {
-                
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    return total;
-        //}
         public float CarcularPorcentaje(string concepto)
         {
             int contadorPorConcepto = 0;
@@ -117,7 +79,6 @@ namespace SistemaContable
             }
             return total;
         }
-
         public float CalcularCreditoFiscal(List<Compra> listaFiltrada) 
         {
             float importeFiscal = 0;
@@ -142,7 +103,6 @@ namespace SistemaContable
             }
             return importeFiscal;
         }
-
         private void nudAño_ValueChanged(object sender, EventArgs e)
         {
             float auxCredFiscal = 0;
@@ -192,10 +152,6 @@ namespace SistemaContable
             }
            
         }
-
-
-
-
         public void Refrescar()
         {
             this.lblCreditoFiscal.Text = "El crédito fiscal generado en el período seleccionado es de: $0";
@@ -204,14 +160,10 @@ namespace SistemaContable
             this.lblAvisoEmergente.Visible = false;
             this.lstComprasPorConcepto.DataSource = null;
         }
-
-        
-
         private void chbMes_CheckedChanged(object sender, EventArgs e)
         {
             this.cmbMes.Enabled = !this.cmbMes.Enabled;
         }
-
 
         #region Gif
         private void ApagarGif()
@@ -234,9 +186,9 @@ namespace SistemaContable
                             Gif.Invoke();
                         });
                         break;
+                    }
+                    Thread.Sleep(1000);
                 }
-                Thread.Sleep(1000);
-            }
                 else
                 {
                     picGif.Visible = false;

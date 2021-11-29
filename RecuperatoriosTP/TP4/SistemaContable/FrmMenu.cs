@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Entidades;
 using Archivos;
 using System.IO;
+using System.Threading;
 
 namespace SistemaContable
 {
@@ -20,11 +21,21 @@ namespace SistemaContable
         private FrmVentas ventas;
         private FrmLog logIn;
         private FrmInformes informes;
-      
+
+        CancellationTokenSource cancelTask;
+        CancellationToken token;
+
+        public delegate void DelegateManejador();
+        public event DelegateManejador Gif;
+        private Task endLog;
+
+
 
         public frmMenu()
         {
             InitializeComponent();
+            this.cancelTask = new CancellationTokenSource();
+            this.token = cancelTask.Token;
         }
 
         private void frmMenu_Load(object sender, EventArgs e)
@@ -38,6 +49,9 @@ namespace SistemaContable
             {
                 this.Visible = true;
                 this.Text = $"Registro Contable: {this.registroContable.Usuario.RazonSocial} - {this.registroContable.Usuario.Cuit}";
+                Gif += ApagarGif;
+                this.endLog = new Task(() => this.CargarGif(token));
+                endLog.Start();
             }
             else
             {
@@ -48,6 +62,38 @@ namespace SistemaContable
             this.informes = new FrmInformes(this.registroContable);
         }
 
+
+        private void ApagarGif()
+        {
+            this.picGif.Visible = false;
+            this.mtrMenu.Enabled = true;
+            this.cancelTask.Cancel();
+        }
+        private void CargarGif(CancellationToken cancelToken)
+        {
+            int contador = 0;
+            while (!cancelToken.IsCancellationRequested)
+            {
+                if (this.picGif.InvokeRequired)
+                {
+                    contador++;
+                    if (contador == 5)
+                    {
+                        this.picGif.BeginInvoke((MethodInvoker)delegate ()
+                        {
+                            picGif.Visible = true;
+                            Gif.Invoke();
+                        });
+                        break;
+                    }
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    picGif.Visible = false;
+                }
+            }
+        }
 
         #region Botones Compras
         private void cargarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -243,6 +289,11 @@ namespace SistemaContable
         private void noToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Menos mal que pregunté", "Borrar Usuario - Negado", MessageBoxButtons.OK);
+        }
+
+        private void frmMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.cancelTask.Cancel();
         }
     }
 }

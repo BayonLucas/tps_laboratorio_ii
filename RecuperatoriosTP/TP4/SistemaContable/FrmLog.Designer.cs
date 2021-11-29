@@ -29,7 +29,6 @@ namespace SistemaContable
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLog));
             this.lblBienvenida = new System.Windows.Forms.Label();
             this.cmbUsuarios = new System.Windows.Forms.ComboBox();
             this.chbNuevoUsuario = new System.Windows.Forms.CheckBox();
@@ -42,8 +41,6 @@ namespace SistemaContable
             this.lblCuit = new System.Windows.Forms.Label();
             this.lblSitFiscal = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
-            this.picGif = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picGif)).BeginInit();
             this.SuspendLayout();
             // 
             // lblBienvenida
@@ -161,23 +158,11 @@ namespace SistemaContable
             this.lblError.Text = "*Complete todos los datos*";
             this.lblError.Visible = false;
             // 
-            // picGif
-            // 
-            this.picGif.Image = ((System.Drawing.Image)(resources.GetObject("picGif.Image")));
-            this.picGif.Location = new System.Drawing.Point(12, 9);
-            this.picGif.Name = "picGif";
-            this.picGif.Size = new System.Drawing.Size(430, 309);
-            this.picGif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picGif.TabIndex = 12;
-            this.picGif.TabStop = false;
-            this.picGif.Visible = false;
-            // 
             // FrmLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 330);
-            this.Controls.Add(this.picGif);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.lblSitFiscal);
             this.Controls.Add(this.lblCuit);
@@ -196,9 +181,7 @@ namespace SistemaContable
             this.Name = "FrmLog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro Contable - Log";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmLog_FormClosing);
             this.Load += new System.EventHandler(this.Log_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picGif)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,6 +201,5 @@ namespace SistemaContable
         private System.Windows.Forms.Label lblCuit;
         private System.Windows.Forms.Label lblSitFiscal;
         private System.Windows.Forms.Label lblError;
-        private System.Windows.Forms.PictureBox picGif;
     }
 }
