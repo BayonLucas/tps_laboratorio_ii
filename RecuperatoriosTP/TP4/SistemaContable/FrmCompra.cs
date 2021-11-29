@@ -201,7 +201,6 @@ namespace SistemaContable
                     this.cmbAlicuota.SelectedIndex = 2;
                     break;
             }
-            //this.txtTotal.Text = c1.CalculoTotal.ToString();
             this.cmbConcepto.SelectedItem = c1.Concepto;
         }
         public void CalculoTotal()

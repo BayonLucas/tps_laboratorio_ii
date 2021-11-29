@@ -466,14 +466,30 @@ namespace Archivos
             return ret;
         }
     
-        public static void EliminarTablas(RegistroContable usuario)
+        public static bool EliminarTablas(RegistroContable usuario)
         {
+            bool ret1 = false;
+            bool ret2 = false;
+            bool retFinal = false;
             try
             {
-                command.CommandText = $"DROP TABLE IF EXISTS dbo.{usuario.Usuario.RazonSocial}Compras";
-                command.ExecuteNonQuery();
-                command.CommandText = $"DROP TABLE IF EXISTS dbo.{usuario.Usuario.RazonSocial}Ventas";
-                command.ExecuteNonQuery();
+                conexion.Open();
+                command.Parameters.Clear();
+                command.CommandText = $"DROP TABLE [dbo].[{usuario.Usuario.RazonSocial}Compras]";
+                if(command.ExecuteNonQuery() !=0)
+                {
+                    ret1 = true;
+                }
+                command.Parameters.Clear();
+                command.CommandText = $"DROP TABLE  [dbo].[{usuario.Usuario.RazonSocial}Ventas]";
+                if(command.ExecuteNonQuery() != 0)
+                {
+                    ret2 = true;
+                }
+                if(ret1 && ret2)
+                {
+                    retFinal = true;
+                }
             }
             catch (Exception ex)
             {
@@ -483,13 +499,20 @@ namespace Archivos
             {
                 conexion.Close();
             }
+            return retFinal;
         }
-        public static void EliminarUsuario(RegistroContable usuario)
+        public static bool EliminarUsuario(RegistroContable usuario)
         {
+            bool ret = false;
+ 
             try 
-            { 
-                command.CommandText = $"DELETE FROM dbo.usuario WHERE cuit = {usuario.Usuario.Cuit}";
-                command.ExecuteNonQuery();
+            {
+                conexion.Open();
+                command.CommandText = $"DELETE FROM dbo.Usuarios WHERE cuit = {usuario.Usuario.Cuit}";
+                if (command.ExecuteNonQuery() != 0)
+                {
+                    ret = true;
+                }
             }
             catch (Exception ex)
             {
@@ -499,6 +522,7 @@ namespace Archivos
             {
                 conexion.Close();
             }
+            return ret;
         }
     
     

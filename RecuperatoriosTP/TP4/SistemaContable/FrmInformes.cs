@@ -59,7 +59,8 @@ namespace SistemaContable
             float total = 0;
             try
             {
-                if (!string.IsNullOrEmpty(concepto))
+
+                if (!string.IsNullOrEmpty(concepto) && this.registroContable.Compras.Count != 0)
                 {
 
                     foreach (Compra item in this.registroContable.Compras)
@@ -70,12 +71,11 @@ namespace SistemaContable
                         }
                     }
                     total = (float)contadorPorConcepto / this.registroContable.Compras.Count * 100;
-
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                throw;
             }
             return total;
         }
