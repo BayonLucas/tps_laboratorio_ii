@@ -56,7 +56,6 @@ namespace Entidades
             get
             {
                 float aux = this.Importe;
-                //return (this.importe + (this.Importe * (this.Alicuota / 100)));
                 return aux.CalcularTotal(this.Alicuota);
             }
         }
@@ -95,24 +94,28 @@ namespace Entidades
         public Compra() : this(new Ente(), string.Empty, string.Empty, DateTime.Now, 0, 0, new Ente(), EConcepto.Varios)
         {        }
 
+        /// <summary>
+        /// Sobreescritura de MostrarDatos de la clase base. Retorna un stringBuilder con los datos importante de la Compra
+        /// </summary>
+        /// <returns></returns>
         public override string MostrarDatos()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.Append($"{base.MostrarDatos()} | ");
-            //sb.Append($"{(string)this.EnteReceptor} | ");
-            //sb.Append($"Importe: {this.Importe} | ");
-            //sb.Append($"IVA: {this.Alicuota} | ");
             sb.Append($"Total: {this.CalculoTotal} | ");
             sb.Append($"Concepto: {this.Concepto}");
 
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Sobreescritura del ToString() para el uso de ListBox en Windows Froms
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return this.MostrarDatos();
         }
-
     }
 }

@@ -66,7 +66,6 @@ namespace Entidades
             get
             {
                 float aux = this.Importe;
-                //return (this.importe + (this.Importe * (this.Alicuota / 100)));
                 return aux.CalcularTotal(this.Alicuota);
             }
         }
@@ -97,7 +96,10 @@ namespace Entidades
             this.enteReceptor = enteRecepto;
         }
 
-
+        /// <summary>
+        /// Sobreescritura de MostrarDatos de la clase Base. Retorna un stringBuilder con la inforcion importante de la Factura.
+        /// </summary>
+        /// <returns></returns>
         public override string MostrarDatos()
         {
             StringBuilder sb = new StringBuilder();
@@ -111,6 +113,10 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Sobreescritura necesaria del Tostring para el uso de listBox en Windows Forms
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

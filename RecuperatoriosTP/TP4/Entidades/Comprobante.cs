@@ -101,6 +101,11 @@ namespace Entidades
             this.NroComprobante = nroComprobante;
         }
 
+        /// <summary>
+        /// Controla que el string pasado por parametro seran digitos y no supere los 5 caracteres
+        /// </summary>
+        /// <param name="ptoV"></param>
+        /// <returns></returns>
         public bool PtoVentaCtrl(string ptoV)
         {
             bool ret = false;
@@ -118,6 +123,12 @@ namespace Entidades
             }
             return ret;
         }
+
+        /// <summary>
+        /// Controla que el string pasado por parametro seran digitos y no supere los 8 caracteres
+        /// </summary>
+        /// <param name="nroComp"></param>
+        /// <returns></returns>
         public bool nroCompCtrl(string nroComp)
         {
             bool ret = false;
@@ -135,43 +146,49 @@ namespace Entidades
             }
             return ret;
         }
-        public bool CuitCtrl(string cuit)
-        {
-            bool ret = false;
-            if(cuit is not null && cuit.Length == 11)
-            {
-                foreach(char item in cuit)
-                {
-                    if(!(char.IsDigit(item)))
-                    {
-                        return ret;
-                    }
-                }
-                ret = true;
-            }
-            return ret;
-        }
-
+       
+        /// <summary>
+        /// Muestra los datos importante del Comprobante
+        /// </summary>
+        /// <returns></returns>
         public virtual string MostrarDatos()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"{this.Fecha.ToString("dd/MM/yy")} | ");
+            sb.Append($"{this.Fecha.ToString("dd/MM/yyyy")} | ");
             sb.Append($"{(string)this.Ente} | ");
             sb.Append($"{this.DatosComprobante}");
 
             return sb.ToString();
         }
         
+        /// <summary>
+        /// Compara el ptoVenta, nroComprobante y datos del ente en cuestion para determinar si dos comprobantes son iguales
+        /// </summary>
+        /// <param name="c1"></param>
+        /// <param name="c2"></param>
+        /// <returns></returns>
         public static bool operator ==(Comprobante c1, Comprobante c2)
         {
             return (c1.Equals(c2) && c1.DatosComprobante == c2.DatosComprobante && c1.Ente == c2.Ente);
         }
+
+        /// <summary>
+        /// Compara el ptoVenta, nroComprobante y datos del ente en cuestion para determinar si dos comprobantes son distintos
+        /// </summary>
+        /// <param name="c1"></param>
+        /// <param name="c2"></param>
+        /// <returns></returns>
         public static bool operator !=(Comprobante c1, Comprobante c2)
         {
             return !(c1 == c2);
         }
 
+        /// <summary>
+        /// Sobreescritura del Equals. Compara el tipo de dos objetos
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             return this.GetType() == obj.GetType();

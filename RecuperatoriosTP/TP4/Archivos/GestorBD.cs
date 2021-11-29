@@ -9,20 +9,25 @@ using Entidades;
 
 namespace Archivos
 {
-
-    
-
     public static class GestorBD 
     {
         private static SqlConnection conexion;
         private static SqlCommand command;
 
+        /// <summary>
+        /// Constructor estático de la Clase GestorBD
+        /// </summary>
         static GestorBD()
         {
             conexion = new SqlConnection(@"Server=LAPTOP-BGK4873G\SQLEXPRESS;Database=Bayon.Lucas.2C.TPFinal;Trusted_Connection = True;");
             command = new SqlCommand();
             command.Connection = conexion;
         }
+   
+        /// <summary>
+        /// Controla que la conexion se haya concretado satisfactoriamente
+        /// </summary>
+        /// <returns></returns>
         public static bool ProbarConexion()
         {
             bool rta = true;
@@ -45,6 +50,11 @@ namespace Archivos
 
             return rta;
         }
+        
+        /// <summary>
+        /// Carga la lista de Usuarios de la base de datos en cuestion
+        /// </summary>
+        /// <returns></returns>
         public static List<Ente> CargarListaUsuarios()
         {
             List<Ente> listaUsuarios = new List<Ente>();
@@ -80,6 +90,11 @@ namespace Archivos
 
             return listaUsuarios;
         }
+        
+        /// <summary>
+        /// Genera un usuario a la base de datos
+        /// </summary>
+        /// <param name="usuario"></param>
         public static void GenerarUsuario(Ente usuario)
         {
             if(usuario is not null)
@@ -105,6 +120,11 @@ namespace Archivos
                 }
             }
         }
+        
+        /// <summary>
+        /// Genera una Tabla de Ventas para un usuario
+        /// </summary>
+        /// <param name="usuario"></param>
         public static void GenerarTablaVentas(Ente usuario)
         {
             try
@@ -126,6 +146,11 @@ namespace Archivos
                 conexion.Close();
             }
         }
+
+        /// <summary>
+        /// Genera una Tabla de Compras para un usuario
+        /// </summary>
+        /// <param name="usuario"></param>
         public static void GenerarTablaCompras(Ente usuario)
         {
             try
@@ -147,6 +172,12 @@ namespace Archivos
                 conexion.Close();
             }
         }
+        
+        /// <summary>
+        /// Carga todas las compras que se encuentren en la base de datos de un usuario a un List
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         public static List<Compra> CargarListaCompras(Ente usuario)
         {
             List<Compra> listaCompras = new List<Compra>();
@@ -188,6 +219,12 @@ namespace Archivos
 
             return listaCompras;
         }
+
+        /// <summary>
+        /// Carga todas las Ventas que se encuentren en la base de datos de un usuario a un List
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         public static List<Factura> CargarListaVentas(Ente usuario)
         {
             List<Factura> listaVentas = new List<Factura>();
@@ -228,6 +265,15 @@ namespace Archivos
 
             return listaVentas;
         }
+        
+        /// <summary>
+        /// Busca en la base de datos todas las compras que cumplan con los criterios pasados por parametros y los guarda en un List
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <param name="concepto"></param>
+        /// <param name="anio"></param>
+        /// <param name="mes"></param>
+        /// <returns></returns>
         public static List<Compra> BuscarComprasSegun(Ente usuario, EConcepto concepto, decimal anio, string mes)
         {
             List<Compra> listaCompras = new List<Compra>();
@@ -281,6 +327,14 @@ namespace Archivos
 
             return listaCompras;
         }
+
+        /// <summary>
+        /// Busca en la base de datos todas las Ventas que cumplan con los criterios pasados por parametros y los guarda en un List
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <param name="anio"></param>
+        /// <param name="mes"></param>
+        /// <returns></returns>
         public static List<Factura> BuscarVentasSegun(Ente usuario, decimal anio, string mes)
         {
             List<Factura> listaVentas = new List<Factura>();
@@ -332,6 +386,12 @@ namespace Archivos
 
             return listaVentas;
         }
+        
+        /// <summary>
+        /// Guarda en la base de datos una venta en la tabla Ventas del usuario correspondiente
+        /// </summary>
+        /// <param name="f"></param>
+        /// <returns></returns>
         public static bool CargarVenta(Factura f)
         {
             bool ret = false;
@@ -368,6 +428,12 @@ namespace Archivos
             }
             return ret;
         }
+
+        /// <summary>
+        /// Anula una venta modificandola en la tabla Ventas del usuario correspondiente
+        /// </summary>
+        /// <param name="f"></param>
+        /// <returns></returns>
         public static bool ModificarVenta(Factura f)
         {
             bool ret = false;
@@ -393,6 +459,12 @@ namespace Archivos
             }
             return ret;
         }
+
+        /// <summary>
+        /// Guarda en la base de datos una Compra en la tabla Compras del usuario correspondiente
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public static bool CargarCompra(Compra c)
         {
             bool ret = false;
@@ -429,6 +501,12 @@ namespace Archivos
             }
             return ret;
         }
+
+        /// <summary>
+        /// Elimina en la base de datos una Compra en la tabla Compras del usuario correspondiente
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public static bool EliminarCompra(Compra c)
         {
             bool ret = false;
@@ -466,6 +544,11 @@ namespace Archivos
             return ret;
         }
     
+        /// <summary>
+        /// Elimina las tablas correspondientes al usuario en cuestion
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         public static bool EliminarTablas(RegistroContable usuario)
         {
             bool ret1 = false;
@@ -501,6 +584,12 @@ namespace Archivos
             }
             return retFinal;
         }
+        
+        /// <summary>
+        /// Elimina al usuario de la tabla Usuarios
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         public static bool EliminarUsuario(RegistroContable usuario)
         {
             bool ret = false;
@@ -524,8 +613,5 @@ namespace Archivos
             }
             return ret;
         }
-    
-    
-    
     }
 }

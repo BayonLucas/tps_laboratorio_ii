@@ -23,7 +23,6 @@ namespace Entidades
                 if(!(string.IsNullOrWhiteSpace(value)))
                 {
                     string aux;
-                    //Aca deberia de extraer un max de 25 caracteres.
                     aux = EmprolijarString(value);
                     aux = aux.Replace(" ", "");
                     while(aux.Length<24)
@@ -73,6 +72,10 @@ namespace Entidades
             this.SitFiscal = sitFiscal;
         }
 
+        /// <summary>
+        /// Sobrecarga explicita para el casteo de Ente a string
+        /// </summary>
+        /// <param name="e"></param>
         public static explicit operator string(Ente e)
         {
             StringBuilder sb = new StringBuilder();
@@ -85,65 +88,34 @@ namespace Entidades
 
             return sb.ToString();
         }
-        //public static explicit operator Ente(string e) //Revisar bien
-        //{
-        //    string auxRazonSocial = "aaaaaaaaaaaaaaaaaaaa";
-        //    string auxCuit = "99999999999";
-        //    ESitFiscal auxSitFiscal = ESitFiscal.ResponsableInscripto;
-
-        //    if (string.IsNullOrWhiteSpace(e)) //Lo que recibo string = Pitulo | 201234567789 | ResponsableInscripto
-        //    {
-        //        string buffer = "";
-        //        int contador = 0;
-
-        //        for(int i  = 0; i<e.Length;i++)
-        //        {
-        //            if (e.ElementAt(i) != '|') 
-        //            {
-        //                buffer = buffer + e.ElementAt(i);
-        //            }
-        //            else if (contador == 0)
-        //            {
-        //                i++;
-        //                auxRazonSocial = buffer;
-        //                contador++;
-        //                buffer = "";
-        //            }
-        //            else if (contador == 1)
-        //            {
-        //                i++;
-        //                auxCuit = buffer;
-        //                contador++;
-        //                buffer = "";
-        //            }
-        //            else
-        //            {
-        //                switch(buffer)
-        //                {
-        //                    case "ResponsableInscripto ":
-        //                        auxSitFiscal = ESitFiscal.ResponsableInscripto;
-        //                        break;
-        //                    case "Monotributista ":
-        //                        auxSitFiscal = ESitFiscal.Monotributista;
-        //                        break;
-        //                    case "ConsumidorFinal ":
-        //                        auxSitFiscal = ESitFiscal.ConsumidorFinal;
-        //                        break;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return new Ente(auxRazonSocial, auxCuit, auxSitFiscal);
-        //}
+      
+        /// <summary>
+        /// Compara si dos Entes son iguales si comparten el mismo cuit
+        /// </summary>
+        /// <param name="e1"></param>
+        /// <param name="e2"></param>
+        /// <returns></returns>
         public static bool operator ==(Ente e1, Ente e2)
         {
             return (e1.Cuit == e2.Cuit);
         }
+
+        /// <summary>
+        /// Compara si dos Entes son no iguales si difieren sus cuits
+        /// </summary>
+        /// <param name="e1"></param>
+        /// <param name="e2"></param>
+        /// <returns></returns>
         public static bool operator !=(Ente e1, Ente e2)
         {
             return !(e1 == e2);
         }
 
+        /// <summary>
+        /// Controla que el string ingresado por parametro este formado solo por 11 digitos
+        /// </summary>
+        /// <param name="cuit"></param>
+        /// <returns></returns>
         public bool CuitCtrl(string cuit)
         {
             bool ret = false;
@@ -161,11 +133,20 @@ namespace Entidades
             return ret;
         }
 
+        /// <summary>
+        /// Sobreescritura necesaria para windows Forms
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"{this.RazonSocial} - {this.Cuit}";
         }
 
+        /// <summary>
+        /// Le da un formato mas agradable a la vista a la razon Social del ente
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public string EmprolijarString(string str)
         {
             char[] strChar = null;

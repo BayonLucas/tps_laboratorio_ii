@@ -17,9 +17,9 @@ namespace Entidades
         public Ente Usuario { get => usuario; set => usuario = value; }
 
 
-        public RegistroContable() : this(null, null, null) //No es necesario
+        public RegistroContable() : this(null)
         { }
-        public RegistroContable(Ente usuario) : this(usuario, null, null) //No es necesario
+        public RegistroContable(Ente usuario) : this(usuario, null, null)
         { }
         public RegistroContable(Ente usuario, List<Factura> ventas, List<Compra> compras)
         {
@@ -28,26 +28,12 @@ namespace Entidades
             this.Compras = compras;
         }
 
-
-
-        /* Primeros constructores
-        public RegistroContable()
-        {
-            this.Ventas = new List<Factura>();
-            this.Compras = new List<Compra>();
-        }
-        public RegistroContable(Ente usuario) : this()
-        {
-            this.Usuario = usuario;
-        }
-        public RegistroContable(Ente usuario, List<Factura> ventas, List<Compra> compras) : this(usuario)
-        {
-            this.Ventas = ventas;
-            this.Compras = compras;
-        }
-        */
-
-
+        /// <summary>
+        /// Retorna true en caso de que la compra este incluida en la lista Compras
+        /// </summary>
+        /// <param name="rc"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public static bool operator ==(RegistroContable rc, Compra c)
         {
             if (rc is not null && c is not null)
@@ -62,10 +48,24 @@ namespace Entidades
             }
             return false;
         }
+
+        /// <summary>
+        /// Retorna true en caso de que la compra este no incluida en la lista Compras
+        /// </summary>
+        /// <param name="rc"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public static bool operator !=(RegistroContable rc, Compra c)
         {
             return !(rc == c);
         }
+       
+        /// <summary>
+        /// Agrega a la lista Compras el objeto pasado por parametro en caso de no estar ya incorporada
+        /// </summary>
+        /// <param name="rc"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public static RegistroContable operator +(RegistroContable rc, Compra c)
         {
             if (rc is not null && c is not null)
@@ -73,11 +73,17 @@ namespace Entidades
                 if (rc != c)
                 {
                     rc.Compras.Add(c);
-                    //return true;
                 }
             }
             return rc;
         }
+
+        /// <summary>
+        /// Elimina de la lista Compras el objeto pasado por parametro en caso de estar ya incorporada
+        /// </summary>
+        /// <param name="rc"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public static RegistroContable operator -(RegistroContable rc, Compra c)
         {
             if (rc is not null && c is not null)
@@ -85,11 +91,17 @@ namespace Entidades
                 if (rc == c)
                 {
                     rc.Compras.Remove(c);
-                    //return true;
                 }
             }
             return rc;
         }
+
+        /// <summary>
+        /// Retorna true en caso de que la Factura este incluida en la lista Ventas
+        /// </summary>
+        /// <param name="rc"></param>
+        /// <param name="f"></param>
+        /// <returns></returns>
         public static bool operator ==(RegistroContable rc, Factura f)
         {
             if (rc is not null && f is not null)
@@ -104,10 +116,24 @@ namespace Entidades
             }
             return false;
         }
+
+        /// <summary>
+        /// Retorna true en caso de que la Factura no este incluida en la lista Ventas
+        /// </summary>
+        /// <param name="rc"></param>
+        /// <param name="f"></param>
+        /// <returns></returns>
         public static bool operator !=(RegistroContable rc, Factura f)
         {
             return !(rc == f);
         }
+
+        /// <summary>
+        /// Agrega a la lista Ventas el objeto pasado por parametro en caso de no estar ya incorporado
+        /// </summary>
+        /// <param name="rc"></param>
+        /// <param name="f"></param>
+        /// <returns></returns>
         public static RegistroContable operator +(RegistroContable rc, Factura f)
         { 
             if(rc is not null && f is not null)
@@ -115,11 +141,17 @@ namespace Entidades
                 if(rc != f)
                 {
                     rc.Ventas.Add(f);
-                    //return true;
                 }
             }
             return rc;
         }
+
+        /// <summary>
+        /// Elimina de la lista Ventas el objeto pasado por parametro en caso de estar ya incorporada
+        /// </summary>
+        /// <param name="rc"></param>
+        /// <param name="f"></param>
+        /// <returns></returns>
         public static RegistroContable operator -(RegistroContable rc, Factura f)
         {
             if (rc is not null && f is not null)
@@ -127,7 +159,6 @@ namespace Entidades
                 if (rc == f)
                 {
                     rc.Ventas.Remove(f);
-                    //return true;
                 }
             }
             return rc;
