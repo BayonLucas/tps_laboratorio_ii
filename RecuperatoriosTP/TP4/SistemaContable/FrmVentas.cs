@@ -41,8 +41,6 @@ namespace SistemaContable
             }
         }
 
-
-
         private void FrmVentas_Load(object sender, EventArgs e)
         {
             this.lblRazonSocialUsuario.Text = this.registroContable.Usuario.RazonSocial;
@@ -87,8 +85,11 @@ namespace SistemaContable
             this.dtpFecha.Value = DateTime.Today;
         }
 
-
-
+        /// <summary>
+        /// Emite una Factura y la carga a la base de datos y a la lista correspondiente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEmitir_Click(object sender, EventArgs e)
         {
             if(ValidarDatosIngresados())
@@ -97,7 +98,6 @@ namespace SistemaContable
                     float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
                     new Ente(txtRazonSocialReceptor.Text, txtCuitReceptor.Text, (ESitFiscal)this.cmbSitFiscalReceptor.SelectedValue), false);
                 this.registroContable += fc;
-                        //Generar evento que encapsule una serializacion XML de la Fc, la carga a la base de datos y la adhision a la lista del usuario
                 if(!GestorBD.CargarVenta(fc))
                 {
                     DataBasesException ex = new DataBasesException("Error al agregar la venta a la Base de Datos");
@@ -110,6 +110,12 @@ namespace SistemaContable
                 this.lblError.Visible = true;
             }
         }
+
+        /// <summary>
+        /// Anula una factura
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAnular_Click(object sender, EventArgs e)
         {
             foreach (Factura item in registroContable.Ventas)
@@ -131,8 +137,9 @@ namespace SistemaContable
             }
         }
 
-
-
+        /// <summary>
+        /// Limpia los campos del formulario
+        /// </summary>
         public void Refrescar()
         {
             this.txtRazonSocialReceptor.Text = string.Empty;
@@ -148,6 +155,10 @@ namespace SistemaContable
             this.lblError.Visible = false;
             this.dtpFecha.Value = DateTime.Today;
         }
+
+        /// <summary>
+        /// Calcula el total de una Compra y lo imprime en el TextBox Total
+        /// </summary>
         public void CalculoTotal()
         {
             float auxIVA;
@@ -156,6 +167,11 @@ namespace SistemaContable
             auxTotal = float.Parse(txtImporte.Text) + auxIVA;
             this.txtTotal.Text = auxTotal.ToString();
         }
+
+        /// <summary>
+        /// Valida que se hayan completados todos los campos del formulario
+        /// </summary>
+        /// <returns></returns>
         public bool ValidarDatosIngresados()
         {
             bool ret = false;
@@ -166,6 +182,12 @@ namespace SistemaContable
             }
             return ret;
         }
+
+        /// <summary>
+        /// Retorna el nro de Comprobante de la ultima Factura Emitida
+        /// </summary>
+        /// <param name="listaVentas"></param>
+        /// <returns></returns>
         private int UltimoNroComprobante(List<Factura> listaVentas)
         {
             int aux = 0; ;
@@ -180,6 +202,11 @@ namespace SistemaContable
             }
             return aux;
         }
+
+        /// <summary>
+        /// Muestra los datos de una Venta en los campos del formulario
+        /// </summary>
+        /// <param name="c1"></param>
         private void MostrarDatos(Factura f1) 
         {
             this.txtRazonSocialReceptor.Text = f1.EnteReceptor.RazonSocial;
@@ -212,10 +239,7 @@ namespace SistemaContable
                     this.cmbAlicuota.SelectedIndex = 2;
                     break;
             }
-            //this.txtTotal.Text = f1.CalculoTotal.ToString();
         }
-
-
 
         private void cmbAlicuota_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -224,6 +248,7 @@ namespace SistemaContable
                 this.CalculoTotal();
             }
         }
+       
         private void cmbAlicuota_SelectedValueChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(this.txtImporte.Text))
@@ -231,6 +256,7 @@ namespace SistemaContable
                 this.CalculoTotal();
             }
         }
+        
         private void lstListaVentas_SelectedValueChanged_1(object sender, EventArgs e)
         {
             if(this.GetOption == "Anular")
@@ -247,6 +273,11 @@ namespace SistemaContable
             }
         }
 
+        /// <summary>
+        /// Limita el ingreso de caracteres de un TextBox a solo digitos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void KeypressValidator(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))

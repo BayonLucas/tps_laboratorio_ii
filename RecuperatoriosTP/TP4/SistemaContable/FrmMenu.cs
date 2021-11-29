@@ -29,8 +29,6 @@ namespace SistemaContable
         public event DelegateManejador Gif;
         private Task endLog;
 
-
-
         public frmMenu()
         {
             InitializeComponent();
@@ -62,13 +60,20 @@ namespace SistemaContable
             this.informes = new FrmInformes(this.registroContable);
         }
 
-
+        /// <summary>
+        /// Vuelve invisible el GIF y habilita los botones del MenuTrip
+        /// </summary>
         private void ApagarGif()
         {
             this.picGif.Visible = false;
             this.mtrMenu.Enabled = true;
             this.cancelTask.Cancel();
         }
+
+        /// <summary>
+        /// Hilo donde se muestra el GIF Intro por una determinada cantidad de tiempo. El mismo se inicia en el evento Load del formulario
+        /// </summary>
+        /// <param name="cancelToken"></param>
         private void CargarGif(CancellationToken cancelToken)
         {
             int contador = 0;
@@ -95,7 +100,11 @@ namespace SistemaContable
             }
         }
 
-        #region Botones Compras
+        /// <summary>
+        /// Apertura del formulario Compras (Cargar)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cargarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
@@ -113,6 +122,11 @@ namespace SistemaContable
             }
         }
 
+        /// <summary>
+        /// Apertura del formulario Compras (Modificar)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
@@ -133,6 +147,11 @@ namespace SistemaContable
             }
         }
 
+        /// <summary>
+        /// Apertura del formulario de Compras (Eliminar)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
@@ -152,10 +171,12 @@ namespace SistemaContable
                 compra.BringToFront();
             }
         }
-        #endregion
 
-        #region Botones Ventas
-
+        /// <summary>
+        /// Apertura del formulario de Ventas (Emitir)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void emitirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((IsFormAlreadyOpen(typeof(FrmVentas))) == null)
@@ -172,7 +193,11 @@ namespace SistemaContable
                 ventas.BringToFront();
             }
         }
-
+        /// <summary>
+        /// Apertura del formulario de Ventas (Anular)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void anularToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((IsFormAlreadyOpen(typeof(FrmVentas))) == null)
@@ -193,9 +218,11 @@ namespace SistemaContable
             }
         }
 
-        #endregion
-
-        #region Botones Archivos
+        /// <summary>
+        /// Realiza una copia de las listas de Compras y Ventas del usuario en formato Json
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GuardarComoJsonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(this.registroContable.Compras.Count>0 || this.registroContable.Ventas.Count > 0)
@@ -229,6 +256,11 @@ namespace SistemaContable
            
         }
 
+        /// <summary>
+        /// Realiza una copia de las listas de Compras y Ventas del usuario en formato XML
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GuardarComoXmlToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.registroContable.Compras.Count > 0 || this.registroContable.Ventas.Count > 0)
@@ -258,10 +290,11 @@ namespace SistemaContable
 
         }
 
-        #endregion
-
-
-
+        /// <summary>
+        /// Apertura del Formulario de Informes y estadisticas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void smiInformes_Click(object sender, EventArgs e)
         {
             try
@@ -285,6 +318,12 @@ namespace SistemaContable
             }
             
         }
+
+        /// <summary>
+        /// Chequea si ya hay abierto un formulario para que no se pueda abrir otro del mismo tipo
+        /// </summary>
+        /// <param name="FormType"></param>
+        /// <returns></returns>
         public static Form IsFormAlreadyOpen(Type FormType)
         {
             foreach (Form OpenForm in System.Windows.Forms.Application.OpenForms)
@@ -296,20 +335,21 @@ namespace SistemaContable
             return null;
         }
 
-
-        ///Eliminar usuario
-
-
-
-
-
-
+        /// <summary>
+        /// Limpia las listas del usuario a borrar
+        /// </summary>
+        /// <param name="usuario"></param>
         public void EliminarListas(RegistroContable usuario)
         {
             usuario.Ventas.Clear();
             usuario.Compras.Clear();
         }
 
+        /// <summary>
+        /// Detalle cómico
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void noToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Menos mal que pregunté", "Borrar Usuario - Negado", MessageBoxButtons.OK);
@@ -320,6 +360,11 @@ namespace SistemaContable
             this.cancelTask.Cancel();
         }
 
+        /// <summary>
+        /// Borra totalmente al usuario de la base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void siToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(MessageBox.Show("Estas 100% seguro?", "Última advertencia", MessageBoxButtons.YesNo) == DialogResult.Yes)

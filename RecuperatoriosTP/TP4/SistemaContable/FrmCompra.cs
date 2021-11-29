@@ -105,9 +105,6 @@ namespace SistemaContable
             this.Refrescar();
         }
 
-
-        #region Botones
-
         /// <summary>
         /// Luego de validaciones, genera una compra ya la carga a Lista de compras y a la base de datos
         /// </summary>
@@ -130,29 +127,44 @@ namespace SistemaContable
             }
         }
 
+        /// <summary>
+        /// Modifica una compra, cargandola en la base de datos y lista Compras
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            //se puede mejorar
-            foreach (Compra item in registro.Compras)
+            if(ValidarDatosIngresados())
             {
-                if (item == (Compra)lstListaCompras.SelectedItem)
+                foreach (Compra item in registro.Compras)
                 {
-                    if(MessageBox.Show("Desea modificar los datos de esta compra?", "Modificar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (item == (Compra)lstListaCompras.SelectedItem)
                     {
-                        Compra compra = new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
-                        this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
-                        this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue);
-                        this.registro += compra;
-                        GestorBD.CargarCompra(compra);
-                        registro -= item;
-                        GestorBD.EliminarCompra(item);
-                        this.Refrescar();
-                        break;
+                        if (MessageBox.Show("Desea modificar los datos de esta compra?", "Modificar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            Compra compra = new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
+                            this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
+                            this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue);
+                            this.registro += compra;
+                            GestorBD.CargarCompra(compra);
+                            registro -= item;
+                            GestorBD.EliminarCompra(item);
+                            this.Refrescar();
+                            break;
+                        }
                     }
                 }
             }
+            {
+                this.lblEstadoBoton.Visible = true;
+            }
         }
 
+        /// <summary>
+        /// Elimina una compra tanto de la lista de Compras como de la base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             foreach(Compra item in registro.Compras)
@@ -170,9 +182,10 @@ namespace SistemaContable
             }
         }
 
-        #endregion
-
-        #region Métodos 
+        /// <summary>
+        /// Muestra los datos de una compra en los campos del formulario
+        /// </summary>
+        /// <param name="c1"></param>
         public void MostrarDatos(Compra c1)
         {
             this.dtpFecha.Value = c1.Fecha;
@@ -207,6 +220,10 @@ namespace SistemaContable
             }
             this.cmbConcepto.SelectedItem = c1.Concepto;
         }
+        
+        /// <summary>
+        /// Calcula el total de una Compra y lo imprime en el TextBox Total
+        /// </summary>
         public void CalculoTotal()
         {
             float auxIVA;
@@ -215,6 +232,10 @@ namespace SistemaContable
             auxTotal = float.Parse(txtImporte.Text) + auxIVA;
             this.txtTotal.Text = auxTotal.ToString(); 
         }
+       
+        /// <summary>
+        /// Limpia los campos del formulario
+        /// </summary>
         public void Refrescar()
         {
             this.txtEmisor.Text = "";
@@ -232,6 +253,11 @@ namespace SistemaContable
             this.dtpFecha.Value = DateTime.Today;
 
         }
+       
+        /// <summary>
+        /// Valida que se hayan completados todos los campos del formulario
+        /// </summary>
+        /// <returns></returns>
         public bool ValidarDatosIngresados()
         {
             bool ret = false;
@@ -243,10 +269,7 @@ namespace SistemaContable
             }
             return ret;
         }
-
-        #endregion
-       
-        
+              
         private void cmbAlicuota_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(!string.IsNullOrWhiteSpace(this.txtImporte.Text))
@@ -285,7 +308,11 @@ namespace SistemaContable
             }
         }
 
-
+        /// <summary>
+        /// Limita el ingreso de caracteres de un TextBox a solo digitos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void KeypressValidator(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))

@@ -52,7 +52,11 @@ namespace SistemaContable
             IntroInformes.Start();
         }
 
-       
+        /// <summary>
+        /// Calcula el porcentaje de todas las existentes Compras por concepto
+        /// </summary>
+        /// <param name="concepto"></param>
+        /// <returns></returns>
         public float CarcularPorcentaje(string concepto)
         {
             int contadorPorConcepto = 0;
@@ -79,6 +83,12 @@ namespace SistemaContable
             }
             return total;
         }
+        
+        /// <summary>
+        /// Calcula el Credito Fiscal de las compras de una lista dada
+        /// </summary>
+        /// <param name="listaFiltrada"></param>
+        /// <returns></returns>
         public float CalcularCreditoFiscal(List<Compra> listaFiltrada) 
         {
             float importeFiscal = 0;
@@ -91,6 +101,12 @@ namespace SistemaContable
             }
             return importeFiscal;
         }
+
+        /// <summary>
+        /// Calcula el Debito Fiscal de las ventas de una lista dada
+        /// </summary>
+        /// <param name="listaFiltrada"></param>
+        /// <returns></returns>
         public float CalcularDebitoFiscal(List<Factura> listaFiltrada)
         {
             float importeFiscal = 0;
@@ -103,6 +119,12 @@ namespace SistemaContable
             }
             return importeFiscal;
         }
+       
+        /// <summary>
+        /// En el evento presente se epondran todos los informes y estadisticas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nudAño_ValueChanged(object sender, EventArgs e)
         {
             float auxCredFiscal = 0;
@@ -152,6 +174,10 @@ namespace SistemaContable
             }
            
         }
+       
+        /// <summary>
+        /// Limpia los campos del formulario
+        /// </summary>
         public void Refrescar()
         {
             this.lblCreditoFiscal.Text = "El crédito fiscal generado en el período seleccionado es de: $0";
@@ -160,16 +186,24 @@ namespace SistemaContable
             this.lblAvisoEmergente.Visible = false;
             this.lstComprasPorConcepto.DataSource = null;
         }
+       
         private void chbMes_CheckedChanged(object sender, EventArgs e)
         {
             this.cmbMes.Enabled = !this.cmbMes.Enabled;
         }
 
-        #region Gif
+        /// <summary>
+        /// Vuelve invisible el GIF
+        /// </summary>
         private void ApagarGif()
         {
             this.picGif.Visible = false;
         }
+       
+        /// <summary>
+        /// Hilo donde se muestra el GIF Intro por una determinada cantidad de tiempo. El mismo se inicia en el evento Load del formulario
+        /// </summary>
+        /// <param name="cancelToken"></param>
         private void CargarGif(CancellationToken cancelToken)
         {
             int contador = 0;
@@ -195,12 +229,11 @@ namespace SistemaContable
                 }
             }
         }
+
         private void FrmInformes_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.cancelTask.Cancel();
         }
-
-        #endregion
 
         private void cmbConcepto_SelectedIndexChanged(object sender, EventArgs e)
         {

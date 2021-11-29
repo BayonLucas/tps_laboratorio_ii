@@ -103,6 +103,12 @@ namespace SistemaContable
                 this.cmbSitFiscal.SelectedIndex = -1;
             }
         }
+        
+        /// <summary>
+        /// Carga o genera un usuario en la base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             if(txtRazonSocial.Text != string.Empty && txtCuit.Text !=string.Empty && cmbSitFiscal.SelectedItem is not null)
@@ -129,7 +135,6 @@ namespace SistemaContable
                             GestorBD.CargarListaCompras(usuarioElegido));
                     }
                 }
-
                 if (this.registro is not null)
                 {
                     this.Close();
@@ -141,6 +146,9 @@ namespace SistemaContable
             }
         }
 
+        /// <summary>
+        /// Limpia los campos del formulario
+        /// </summary>
         public void Refrescar()
         {
             this.txtRazonSocial.Text = string.Empty;
@@ -150,6 +158,11 @@ namespace SistemaContable
             lblError.Visible = false;
         }
 
+        /// <summary>
+        /// Limita el ingreso de caracteres de un TextBox a solo digitos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void KeypressValidator(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
