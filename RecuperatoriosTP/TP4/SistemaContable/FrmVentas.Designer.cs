@@ -176,7 +176,7 @@ namespace SistemaContable
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(516, 13);
-            this.dtpFecha.MinDate = new System.DateTime(2021, 11, 20, 0, 0, 0, 0);
+            this.dtpFecha.MinDate = new System.DateTime(1900, 11, 20, 0, 0, 0, 0);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(125, 27);
             this.dtpFecha.TabIndex = 1;
@@ -275,7 +275,7 @@ namespace SistemaContable
             this.lstListaVentas.ItemHeight = 20;
             this.lstListaVentas.Location = new System.Drawing.Point(12, 287);
             this.lstListaVentas.Name = "lstListaVentas";
-            this.lstListaVentas.Size = new System.Drawing.Size(1192, 284);
+            this.lstListaVentas.Size = new System.Drawing.Size(1192, 264);
             this.lstListaVentas.TabIndex = 23;
             this.lstListaVentas.SelectedValueChanged += new System.EventHandler(this.lstListaVentas_SelectedValueChanged_1);
             // 

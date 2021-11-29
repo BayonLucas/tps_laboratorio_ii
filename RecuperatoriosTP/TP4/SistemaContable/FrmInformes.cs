@@ -37,19 +37,26 @@ namespace SistemaContable
 
         private void FrmInformes_Load(object sender, EventArgs e)
         {
-            this.nudAño.Minimum = (decimal.Parse(DateTime.Now.Year.ToString()) - 5);
-            this.nudAño.Maximum = (decimal.Parse(DateTime.Now.Year.ToString()));
-            this.cmbConcepto.DataSource = Enum.GetValues(typeof(EConcepto));
-            this.Refrescar();
+            try
+            {
+                this.nudAño.Minimum = (decimal.Parse(DateTime.Now.Year.ToString()) - 5);
+                this.nudAño.Maximum = (decimal.Parse(DateTime.Now.Year.ToString()));
+                this.cmbConcepto.DataSource = Enum.GetValues(typeof(EConcepto));
+                this.Refrescar();
 
-            this.prbBienDeUso.Value = (int)this.CarcularPorcentaje(EConcepto.Bien_de_uso.ToString());
-            this.prbServicios.Value = (int)this.CarcularPorcentaje(EConcepto.Servicio.ToString());
-            this.prbBienDeConsumo.Value = (int)this.CarcularPorcentaje(EConcepto.Bien_de_consumo.ToString());
-            this.prbVarios.Value = (int)this.CarcularPorcentaje(EConcepto.Varios.ToString());
+                this.prbBienDeUso.Value = (int)this.CarcularPorcentaje(EConcepto.Bien_de_uso.ToString());
+                this.prbServicios.Value = (int)this.CarcularPorcentaje(EConcepto.Servicio.ToString());
+                this.prbBienDeConsumo.Value = (int)this.CarcularPorcentaje(EConcepto.Bien_de_consumo.ToString());
+                this.prbVarios.Value = (int)this.CarcularPorcentaje(EConcepto.Varios.ToString());
 
-            Gif += ApagarGif;
-            this.IntroInformes = new Task(() => this.CargarGif(token));
-            IntroInformes.Start();
+                Gif += ApagarGif;
+                this.IntroInformes = new Task(() => this.CargarGif(token));
+                IntroInformes.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -92,12 +99,20 @@ namespace SistemaContable
         public float CalcularCreditoFiscal(List<Compra> listaFiltrada) 
         {
             float importeFiscal = 0;
-            if(listaFiltrada is not null && listaFiltrada.Count > 0)
+            try
             {
-                foreach(Compra item in listaFiltrada)
+                
+                if(listaFiltrada is not null && listaFiltrada.Count > 0)
                 {
-                    importeFiscal = item.Importe * item.Alicuota / 100;
-                }
+                    foreach(Compra item in listaFiltrada)
+                    {
+                        importeFiscal = item.Importe * item.Alicuota / 100;
+                    }
+                } 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             return importeFiscal;
         }
@@ -110,12 +125,19 @@ namespace SistemaContable
         public float CalcularDebitoFiscal(List<Factura> listaFiltrada)
         {
             float importeFiscal = 0;
-            if (listaFiltrada is not null && listaFiltrada.Count > 0)
+            try
             {
-                foreach (Factura item in listaFiltrada)
+                if (listaFiltrada is not null && listaFiltrada.Count > 0)
                 {
-                    importeFiscal = item.Importe * item.Alicuota / 100;
+                    foreach (Factura item in listaFiltrada)
+                    {
+                        importeFiscal = item.Importe * item.Alicuota / 100;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             return importeFiscal;
         }

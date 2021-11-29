@@ -92,22 +92,29 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void btnEmitir_Click(object sender, EventArgs e)
         {
-            if(ValidarDatosIngresados())
+            try
             {
-                Factura fc = new Factura(this.registroContable.Usuario, "99", this.txtNroComprobante.Text, dtpFecha.Value,
-                    float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
-                    new Ente(txtRazonSocialReceptor.Text, txtCuitReceptor.Text, (ESitFiscal)this.cmbSitFiscalReceptor.SelectedValue), false);
-                this.registroContable += fc;
-                if(!GestorBD.CargarVenta(fc))
+                if(ValidarDatosIngresados())
                 {
-                    DataBasesException ex = new DataBasesException("Error al agregar la venta a la Base de Datos");
-                    throw ex;
+                    Factura fc = new Factura(this.registroContable.Usuario, "99", this.txtNroComprobante.Text, dtpFecha.Value,
+                        float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
+                        new Ente(txtRazonSocialReceptor.Text, txtCuitReceptor.Text, (ESitFiscal)this.cmbSitFiscalReceptor.SelectedValue), false);
+                    this.registroContable += fc;
+                    if(!GestorBD.CargarVenta(fc))
+                    {
+                        DataBasesException ex = new DataBasesException("Error al agregar la venta a la Base de Datos");
+                        throw ex;
+                    }
+                    this.Refrescar();
                 }
-                this.Refrescar();
+                else
+                {
+                    this.lblError.Visible = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.lblError.Visible = true;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -118,22 +125,29 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void btnAnular_Click(object sender, EventArgs e)
         {
-            foreach (Factura item in registroContable.Ventas)
+            try
             {
-                if (item == (Factura)lstListaVentas.SelectedItem)
+                foreach (Factura item in registroContable.Ventas)
                 {
-                    this.MostrarDatos(item);
-                    if(item.Anulado == false)
+                    if (item == (Factura)lstListaVentas.SelectedItem)
                     {
-                        if (MessageBox.Show("Desea anular esta factura?", "Anular", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        this.MostrarDatos(item);
+                        if(item.Anulado == false)
                         {
-                            item.Anulado = true;
-                            GestorBD.ModificarVenta(item);
-                            this.Refrescar();
-                            break;
+                            if (MessageBox.Show("Desea anular esta factura?", "Anular", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            {
+                                item.Anulado = true;
+                                GestorBD.ModificarVenta(item);
+                                this.Refrescar();
+                                break;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -154,6 +168,14 @@ namespace SistemaContable
             this.lstListaVentas.DataSource = this.registroContable.Ventas;
             this.lblError.Visible = false;
             this.dtpFecha.Value = DateTime.Today;
+            if(this.GetOption == "Modificar")
+            {
+                this.dtpFecha.MinDate = DateTime.MinValue;
+            }
+            else
+            {
+                this.dtpFecha.MinDate = DateTime.Today;
+            }
         }
 
         /// <summary>
@@ -161,11 +183,18 @@ namespace SistemaContable
         /// </summary>
         public void CalculoTotal()
         {
-            float auxIVA;
-            float auxTotal;
-            auxIVA = float.Parse(txtImporte.Text) * float.Parse(cmbAlicuota.Text) / 100;
-            auxTotal = float.Parse(txtImporte.Text) + auxIVA;
-            this.txtTotal.Text = auxTotal.ToString();
+            try
+            {
+                float auxIVA;
+                float auxTotal;
+                auxIVA = float.Parse(txtImporte.Text) * float.Parse(cmbAlicuota.Text) / 100;
+                auxTotal = float.Parse(txtImporte.Text) + auxIVA;
+                this.txtTotal.Text = auxTotal.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -209,35 +238,42 @@ namespace SistemaContable
         /// <param name="c1"></param>
         private void MostrarDatos(Factura f1) 
         {
-            this.txtRazonSocialReceptor.Text = f1.EnteReceptor.RazonSocial;
-            this.txtCuitReceptor.Text = f1.EnteReceptor.Cuit;
-            this.dtpFecha.Value = f1.Fecha;
-            this.txtPtoVenta.Text = f1.PtoVenta;
-            this.txtNroComprobante.Text = f1.NroComprobante;
-            this.txtImporte.Text = f1.Importe.ToString();
-            switch (f1.Ente.SitFiscal)
+            try
             {
-                case ESitFiscal.Responsable_Inscripto:
-                    this.cmbSitFiscalReceptor.SelectedItem = ESitFiscal.Responsable_Inscripto;
-                    break;
-                case ESitFiscal.Monotributista:
-                    this.cmbSitFiscalReceptor.SelectedItem = ESitFiscal.Monotributista;
-                    break;
-                case ESitFiscal.Consumidor_Final:
-                    this.cmbSitFiscalReceptor.SelectedItem = ESitFiscal.Consumidor_Final;
-                    break;
+                this.txtRazonSocialReceptor.Text = f1.EnteReceptor.RazonSocial;
+                this.txtCuitReceptor.Text = f1.EnteReceptor.Cuit;
+                this.dtpFecha.Value = f1.Fecha;
+                this.txtPtoVenta.Text = f1.PtoVenta;
+                this.txtNroComprobante.Text = f1.NroComprobante;
+                this.txtImporte.Text = f1.Importe.ToString();
+                switch (f1.Ente.SitFiscal)
+                {
+                    case ESitFiscal.Responsable_Inscripto:
+                        this.cmbSitFiscalReceptor.SelectedItem = ESitFiscal.Responsable_Inscripto;
+                        break;
+                    case ESitFiscal.Monotributista:
+                        this.cmbSitFiscalReceptor.SelectedItem = ESitFiscal.Monotributista;
+                        break;
+                    case ESitFiscal.Consumidor_Final:
+                        this.cmbSitFiscalReceptor.SelectedItem = ESitFiscal.Consumidor_Final;
+                        break;
+                }
+                switch((int)f1.Alicuota)
+                {
+                    case 21:
+                        this.cmbAlicuota.SelectedIndex = 0;
+                        break;
+                    case 27:
+                        this.cmbAlicuota.SelectedIndex = 1;
+                        break;
+                    case 10:
+                        this.cmbAlicuota.SelectedIndex = 2;
+                        break;
+                }
             }
-            switch((int)f1.Alicuota)
+            catch (Exception ex)
             {
-                case 21:
-                    this.cmbAlicuota.SelectedIndex = 0;
-                    break;
-                case 27:
-                    this.cmbAlicuota.SelectedIndex = 1;
-                    break;
-                case 10:
-                    this.cmbAlicuota.SelectedIndex = 2;
-                    break;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -285,8 +321,6 @@ namespace SistemaContable
                 e.Handled = true;
             }
         }
-
-
 
     }
 

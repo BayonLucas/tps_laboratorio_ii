@@ -225,35 +225,40 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void GuardarComoJsonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(this.registroContable.Compras.Count>0 || this.registroContable.Ventas.Count > 0)
+            try
             {
-                string rutaVentas = Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Ventas.Json");
-                string rutaCompras = Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Compras.Json");
+                if(this.registroContable.Compras.Count>0 || this.registroContable.Ventas.Count > 0)
+                {
+                    string rutaVentas = Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Ventas.Json");
+                    string rutaCompras = Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Compras.Json");
 
-                foreach (Factura item in this.registroContable.Ventas)
-                {
-                    JsonSerial.SerializarJson<Factura>(rutaVentas, item);
-                }
-                File.Delete(rutaCompras);
-                foreach (Compra item in this.registroContable.Compras)
-                {
-                    JsonSerial.SerializarJson<Compra>(rutaCompras, item);
-                }
-                if (File.Exists(rutaVentas) && File.Exists(rutaCompras))
-                {
-                    MessageBox.Show("El guardado del archivo a Json se realizó con exito", "Guardar como Json", MessageBoxButtons.OK);
+                    foreach (Factura item in this.registroContable.Ventas)
+                    {
+                        JsonSerial.SerializarJson<Factura>(rutaVentas, item);
+                    }
+                    File.Delete(rutaCompras);
+                    foreach (Compra item in this.registroContable.Compras)
+                    {
+                        JsonSerial.SerializarJson<Compra>(rutaCompras, item);
+                    }
+                    if (File.Exists(rutaVentas) && File.Exists(rutaCompras))
+                    {
+                        MessageBox.Show("El guardado del archivo a Json se realizó con exito", "Guardar como Json", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error en el guardado del archivos a Json ", "Error", MessageBoxButtons.OK);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Error en el guardado del archivos a Json ", "Error", MessageBoxButtons.OK);
+                    MessageBox.Show("No se pueden generar archivos si no hay contenido en las listas correspondientes al usuario.", "Error");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No se pueden generar archivos si no hay contenido en las listas correspondientes al usuario.", "Error");
+                MessageBox.Show(ex.Message);
             }
-
-           
         }
 
         /// <summary>
@@ -263,31 +268,37 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void GuardarComoXmlToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.registroContable.Compras.Count > 0 || this.registroContable.Ventas.Count > 0)
+            try
             {
-                string rutaVentas = Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Ventas.xml");
-                string rutaCompras = Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Compras.xml");
-
-                XmlSerial.SerializarAXm<List<Factura>>(this.registroContable.Ventas, rutaVentas);
-
-                File.Delete(rutaCompras);
-
-                XmlSerial.SerializarAXm<List<Compra>>(this.registroContable.Compras, rutaCompras);
-
-                if (File.Exists(rutaVentas) && File.Exists(rutaCompras))
+                if (this.registroContable.Compras.Count > 0 || this.registroContable.Ventas.Count > 0)
                 {
-                    MessageBox.Show("El guardado del archivo a XML se realizó con exito", "Guardar como XML", MessageBoxButtons.OK);
+                    string rutaVentas = Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Ventas.xml");
+                    string rutaCompras = Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Compras.xml");
+
+                    XmlSerial.SerializarAXm<List<Factura>>(this.registroContable.Ventas, rutaVentas);
+
+                    File.Delete(rutaCompras);
+
+                    XmlSerial.SerializarAXm<List<Compra>>(this.registroContable.Compras, rutaCompras);
+
+                    if (File.Exists(rutaVentas) && File.Exists(rutaCompras))
+                    {
+                        MessageBox.Show("El guardado del archivo a XML se realizó con exito", "Guardar como XML", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error en el guardado del archivos a XML ", "Error", MessageBoxButtons.OK);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Error en el guardado del archivos a XML ", "Error", MessageBoxButtons.OK);
+                    MessageBox.Show("No se pueden generar archivos si no hay contenido en las listas correspondientes al usuario.", "Error");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No se pueden generar archivos si no hay contenido en las listas correspondientes al usuario.", "Error");
+                MessageBox.Show(ex.Message);
             }
-
         }
 
         /// <summary>
@@ -367,14 +378,21 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void siToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Estas 100% seguro?", "Última advertencia", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            try
             {
-                if (GestorBD.EliminarTablas(this.registroContable) && GestorBD.EliminarUsuario(this.registroContable))
+                if(MessageBox.Show("Estas 100% seguro?", "Última advertencia", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    this.EliminarListas(this.registroContable);
-                    MessageBox.Show("Se ha eliminado al usuario de la base de datos exitosamente. Se procederá a cerrar el programa. \n Gracias por elegirnos!.", "Despedida");
-                    this.Close();
+                    if (GestorBD.EliminarTablas(this.registroContable) && GestorBD.EliminarUsuario(this.registroContable))
+                    {
+                        this.EliminarListas(this.registroContable);
+                        MessageBox.Show("Se ha eliminado al usuario de la base de datos exitosamente. Se procederá a cerrar el programa. \n Gracias por elegirnos!.", "Despedida");
+                        this.Close();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

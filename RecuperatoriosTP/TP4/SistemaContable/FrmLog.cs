@@ -38,22 +38,29 @@ namespace SistemaContable
 
         private void Log_Load(object sender, EventArgs e)
         {
-            cmbSitFiscal.DataSource = Enum.GetValues(typeof(ESitFiscal));
-            this.usuarios = GestorBD.CargarListaUsuarios();
-            this.cmbUsuarios.DataSource = this.usuarios;
-            this.cmbUsuarios.SelectedIndex = -1;
-            this.cmbSitFiscal.SelectedIndex = -1;
-            this.cmbUsuarios.Enabled = true;
-            this.txtRazonSocial.Enabled = false;
-            this.txtCuit.Enabled = false;
-            this.cmbSitFiscal.Enabled = false;
-            if(this.usuarios.Count == 0)
+            try
             {
-                this.chbNuevoUsuario.Checked = true;
+                cmbSitFiscal.DataSource = Enum.GetValues(typeof(ESitFiscal));
+                this.usuarios = GestorBD.CargarListaUsuarios();
+                this.cmbUsuarios.DataSource = this.usuarios;
+                this.cmbUsuarios.SelectedIndex = -1;
+                this.cmbSitFiscal.SelectedIndex = -1;
+                this.cmbUsuarios.Enabled = true;
+                this.txtRazonSocial.Enabled = false;
+                this.txtCuit.Enabled = false;
+                this.cmbSitFiscal.Enabled = false;
+                if(this.usuarios.Count == 0)
+                {
+                    this.chbNuevoUsuario.Checked = true;
+                }
+                else
+                {
+                    this.chbNuevoUsuario.Checked = false;
+                }
             }
-            else
+                catch (Exception ex)
             {
-                this.chbNuevoUsuario.Checked = false;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -111,38 +118,45 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            if(txtRazonSocial.Text != string.Empty && txtCuit.Text !=string.Empty && cmbSitFiscal.SelectedItem is not null)
+            try
             {
-                Ente usuarioElegido;
-                if (this.chbNuevoUsuario.Checked == false)
+                if(txtRazonSocial.Text != string.Empty && txtCuit.Text !=string.Empty && cmbSitFiscal.SelectedItem is not null)
                 {
-                    usuarioElegido = (Ente)this.cmbUsuarios.SelectedItem;
-                    if(usuarioElegido is not null)
+                    Ente usuarioElegido;
+                    if (this.chbNuevoUsuario.Checked == false)
                     {
-                        this.registro = new RegistroContable(usuarioElegido, GestorBD.CargarListaVentas(usuarioElegido),
-                            GestorBD.CargarListaCompras(usuarioElegido));
+                        usuarioElegido = (Ente)this.cmbUsuarios.SelectedItem;
+                        if(usuarioElegido is not null)
+                        {
+                            this.registro = new RegistroContable(usuarioElegido, GestorBD.CargarListaVentas(usuarioElegido),
+                                GestorBD.CargarListaCompras(usuarioElegido));
+                        }
+                    }
+                    else
+                    {
+                        usuarioElegido = new Ente(this.txtRazonSocial.Text, this.txtCuit.Text, (ESitFiscal)cmbSitFiscal.SelectedItem);
+                        if(usuarioElegido is not null)
+                        {
+                            GestorBD.GenerarUsuario(usuarioElegido);
+                            GestorBD.GenerarTablaVentas(usuarioElegido);
+                            GestorBD.GenerarTablaCompras(usuarioElegido);
+                            this.registro = new RegistroContable(usuarioElegido, GestorBD.CargarListaVentas(usuarioElegido),
+                                GestorBD.CargarListaCompras(usuarioElegido));
+                        }
+                    }
+                    if (this.registro is not null)
+                    {
+                        this.Close();
                     }
                 }
                 else
                 {
-                    usuarioElegido = new Ente(this.txtRazonSocial.Text, this.txtCuit.Text, (ESitFiscal)cmbSitFiscal.SelectedItem);
-                    if(usuarioElegido is not null)
-                    {
-                        GestorBD.GenerarUsuario(usuarioElegido);
-                        GestorBD.GenerarTablaVentas(usuarioElegido);
-                        GestorBD.GenerarTablaCompras(usuarioElegido);
-                        this.registro = new RegistroContable(usuarioElegido, GestorBD.CargarListaVentas(usuarioElegido),
-                            GestorBD.CargarListaCompras(usuarioElegido));
-                    }
-                }
-                if (this.registro is not null)
-                {
-                    this.Close();
+                    lblError.Visible = true;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                lblError.Visible = true;
+                MessageBox.Show(ex.Message);
             }
         }
 

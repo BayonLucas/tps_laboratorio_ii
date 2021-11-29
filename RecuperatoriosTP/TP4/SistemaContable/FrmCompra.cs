@@ -112,18 +112,25 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            if (ValidarDatosIngresados())
+            try
             {
-                Compra compra = new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
-                    this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
-                    this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue);
-                this.registro += compra;
-                GestorBD.CargarCompra(compra);
-                this.Refrescar();
+                if (ValidarDatosIngresados())
+                {
+                    Compra compra = new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
+                        this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
+                        this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue);
+                    this.registro += compra;
+                    GestorBD.CargarCompra(compra);
+                    this.Refrescar();
+                }
+                else
+                {
+                    this.lblEstadoBoton.Visible = true;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                this.lblEstadoBoton.Visible = true;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -134,29 +141,37 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if(ValidarDatosIngresados())
+            try
             {
-                foreach (Compra item in registro.Compras)
+
+                if(ValidarDatosIngresados())
                 {
-                    if (item == (Compra)lstListaCompras.SelectedItem)
+                    foreach (Compra item in registro.Compras)
                     {
-                        if (MessageBox.Show("Desea modificar los datos de esta compra?", "Modificar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        if (item == (Compra)lstListaCompras.SelectedItem)
                         {
-                            Compra compra = new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
-                            this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
-                            this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue);
-                            this.registro += compra;
-                            GestorBD.CargarCompra(compra);
-                            registro -= item;
-                            GestorBD.EliminarCompra(item);
-                            this.Refrescar();
-                            break;
+                            if (MessageBox.Show("Desea modificar los datos de esta compra?", "Modificar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            {
+                                Compra compra = new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
+                                this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
+                                this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue);
+                                this.registro += compra;
+                                GestorBD.CargarCompra(compra);
+                                registro -= item;
+                                GestorBD.EliminarCompra(item);
+                                this.Refrescar();
+                                break;
+                            }
                         }
                     }
                 }
+                {
+                    this.lblEstadoBoton.Visible = true;
+                }
             }
+            catch (Exception ex)
             {
-                this.lblEstadoBoton.Visible = true;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -167,18 +182,25 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            foreach(Compra item in registro.Compras)
+            try
             {
-                if(item == (Compra)lstListaCompras.SelectedItem)
+                foreach(Compra item in registro.Compras)
                 {
-                    if(MessageBox.Show("Desea eliminar esta compra?", "Eliminar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if(item == (Compra)lstListaCompras.SelectedItem)
                     {
-                        registro -= item;
-                        GestorBD.EliminarCompra(item);
-                        this.Refrescar();
-                        break;
+                        if(MessageBox.Show("Desea eliminar esta compra?", "Eliminar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            registro -= item;
+                            GestorBD.EliminarCompra(item);
+                            this.Refrescar();
+                            break;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -188,37 +210,44 @@ namespace SistemaContable
         /// <param name="c1"></param>
         public void MostrarDatos(Compra c1)
         {
-            this.dtpFecha.Value = c1.Fecha;
-            this.txtPtoVenta.Text = c1.PtoVenta;
-            this.txtNroComprobante.Text = c1.NroComprobante;
-            this.txtEmisor.Text = c1.Ente.RazonSocial;
-            this.txtCuitEmisor.Text = c1.Ente.Cuit;
-            switch(c1.Ente.SitFiscal)
+            try
             {
-                case ESitFiscal.Responsable_Inscripto:
-                    this.cmbSitFiscal.SelectedItem = ESitFiscal.Responsable_Inscripto;
-                    break;
-                case ESitFiscal.Monotributista:
-                    this.cmbSitFiscal.SelectedItem = ESitFiscal.Monotributista;
-                    break;
-                case ESitFiscal.Consumidor_Final:
-                    this.cmbSitFiscal.SelectedItem = ESitFiscal.Consumidor_Final;
-                    break;
+                this.dtpFecha.Value = c1.Fecha;
+                this.txtPtoVenta.Text = c1.PtoVenta;
+                this.txtNroComprobante.Text = c1.NroComprobante;
+                this.txtEmisor.Text = c1.Ente.RazonSocial;
+                this.txtCuitEmisor.Text = c1.Ente.Cuit;
+                switch(c1.Ente.SitFiscal)
+                {
+                    case ESitFiscal.Responsable_Inscripto:
+                        this.cmbSitFiscal.SelectedItem = ESitFiscal.Responsable_Inscripto;
+                        break;
+                    case ESitFiscal.Monotributista:
+                        this.cmbSitFiscal.SelectedItem = ESitFiscal.Monotributista;
+                        break;
+                    case ESitFiscal.Consumidor_Final:
+                        this.cmbSitFiscal.SelectedItem = ESitFiscal.Consumidor_Final;
+                        break;
+                }
+                this.txtImporte.Text = c1.Importe.ToString();
+                switch ((int)c1.Alicuota)
+                {
+                    case 21:
+                        this.cmbAlicuota.SelectedIndex = 0;
+                        break;
+                    case 27:
+                        this.cmbAlicuota.SelectedIndex = 1;
+                        break;
+                    case 10:
+                        this.cmbAlicuota.SelectedIndex = 2;
+                        break;
+                }
+                this.cmbConcepto.SelectedItem = c1.Concepto;
             }
-            this.txtImporte.Text = c1.Importe.ToString();
-            switch ((int)c1.Alicuota)
+            catch(Exception ex)
             {
-                case 21:
-                    this.cmbAlicuota.SelectedIndex = 0;
-                    break;
-                case 27:
-                    this.cmbAlicuota.SelectedIndex = 1;
-                    break;
-                case 10:
-                    this.cmbAlicuota.SelectedIndex = 2;
-                    break;
+                MessageBox.Show(ex.Message);
             }
-            this.cmbConcepto.SelectedItem = c1.Concepto;
         }
         
         /// <summary>
@@ -226,11 +255,18 @@ namespace SistemaContable
         /// </summary>
         public void CalculoTotal()
         {
-            float auxIVA;
-            float auxTotal;
-            auxIVA = float.Parse(txtImporte.Text) * float.Parse(cmbAlicuota.Text) / 100;
-            auxTotal = float.Parse(txtImporte.Text) + auxIVA;
-            this.txtTotal.Text = auxTotal.ToString(); 
+            try
+            {
+                float auxIVA;
+                float auxTotal;
+                auxIVA = float.Parse(txtImporte.Text) * float.Parse(cmbAlicuota.Text) / 100;
+                auxTotal = float.Parse(txtImporte.Text) + auxIVA;
+                this.txtTotal.Text = auxTotal.ToString(); 
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
        
         /// <summary>
