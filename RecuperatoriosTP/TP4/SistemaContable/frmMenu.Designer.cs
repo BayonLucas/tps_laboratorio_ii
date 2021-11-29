@@ -41,6 +41,12 @@ namespace SistemaContable
             this.emitirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.anularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smiInformes = new System.Windows.Forms.ToolStripMenuItem();
+            this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.elminarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estasSeguroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.muySeguroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.siToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.noToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +57,8 @@ namespace SistemaContable
             this.smiArchivo,
             this.smiCompra,
             this.smiVenta,
-            this.smiInformes});
+            this.smiInformes,
+            this.usuarioToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1216, 28);
@@ -142,6 +149,52 @@ namespace SistemaContable
             this.smiInformes.Text = "Informes";
             this.smiInformes.Click += new System.EventHandler(this.smiInformes_Click);
             // 
+            // usuarioToolStripMenuItem
+            // 
+            this.usuarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.elminarUsuarioToolStripMenuItem});
+            this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
+            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.usuarioToolStripMenuItem.Text = "Usuario";
+            // 
+            // elminarUsuarioToolStripMenuItem
+            // 
+            this.elminarUsuarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.estasSeguroToolStripMenuItem});
+            this.elminarUsuarioToolStripMenuItem.Name = "elminarUsuarioToolStripMenuItem";
+            this.elminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.elminarUsuarioToolStripMenuItem.Text = "Elminar Usuario";
+            // 
+            // estasSeguroToolStripMenuItem
+            // 
+            this.estasSeguroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.muySeguroToolStripMenuItem});
+            this.estasSeguroToolStripMenuItem.Name = "estasSeguroToolStripMenuItem";
+            this.estasSeguroToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.estasSeguroToolStripMenuItem.Text = "Estas seguro?";
+            // 
+            // muySeguroToolStripMenuItem
+            // 
+            this.muySeguroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.siToolStripMenuItem,
+            this.noToolStripMenuItem});
+            this.muySeguroToolStripMenuItem.Name = "muySeguroToolStripMenuItem";
+            this.muySeguroToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.muySeguroToolStripMenuItem.Text = "Muy seguro?";
+            // 
+            // siToolStripMenuItem
+            // 
+            this.siToolStripMenuItem.Name = "siToolStripMenuItem";
+            this.siToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.siToolStripMenuItem.Text = "Si";
+            // 
+            // noToolStripMenuItem
+            // 
+            this.noToolStripMenuItem.Name = "noToolStripMenuItem";
+            this.noToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.noToolStripMenuItem.Text = "No";
+            this.noToolStripMenuItem.Click += new System.EventHandler(this.noToolStripMenuItem_Click);
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -179,5 +232,11 @@ namespace SistemaContable
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem emitirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem anularToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem elminarUsuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estasSeguroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem muySeguroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem siToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem noToolStripMenuItem;
     }
 }

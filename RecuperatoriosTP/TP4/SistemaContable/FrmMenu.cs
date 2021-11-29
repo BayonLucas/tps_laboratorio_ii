@@ -226,5 +226,23 @@ namespace SistemaContable
             return null;
         }
 
+
+        ///Eliminar usuario
+
+
+
+
+
+
+        public void EliminarListas(RegistroContable usuario)
+        {
+            usuario.Ventas.Clear();
+            usuario.Compras.Clear();
+        }
+
+        private void noToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Menos mal que pregunté", "Borrar Usuario - Negado", MessageBoxButtons.OK);
+        }
     }
 }

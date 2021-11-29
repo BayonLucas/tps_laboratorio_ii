@@ -29,7 +29,9 @@ namespace SistemaContable
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmInformes));
             this.gpbCreditoDebitoFiscal = new System.Windows.Forms.GroupBox();
+            this.lblAvisoEmergente = new System.Windows.Forms.Label();
             this.lvlInforme = new System.Windows.Forms.Label();
             this.lblTotalSitFiscal = new System.Windows.Forms.Label();
             this.lblDebitoFsical = new System.Windows.Forms.Label();
@@ -39,11 +41,11 @@ namespace SistemaContable
             this.nudAño = new System.Windows.Forms.NumericUpDown();
             this.cmbMes = new System.Windows.Forms.ComboBox();
             this.chbMes = new System.Windows.Forms.CheckBox();
-            this.btnInformarAFIP = new System.Windows.Forms.Button();
+            this.picGif = new System.Windows.Forms.PictureBox();
             this.gpbGastos = new System.Windows.Forms.GroupBox();
+            this.lstComprasPorConcepto = new System.Windows.Forms.ListBox();
             this.cmbConcepto = new System.Windows.Forms.ComboBox();
             this.lblVarios = new System.Windows.Forms.Label();
-            this.rtbComprasConceptos = new System.Windows.Forms.RichTextBox();
             this.prbVarios = new System.Windows.Forms.ProgressBar();
             this.prbBienDeConsumo = new System.Windows.Forms.ProgressBar();
             this.prbServicios = new System.Windows.Forms.ProgressBar();
@@ -51,15 +53,15 @@ namespace SistemaContable
             this.lblBienDeConsumo = new System.Windows.Forms.Label();
             this.lblServicios = new System.Windows.Forms.Label();
             this.lblBienDeUso = new System.Windows.Forms.Label();
-            this.picGif = new System.Windows.Forms.PictureBox();
             this.gpbCreditoDebitoFiscal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAño)).BeginInit();
-            this.gpbGastos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picGif)).BeginInit();
+            this.gpbGastos.SuspendLayout();
             this.SuspendLayout();
             // 
             // gpbCreditoDebitoFiscal
             // 
+            this.gpbCreditoDebitoFiscal.Controls.Add(this.lblAvisoEmergente);
             this.gpbCreditoDebitoFiscal.Controls.Add(this.lvlInforme);
             this.gpbCreditoDebitoFiscal.Controls.Add(this.lblTotalSitFiscal);
             this.gpbCreditoDebitoFiscal.Controls.Add(this.lblDebitoFsical);
@@ -71,47 +73,62 @@ namespace SistemaContable
             this.gpbCreditoDebitoFiscal.Controls.Add(this.chbMes);
             this.gpbCreditoDebitoFiscal.Location = new System.Drawing.Point(12, 12);
             this.gpbCreditoDebitoFiscal.Name = "gpbCreditoDebitoFiscal";
-            this.gpbCreditoDebitoFiscal.Size = new System.Drawing.Size(933, 220);
+            this.gpbCreditoDebitoFiscal.Size = new System.Drawing.Size(1192, 220);
             this.gpbCreditoDebitoFiscal.TabIndex = 0;
             this.gpbCreditoDebitoFiscal.TabStop = false;
             this.gpbCreditoDebitoFiscal.Text = "Crédito/Débito Fiscal";
             // 
+            // lblAvisoEmergente
+            // 
+            this.lblAvisoEmergente.AutoSize = true;
+            this.lblAvisoEmergente.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lblAvisoEmergente.ForeColor = System.Drawing.Color.Red;
+            this.lblAvisoEmergente.Location = new System.Drawing.Point(648, 183);
+            this.lblAvisoEmergente.Name = "lblAvisoEmergente";
+            this.lblAvisoEmergente.Size = new System.Drawing.Size(232, 20);
+            this.lblAvisoEmergente.TabIndex = 11;
+            this.lblAvisoEmergente.Text = "*Debe regularizar su situación*";
+            this.lblAvisoEmergente.Visible = false;
+            // 
             // lvlInforme
             // 
             this.lvlInforme.AutoSize = true;
-            this.lvlInforme.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lvlInforme.Location = new System.Drawing.Point(320, 30);
+            this.lvlInforme.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lvlInforme.Location = new System.Drawing.Point(404, 22);
             this.lvlInforme.Name = "lvlInforme";
-            this.lvlInforme.Size = new System.Drawing.Size(70, 20);
+            this.lvlInforme.Size = new System.Drawing.Size(91, 28);
             this.lvlInforme.TabIndex = 10;
             this.lvlInforme.Text = "Informe:";
             // 
             // lblTotalSitFiscal
             // 
             this.lblTotalSitFiscal.AutoSize = true;
-            this.lblTotalSitFiscal.Location = new System.Drawing.Point(320, 158);
+            this.lblTotalSitFiscal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTotalSitFiscal.Location = new System.Drawing.Point(439, 137);
             this.lblTotalSitFiscal.Name = "lblTotalSitFiscal";
-            this.lblTotalSitFiscal.Size = new System.Drawing.Size(103, 20);
+            this.lblTotalSitFiscal.Size = new System.Drawing.Size(226, 23);
             this.lblTotalSitFiscal.TabIndex = 9;
-            this.lblTotalSitFiscal.Text = "Total Sit Fiscal";
+            this.lblTotalSitFiscal.Text = "El total acumulado es de: $";
             // 
             // lblDebitoFsical
             // 
             this.lblDebitoFsical.AutoSize = true;
-            this.lblDebitoFsical.Location = new System.Drawing.Point(320, 106);
+            this.lblDebitoFsical.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDebitoFsical.Location = new System.Drawing.Point(439, 93);
             this.lblDebitoFsical.Name = "lblDebitoFsical";
-            this.lblDebitoFsical.Size = new System.Drawing.Size(95, 20);
+            this.lblDebitoFsical.Size = new System.Drawing.Size(543, 25);
             this.lblDebitoFsical.TabIndex = 8;
-            this.lblDebitoFsical.Text = "Debito Fiscal";
+            this.lblDebitoFsical.Text = "El débito fiscal acumulado en el período seleccionado es de: $0";
             // 
             // lblCreditoFiscal
             // 
             this.lblCreditoFiscal.AutoSize = true;
-            this.lblCreditoFiscal.Location = new System.Drawing.Point(320, 59);
+            this.lblCreditoFiscal.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblCreditoFiscal.Location = new System.Drawing.Point(439, 59);
             this.lblCreditoFiscal.Name = "lblCreditoFiscal";
-            this.lblCreditoFiscal.Size = new System.Drawing.Size(98, 20);
+            this.lblCreditoFiscal.Size = new System.Drawing.Size(548, 25);
             this.lblCreditoFiscal.TabIndex = 7;
-            this.lblCreditoFiscal.Text = "Credito Fiscal";
+            this.lblCreditoFiscal.Text = "El crédito fiscal acumulado en el período seleccionado es de: $0";
             // 
             // lblAño
             // 
@@ -133,7 +150,6 @@ namespace SistemaContable
             // 
             // nudAño
             // 
-            this.nudAño.Enabled = false;
             this.nudAño.Location = new System.Drawing.Point(31, 137);
             this.nudAño.Name = "nudAño";
             this.nudAño.Size = new System.Drawing.Size(209, 27);
@@ -162,6 +178,7 @@ namespace SistemaContable
             this.cmbMes.Name = "cmbMes";
             this.cmbMes.Size = new System.Drawing.Size(209, 28);
             this.cmbMes.TabIndex = 2;
+            this.cmbMes.SelectedValueChanged += new System.EventHandler(this.cmbMes_SelectedValueChanged);
             // 
             // chbMes
             // 
@@ -171,21 +188,23 @@ namespace SistemaContable
             this.chbMes.Size = new System.Drawing.Size(18, 17);
             this.chbMes.TabIndex = 0;
             this.chbMes.UseVisualStyleBackColor = true;
+            this.chbMes.CheckedChanged += new System.EventHandler(this.chbMes_CheckedChanged);
             // 
-            // btnInformarAFIP
+            // picGif
             // 
-            this.btnInformarAFIP.Location = new System.Drawing.Point(951, 21);
-            this.btnInformarAFIP.Name = "btnInformarAFIP";
-            this.btnInformarAFIP.Size = new System.Drawing.Size(253, 78);
-            this.btnInformarAFIP.TabIndex = 1;
-            this.btnInformarAFIP.Text = "Informar AFIP";
-            this.btnInformarAFIP.UseVisualStyleBackColor = true;
+            this.picGif.Image = ((System.Drawing.Image)(resources.GetObject("picGif.Image")));
+            this.picGif.Location = new System.Drawing.Point(12, 12);
+            this.picGif.Name = "picGif";
+            this.picGif.Size = new System.Drawing.Size(1192, 559);
+            this.picGif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picGif.TabIndex = 4;
+            this.picGif.TabStop = false;
             // 
             // gpbGastos
             // 
+            this.gpbGastos.Controls.Add(this.lstComprasPorConcepto);
             this.gpbGastos.Controls.Add(this.cmbConcepto);
             this.gpbGastos.Controls.Add(this.lblVarios);
-            this.gpbGastos.Controls.Add(this.rtbComprasConceptos);
             this.gpbGastos.Controls.Add(this.prbVarios);
             this.gpbGastos.Controls.Add(this.prbBienDeConsumo);
             this.gpbGastos.Controls.Add(this.prbServicios);
@@ -195,10 +214,20 @@ namespace SistemaContable
             this.gpbGastos.Controls.Add(this.lblBienDeUso);
             this.gpbGastos.Location = new System.Drawing.Point(12, 238);
             this.gpbGastos.Name = "gpbGastos";
-            this.gpbGastos.Size = new System.Drawing.Size(933, 333);
+            this.gpbGastos.Size = new System.Drawing.Size(1192, 333);
             this.gpbGastos.TabIndex = 2;
             this.gpbGastos.TabStop = false;
             this.gpbGastos.Text = "Informe de Gastos Anuales por conceptos ";
+            // 
+            // lstComprasPorConcepto
+            // 
+            this.lstComprasPorConcepto.Enabled = false;
+            this.lstComprasPorConcepto.FormattingEnabled = true;
+            this.lstComprasPorConcepto.ItemHeight = 20;
+            this.lstComprasPorConcepto.Location = new System.Drawing.Point(275, 63);
+            this.lstComprasPorConcepto.Name = "lstComprasPorConcepto";
+            this.lstComprasPorConcepto.Size = new System.Drawing.Size(911, 244);
+            this.lstComprasPorConcepto.TabIndex = 8;
             // 
             // cmbConcepto
             // 
@@ -207,6 +236,7 @@ namespace SistemaContable
             this.cmbConcepto.Name = "cmbConcepto";
             this.cmbConcepto.Size = new System.Drawing.Size(217, 28);
             this.cmbConcepto.TabIndex = 4;
+            this.cmbConcepto.SelectedIndexChanged += new System.EventHandler(this.cmbConcepto_SelectedIndexChanged);
             // 
             // lblVarios
             // 
@@ -216,15 +246,6 @@ namespace SistemaContable
             this.lblVarios.Size = new System.Drawing.Size(49, 20);
             this.lblVarios.TabIndex = 7;
             this.lblVarios.Text = "Varios";
-            // 
-            // rtbComprasConceptos
-            // 
-            this.rtbComprasConceptos.Enabled = false;
-            this.rtbComprasConceptos.Location = new System.Drawing.Point(281, 57);
-            this.rtbComprasConceptos.Name = "rtbComprasConceptos";
-            this.rtbComprasConceptos.Size = new System.Drawing.Size(646, 270);
-            this.rtbComprasConceptos.TabIndex = 3;
-            this.rtbComprasConceptos.Text = "";
             // 
             // prbVarios
             // 
@@ -281,14 +302,6 @@ namespace SistemaContable
             this.lblBienDeUso.TabIndex = 0;
             this.lblBienDeUso.Text = "Bien de Uso";
             // 
-            // picGif
-            // 
-            this.picGif.Location = new System.Drawing.Point(951, 249);
-            this.picGif.Name = "picGif";
-            this.picGif.Size = new System.Drawing.Size(253, 322);
-            this.picGif.TabIndex = 3;
-            this.picGif.TabStop = false;
-            // 
             // FrmInformes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -296,21 +309,22 @@ namespace SistemaContable
             this.ClientSize = new System.Drawing.Size(1216, 583);
             this.Controls.Add(this.picGif);
             this.Controls.Add(this.gpbGastos);
-            this.Controls.Add(this.btnInformarAFIP);
             this.Controls.Add(this.gpbCreditoDebitoFiscal);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmInformes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Informes y Estadisticas";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmInformes_FormClosing);
             this.Load += new System.EventHandler(this.FrmInformes_Load);
             this.gpbCreditoDebitoFiscal.ResumeLayout(false);
             this.gpbCreditoDebitoFiscal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAño)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picGif)).EndInit();
             this.gpbGastos.ResumeLayout(false);
             this.gpbGastos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picGif)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -326,7 +340,6 @@ namespace SistemaContable
         private System.Windows.Forms.Label lblTotalSitFiscal;
         private System.Windows.Forms.Label lblDebitoFsical;
         private System.Windows.Forms.Label lblCreditoFiscal;
-        private System.Windows.Forms.Button btnInformarAFIP;
         private System.Windows.Forms.GroupBox gpbGastos;
         private System.Windows.Forms.Label lblBienDeConsumo;
         private System.Windows.Forms.Label lblServicios;
@@ -337,8 +350,9 @@ namespace SistemaContable
         private System.Windows.Forms.ProgressBar prbServicios;
         private System.Windows.Forms.ProgressBar prbBienDeUso;
         private System.Windows.Forms.Label lvlInforme;
-        private System.Windows.Forms.RichTextBox rtbComprasConceptos;
         private System.Windows.Forms.ComboBox cmbConcepto;
+        private System.Windows.Forms.ListBox lstComprasPorConcepto;
+        private System.Windows.Forms.Label lblAvisoEmergente;
         private System.Windows.Forms.PictureBox picGif;
     }
 }

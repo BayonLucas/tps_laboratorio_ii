@@ -23,7 +23,6 @@ namespace Archivos
             command = new SqlCommand();
             command.Connection = conexion;
         }
-
         public static bool ProbarConexion()
         {
             bool rta = true;
@@ -46,7 +45,6 @@ namespace Archivos
 
             return rta;
         }
-
         public static List<Ente> CargarListaUsuarios()
         {
             List<Ente> listaUsuarios = new List<Ente>();
@@ -230,21 +228,24 @@ namespace Archivos
 
             return listaVentas;
         }
-        
-        public static List<Compra> BuscarComprasSegun(Ente usuario, string concepto, decimal anio, string mes)
+        public static List<Compra> BuscarComprasSegun(Ente usuario, EConcepto concepto, decimal anio, string mes)
         {
             List<Compra> listaCompras = new List<Compra>();
             try
             {
-                if(mes == string.Empty)
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@concepto", concepto);
+                command.Parameters.AddWithValue("@anio", anio);
+                command.Parameters.AddWithValue("@mes", mes);
+                if (mes == string.Empty)
                 {
                     command.CommandText = $"SELECT RAZONSOCIALEMISOR, CUITEMISOR, sitFiscalEmisor, ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, CONCEPTO " +
-                        $"FROM {usuario.RazonSocial}Compras WHERE concepto = {concepto} AND YEAR(FECHA) = {anio}";
+                        $"FROM {usuario.RazonSocial}Compras WHERE concepto = @concepto AND YEAR(FECHA) = @anio";
                 }
                 else
                 {
                     command.CommandText = $"SELECT RAZONSOCIALEMISOR, CUITEMISOR, sitFiscalEmisor, ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, CONCEPTO " +
-                        $"FROM {usuario.RazonSocial}Compras WHERE concepto = {concepto} AND YEAR(FECHA) = {anio} AND MONTH(mes) = {mes}";
+                        $"FROM {usuario.RazonSocial}Compras WHERE concepto = @concepto AND YEAR(FECHA) = @anio AND MONTH(FECHA) = @mes";
                 }
                 conexion.Open();
 
@@ -280,13 +281,57 @@ namespace Archivos
 
             return listaCompras;
         }
-        
+        public static List<Factura> BuscarVentasSegun(Ente usuario, decimal anio, string mes)
+        {
+            List<Factura> listaVentas = new List<Factura>();
+            try
+            {
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@anio", anio);
+                command.Parameters.AddWithValue("@mes", mes);
+                if (mes == string.Empty)
+                {
+                    command.CommandText = $"SELECT ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, RAZONSOCIALRECEPTOR, CUITRECEPTOR, SITFISCALRECEPTOR, ANULADO " +
+                        $"FROM {usuario.RazonSocial}Ventas WHERE YEAR(FECHA) = @anio";
+                }
+                else
+                {
+                    command.CommandText = $"SELECT ptoVenta, NROCOMPROBANTE, FECHA, IMPORTE, ALICUOTA, RAZONSOCIALRECEPTOR, CUITRECEPTOR, SITFISCALRECEPTOR, ANULADO " +
+                        $"FROM {usuario.RazonSocial}Ventas WHERE YEAR(FECHA) = @anio AND MONTH(FECHA) = @mes";
+                }
+                conexion.Open();
 
+                SqlDataReader reader = command.ExecuteReader();
 
+                while (reader.Read())
+                {
+                    string auxPtoVenta = reader["ptoVenta"].ToString();
+                    string auxNroComprobante = reader["NROCOMPROBANTE"].ToString();
+                    DateTime auxFecha = DateTime.Parse(reader["FECHA"].ToString());
+                    float auxImporte = float.Parse(reader["IMPORTE"].ToString());
+                    float auxAlicuota = float.Parse(reader["ALICUOTA"].ToString());
+                    Ente auxEnteReceptor = new Ente(reader["RAZONSOCIALRECEPTOR"].ToString(), reader["CUITRECEPTOR"].ToString(),
+                        (ESitFiscal)Enum.Parse(typeof(ESitFiscal), reader["SITFISCALRECEPTOR"].ToString()));
+                    bool auxAnulado = bool.Parse(reader["ANULADO"].ToString());
 
+                    Factura auxFactura = new Factura(usuario, auxPtoVenta, auxNroComprobante, auxFecha, auxImporte, auxAlicuota, auxEnteReceptor, auxAnulado);
+                    if (!(auxFactura is null))
+                    {
+                        listaVentas.Add(auxFactura);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
+            }
+            finally
+            {
+                conexion.Close();
+            }
 
-
-
+            return listaVentas;
+        }
         public static bool CargarVenta(Factura f)
         {
             bool ret = false;
@@ -348,7 +393,6 @@ namespace Archivos
             }
             return ret;
         }
-
         public static bool CargarCompra(Compra c)
         {
             bool ret = false;
@@ -422,7 +466,40 @@ namespace Archivos
             return ret;
         }
     
-    
+        public static void EliminarTablas(RegistroContable usuario)
+        {
+            try
+            {
+                command.CommandText = $"DROP TABLE IF EXISTS dbo.{usuario.Usuario.RazonSocial}Compras";
+                command.ExecuteNonQuery();
+                command.CommandText = $"DROP TABLE IF EXISTS dbo.{usuario.Usuario.RazonSocial}Ventas";
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+        public static void EliminarUsuario(RegistroContable usuario)
+        {
+            try 
+            { 
+                command.CommandText = $"DELETE FROM dbo.usuario WHERE cuit = {usuario.Usuario.Cuit}";
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
     
     
     
