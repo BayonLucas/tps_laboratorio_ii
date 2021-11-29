@@ -108,6 +108,11 @@ namespace SistemaContable
 
         #region Botones
 
+        /// <summary>
+        /// Luego de validaciones, genera una compra ya la carga a Lista de compras y a la base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCargar_Click(object sender, EventArgs e)
         {
             if (ValidarDatosIngresados())
@@ -115,7 +120,7 @@ namespace SistemaContable
                 Compra compra = new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
                     this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
                     this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue);
-                this.registro.Compras.Add(compra);
+                this.registro += compra;
                 GestorBD.CargarCompra(compra);
                 this.Refrescar();
             }
@@ -137,10 +142,9 @@ namespace SistemaContable
                         Compra compra = new Compra(new Ente(this.txtEmisor.Text, this.txtCuitEmisor.Text, (ESitFiscal)this.cmbSitFiscal.SelectedValue),
                         this.txtPtoVenta.Text, this.txtNroComprobante.Text, this.dtpFecha.Value, float.Parse(this.txtImporte.Text), float.Parse(this.cmbAlicuota.Text),
                         this.registro.Usuario, (EConcepto)this.cmbConcepto.SelectedValue);
-                        this.registro.Compras.Add(compra);
+                        this.registro += compra;
                         GestorBD.CargarCompra(compra);
                         registro -= item;
-                        //Acá debo eliminar el item
                         GestorBD.EliminarCompra(item);
                         this.Refrescar();
                         break;
