@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Factura xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PtoVenta>00099</PtoVenta>
+  <NroComprobante>00000003</NroComprobante>
+  <Fecha>2021-12-03T00:00:00-03:00</Fecha>
+  <Ente>
+    <RazonSocial>ConsolaTester</RazonSocial>
+    <Cuit>33789654123</Cuit>
+    <SitFiscal>Responsable_Inscripto</SitFiscal>
+  </Ente>
+  <Anulado>false</Anulado>
+  <Alicuota>21</Alicuota>
+  <Importe>35000</Importe>
+  <EnteReceptor>
+    <RazonSocial>Aldanas</RazonSocial>
+    <Cuit>99999999999</Cuit>
+    <SitFiscal>Consumidor_Final</SitFiscal>
+  </EnteReceptor>
+</Factura>

@@ -175,6 +175,7 @@ namespace SistemaContable
             this.cmbSitFiscal.Name = "cmbSitFiscal";
             this.cmbSitFiscal.Size = new System.Drawing.Size(151, 28);
             this.cmbSitFiscal.TabIndex = 6;
+            this.cmbSitFiscal.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.Cmbformat);
             // 
             // gpbDatosCompra
             // 
@@ -203,6 +204,7 @@ namespace SistemaContable
             this.cmbConcepto.Name = "cmbConcepto";
             this.cmbConcepto.Size = new System.Drawing.Size(151, 28);
             this.cmbConcepto.TabIndex = 9;
+            this.cmbConcepto.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.Cmbformat);
             // 
             // txtTotal
             // 

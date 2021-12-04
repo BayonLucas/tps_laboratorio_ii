@@ -19,7 +19,7 @@ namespace Entidades
 
         public RegistroContable() : this(null)
         { }
-        public RegistroContable(Ente usuario) : this(usuario, null, null)
+        public RegistroContable(Ente usuario) : this(usuario, new List<Factura>(), new List<Compra>())
         { }
         public RegistroContable(Ente usuario, List<Factura> ventas, List<Compra> compras)
         {
@@ -158,7 +158,13 @@ namespace Entidades
             {
                 if (rc == f)
                 {
-                    rc.Ventas.Remove(f);
+                    foreach(Factura item in rc.Ventas)
+                    {
+                        if(item == f)
+                        {
+                            item.Anulado = true;
+                        }
+                    }
                 }
             }
             return rc;

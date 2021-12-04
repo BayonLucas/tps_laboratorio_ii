@@ -357,6 +357,14 @@ namespace SistemaContable
             }
         }
 
-
+        /// <summary>
+        /// Reemplaza el "_" por un espacio vacio para una vista mas agradable del item del ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cmbformat(object sender, ListControlConvertEventArgs e)
+        {
+            e.Value = e.ListItem.ToString().Replace("_", " ");
+        }
     }
 }

@@ -94,11 +94,13 @@ namespace SistemaContable
             // 
             // cmbSitFiscal
             // 
+            this.cmbSitFiscal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSitFiscal.FormattingEnabled = true;
             this.cmbSitFiscal.Location = new System.Drawing.Point(130, 196);
             this.cmbSitFiscal.Name = "cmbSitFiscal";
             this.cmbSitFiscal.Size = new System.Drawing.Size(277, 28);
             this.cmbSitFiscal.TabIndex = 5;
+            this.cmbSitFiscal.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.Cmbformat);
             // 
             // btnIngresar
             // 

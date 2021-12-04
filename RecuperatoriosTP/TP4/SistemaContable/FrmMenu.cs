@@ -275,11 +275,11 @@ namespace SistemaContable
                     string rutaVentas = Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Ventas.xml");
                     string rutaCompras = Ruta.GenerarRuta($"{this.registroContable.Usuario.RazonSocial}Compras.xml");
 
-                    XmlSerial.SerializarAXm<List<Factura>>(this.registroContable.Ventas, rutaVentas);
+                    XmlSerial.SerializarXml<List<Factura>>(this.registroContable.Ventas, rutaVentas);
 
                     File.Delete(rutaCompras);
 
-                    XmlSerial.SerializarAXm<List<Compra>>(this.registroContable.Compras, rutaCompras);
+                    XmlSerial.SerializarXml<List<Compra>>(this.registroContable.Compras, rutaCompras);
 
                     if (File.Exists(rutaVentas) && File.Exists(rutaCompras))
                     {

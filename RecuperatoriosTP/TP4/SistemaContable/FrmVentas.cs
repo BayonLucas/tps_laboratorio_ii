@@ -160,17 +160,25 @@ namespace SistemaContable
             this.txtCuitReceptor.Text = string.Empty;
             this.txtImporte.Text = string.Empty;
             this.txtPtoVenta.Text = "99";
-            this.txtNroComprobante.Text = (UltimoNroComprobante(this.registroContable.Ventas)+1).ToString();
+            this.txtNroComprobante.Text = (Factura.UltimoNroComprobante(this.registroContable.Ventas)+1).ToString();
             this.txtTotal.Text = string.Empty;
             this.cmbAlicuota.SelectedIndex = -1;
             this.cmbSitFiscalReceptor.SelectedIndex = -1;
             this.lstListaVentas.DataSource = null;
-            this.lstListaVentas.DataSource = this.registroContable.Ventas;
+            if (this.GetOption == "Anular")
+            {
+                this.lstListaVentas.DataSource = this.registroContable.Ventas.FindAll(delegate(Factura f){ return f.Anulado == false; });
+            }
+            else
+            {
+                this.lstListaVentas.DataSource = this.registroContable.Ventas;
+            }
+            //this.lstListaVentas.DataSource = this.registroContable.Ventas;
             this.lblError.Visible = false;
             this.dtpFecha.Value = DateTime.Today;
-            if(this.GetOption == "Modificar")
+            if(this.GetOption == "Anular")
             {
-                this.dtpFecha.MinDate = DateTime.MinValue;
+                this.dtpFecha.MinDate = DateTime.Today.AddYears(-25);
             }
             else
             {
@@ -210,26 +218,6 @@ namespace SistemaContable
                 ret = true;
             }
             return ret;
-        }
-
-        /// <summary>
-        /// Retorna el nro de Comprobante de la ultima Factura Emitida
-        /// </summary>
-        /// <param name="listaVentas"></param>
-        /// <returns></returns>
-        private int UltimoNroComprobante(List<Factura> listaVentas)
-        {
-            int aux = 0; ;
-            if(listaVentas is not null)
-            {
-                if(listaVentas.Count>0)
-                {
-                    Factura auxFc = listaVentas.Last();
-                    if(auxFc is not null)
-                        aux = int.Parse(auxFc.NroComprobante);
-                }
-            }
-            return aux;
         }
 
         /// <summary>
@@ -322,6 +310,15 @@ namespace SistemaContable
             }
         }
 
+        /// <summary>
+        /// Reemplaza el "_" por un espacio vacio para una vista mas agradable del item del ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cmbformat(object sender, ListControlConvertEventArgs e)
+        {
+            e.Value = e.ListItem.ToString().Replace("_", " ");
+        }
     }
 
 }

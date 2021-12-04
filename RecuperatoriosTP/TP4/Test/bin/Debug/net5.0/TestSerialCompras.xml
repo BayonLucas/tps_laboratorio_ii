@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Compra xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PtoVenta>56374</PtoVenta>
+  <NroComprobante>99985652</NroComprobante>
+  <Fecha>2021-12-03T00:00:00-03:00</Fecha>
+  <Ente>
+    <RazonSocial>Kanon</RazonSocial>
+    <Cuit>66794613852</Cuit>
+    <SitFiscal>Responsable_Inscripto</SitFiscal>
+  </Ente>
+  <Alicuota>27</Alicuota>
+  <Importe>156000</Importe>
+  <EnteReceptor>
+    <RazonSocial>ConsolaTester</RazonSocial>
+    <Cuit>33789654123</Cuit>
+    <SitFiscal>Responsable_Inscripto</SitFiscal>
+  </EnteReceptor>
+  <Concepto>Bien_de_consumo</Concepto>
+</Compra>

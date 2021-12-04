@@ -1,0 +1,77 @@
+{
+  "Alicuota": 21,
+  "Importe": 1680,
+  "CalculoTotal": 2032.8,
+  "EnteReceptor": {
+    "RazonSocial": "ConsolaTester",
+    "Cuit": "33789654123",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "Concepto": "Servicio",
+  "PtoVenta": "00456",
+  "NroComprobante": "08989898",
+  "Fecha": "2021-12-03T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "Aldanas",
+    "Cuit": "12346167895",
+    "SitFiscal": "Monotributista"
+  },
+  "DatosComprobante": "00456-08989898"
+}{
+  "Alicuota": 27,
+  "Importe": 156000,
+  "CalculoTotal": 198120,
+  "EnteReceptor": {
+    "RazonSocial": "ConsolaTester",
+    "Cuit": "33789654123",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "Concepto": "Bien_de_consumo",
+  "PtoVenta": "56374",
+  "NroComprobante": "99985652",
+  "Fecha": "2021-12-03T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "Kanon",
+    "Cuit": "66794613852",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "DatosComprobante": "56374-99985652"
+}{
+  "Alicuota": 21,
+  "Importe": 1680,
+  "CalculoTotal": 2032.8,
+  "EnteReceptor": {
+    "RazonSocial": "ConsolaTester",
+    "Cuit": "33789654123",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "Concepto": "Servicio",
+  "PtoVenta": "00456",
+  "NroComprobante": "08989898",
+  "Fecha": "2021-12-03T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "Aldanas",
+    "Cuit": "12346167895",
+    "SitFiscal": "Monotributista"
+  },
+  "DatosComprobante": "00456-08989898"
+}{
+  "Alicuota": 27,
+  "Importe": 156000,
+  "CalculoTotal": 198120,
+  "EnteReceptor": {
+    "RazonSocial": "ConsolaTester",
+    "Cuit": "33789654123",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "Concepto": "Bien_de_consumo",
+  "PtoVenta": "56374",
+  "NroComprobante": "99985652",
+  "Fecha": "2021-12-03T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "Kanon",
+    "Cuit": "66794613852",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "DatosComprobante": "56374-99985652"
+}

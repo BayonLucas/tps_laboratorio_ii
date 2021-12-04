@@ -32,7 +32,7 @@ namespace SistemaContable
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmInformes));
             this.gpbCreditoDebitoFiscal = new System.Windows.Forms.GroupBox();
             this.lblAvisoEmergente = new System.Windows.Forms.Label();
-            this.lvlInforme = new System.Windows.Forms.Label();
+            this.lblInforme = new System.Windows.Forms.Label();
             this.lblTotalSitFiscal = new System.Windows.Forms.Label();
             this.lblDebitoFsical = new System.Windows.Forms.Label();
             this.lblCreditoFiscal = new System.Windows.Forms.Label();
@@ -62,7 +62,7 @@ namespace SistemaContable
             // gpbCreditoDebitoFiscal
             // 
             this.gpbCreditoDebitoFiscal.Controls.Add(this.lblAvisoEmergente);
-            this.gpbCreditoDebitoFiscal.Controls.Add(this.lvlInforme);
+            this.gpbCreditoDebitoFiscal.Controls.Add(this.lblInforme);
             this.gpbCreditoDebitoFiscal.Controls.Add(this.lblTotalSitFiscal);
             this.gpbCreditoDebitoFiscal.Controls.Add(this.lblDebitoFsical);
             this.gpbCreditoDebitoFiscal.Controls.Add(this.lblCreditoFiscal);
@@ -90,15 +90,15 @@ namespace SistemaContable
             this.lblAvisoEmergente.Text = "*Debe regularizar su situación*";
             this.lblAvisoEmergente.Visible = false;
             // 
-            // lvlInforme
+            // lblInforme
             // 
-            this.lvlInforme.AutoSize = true;
-            this.lvlInforme.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.lvlInforme.Location = new System.Drawing.Point(404, 22);
-            this.lvlInforme.Name = "lvlInforme";
-            this.lvlInforme.Size = new System.Drawing.Size(91, 28);
-            this.lvlInforme.TabIndex = 10;
-            this.lvlInforme.Text = "Informe:";
+            this.lblInforme.AutoSize = true;
+            this.lblInforme.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lblInforme.Location = new System.Drawing.Point(404, 22);
+            this.lblInforme.Name = "lblInforme";
+            this.lblInforme.Size = new System.Drawing.Size(91, 28);
+            this.lblInforme.TabIndex = 10;
+            this.lblInforme.Text = "Informe:";
             // 
             // lblTotalSitFiscal
             // 
@@ -231,12 +231,14 @@ namespace SistemaContable
             // 
             // cmbConcepto
             // 
+            this.cmbConcepto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConcepto.FormattingEnabled = true;
             this.cmbConcepto.Location = new System.Drawing.Point(359, 23);
             this.cmbConcepto.Name = "cmbConcepto";
             this.cmbConcepto.Size = new System.Drawing.Size(217, 28);
             this.cmbConcepto.TabIndex = 4;
             this.cmbConcepto.SelectedIndexChanged += new System.EventHandler(this.cmbConcepto_SelectedIndexChanged);
+            this.cmbConcepto.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.Cmbformat);
             // 
             // lblVarios
             // 
@@ -349,7 +351,7 @@ namespace SistemaContable
         private System.Windows.Forms.ProgressBar prbBienDeConsumo;
         private System.Windows.Forms.ProgressBar prbServicios;
         private System.Windows.Forms.ProgressBar prbBienDeUso;
-        private System.Windows.Forms.Label lvlInforme;
+        private System.Windows.Forms.Label lblInforme;
         private System.Windows.Forms.ComboBox cmbConcepto;
         private System.Windows.Forms.ListBox lstComprasPorConcepto;
         private System.Windows.Forms.Label lblAvisoEmergente;

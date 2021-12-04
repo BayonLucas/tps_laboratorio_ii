@@ -171,6 +171,7 @@ namespace SistemaContable
             this.cmbSitFiscalReceptor.Name = "cmbSitFiscalReceptor";
             this.cmbSitFiscalReceptor.Size = new System.Drawing.Size(161, 28);
             this.cmbSitFiscalReceptor.TabIndex = 3;
+            this.cmbSitFiscalReceptor.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.Cmbformat);
             // 
             // dtpFecha
             // 

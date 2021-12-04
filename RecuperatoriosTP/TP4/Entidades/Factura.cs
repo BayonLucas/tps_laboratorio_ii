@@ -108,7 +108,8 @@ namespace Entidades
             sb.Append($"{(string)this.EnteReceptor} | ");
             sb.Append($"Importe: {this.Importe} | ");
             sb.Append($"IVA: {this.Alicuota} | ");
-            sb.Append($"Total: {this.CalculoTotal}");
+            sb.Append($"Total: {this.CalculoTotal} | ");
+            sb.Append($"Anulado: {this.Anulado}");
 
             return sb.ToString();
         }
@@ -128,6 +129,26 @@ namespace Entidades
             sb.Append($"Anulado: {this.Anulado}");
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Retorna el nro de Comprobante de la ultima Factura Emitida
+        /// </summary>
+        /// <param name="listaVentas"></param>
+        /// <returns></returns>
+        public static int UltimoNroComprobante(List<Factura> listaVentas)
+        {
+            int aux = 0; ;
+            if (listaVentas is not null)
+            {
+                if (listaVentas.Count > 0)
+                {
+                    Factura auxFc = listaVentas.Last();
+                    if (auxFc is not null)
+                        aux = int.Parse(auxFc.NroComprobante);
+                }
+            }
+            return aux;
         }
     }
 }

@@ -1,0 +1,115 @@
+{
+  "Anulado": false,
+  "Alicuota": 21,
+  "Importe": 150000,
+  "CalculoTotal": 181500,
+  "EnteReceptor": {
+    "RazonSocial": "Aldanas",
+    "Cuit": "12346167895",
+    "SitFiscal": "Monotributista"
+  },
+  "PtoVenta": "00099",
+  "NroComprobante": "00000001",
+  "Fecha": "2021-12-03T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "ConsolaTester",
+    "Cuit": "33789654123",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "DatosComprobante": "00099-00000001"
+}{
+  "Anulado": true,
+  "Alicuota": 27,
+  "Importe": 13500,
+  "CalculoTotal": 17145,
+  "EnteReceptor": {
+    "RazonSocial": "Rito",
+    "Cuit": "32165478925",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "PtoVenta": "00099",
+  "NroComprobante": "00000002",
+  "Fecha": "2021-12-03T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "ConsolaTester",
+    "Cuit": "33789654123",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "DatosComprobante": "00099-00000002"
+}{
+  "Anulado": false,
+  "Alicuota": 21,
+  "Importe": 35000,
+  "CalculoTotal": 42350,
+  "EnteReceptor": {
+    "RazonSocial": "Aldanas",
+    "Cuit": "99999999999",
+    "SitFiscal": "Consumidor_Final"
+  },
+  "PtoVenta": "00099",
+  "NroComprobante": "00000003",
+  "Fecha": "2021-12-03T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "ConsolaTester",
+    "Cuit": "33789654123",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "DatosComprobante": "00099-00000003"
+}{
+  "Anulado": false,
+  "Alicuota": 21,
+  "Importe": 150000,
+  "CalculoTotal": 181500,
+  "EnteReceptor": {
+    "RazonSocial": "Aldanas",
+    "Cuit": "12346167895",
+    "SitFiscal": "Monotributista"
+  },
+  "PtoVenta": "00099",
+  "NroComprobante": "00000001",
+  "Fecha": "2021-12-03T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "ConsolaTester",
+    "Cuit": "33789654123",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "DatosComprobante": "00099-00000001"
+}{
+  "Anulado": true,
+  "Alicuota": 27,
+  "Importe": 13500,
+  "CalculoTotal": 17145,
+  "EnteReceptor": {
+    "RazonSocial": "Rito",
+    "Cuit": "32165478925",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "PtoVenta": "00099",
+  "NroComprobante": "00000002",
+  "Fecha": "2021-12-03T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "ConsolaTester",
+    "Cuit": "33789654123",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "DatosComprobante": "00099-00000002"
+}{
+  "Anulado": false,
+  "Alicuota": 21,
+  "Importe": 35000,
+  "CalculoTotal": 42350,
+  "EnteReceptor": {
+    "RazonSocial": "Aldanas",
+    "Cuit": "99999999999",
+    "SitFiscal": "Consumidor_Final"
+  },
+  "PtoVenta": "00099",
+  "NroComprobante": "00000003",
+  "Fecha": "2021-12-03T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "ConsolaTester",
+    "Cuit": "33789654123",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "DatosComprobante": "00099-00000003"
+}

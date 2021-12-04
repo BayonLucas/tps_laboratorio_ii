@@ -16,7 +16,7 @@ namespace Archivos
         /// </summary>
         /// <param name="objeto">Objeto a serializar.</param>
         /// <param name="ruta">Ruta donde se creará el archivo de serialización.</param>
-        public static void SerializarAXm<T>(T objeto, string ruta)
+        public static void SerializarXml<T>(T objeto, string ruta)
         {
             XmlTextWriter writer = null;
             try
