@@ -42,6 +42,7 @@ namespace SistemaContable
 
         private void FrmCargarCompra_Load(object sender, EventArgs e)
         {
+            this.Dock = DockStyle.Fill;
             switch (this.GetOption)
             {
                 case "Cargar":

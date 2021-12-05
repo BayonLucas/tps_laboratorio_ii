@@ -193,9 +193,9 @@ namespace SistemaContable
             // picGif
             // 
             this.picGif.Image = ((System.Drawing.Image)(resources.GetObject("picGif.Image")));
-            this.picGif.Location = new System.Drawing.Point(12, 12);
+            this.picGif.Location = new System.Drawing.Point(-1, 0);
             this.picGif.Name = "picGif";
-            this.picGif.Size = new System.Drawing.Size(1192, 559);
+            this.picGif.Size = new System.Drawing.Size(1220, 565);
             this.picGif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picGif.TabIndex = 4;
             this.picGif.TabStop = false;
@@ -237,8 +237,8 @@ namespace SistemaContable
             this.cmbConcepto.Name = "cmbConcepto";
             this.cmbConcepto.Size = new System.Drawing.Size(217, 28);
             this.cmbConcepto.TabIndex = 4;
-            this.cmbConcepto.SelectedIndexChanged += new System.EventHandler(this.cmbConcepto_SelectedIndexChanged);
             this.cmbConcepto.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.Cmbformat);
+            this.cmbConcepto.SelectedValueChanged += new System.EventHandler(this.cmbConcepto_SelectedValueChanged);
             // 
             // lblVarios
             // 
@@ -308,17 +308,16 @@ namespace SistemaContable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1216, 583);
+            this.ClientSize = new System.Drawing.Size(1216, 553);
             this.Controls.Add(this.picGif);
             this.Controls.Add(this.gpbGastos);
             this.Controls.Add(this.gpbCreditoDebitoFiscal);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmInformes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Informes y Estadisticas";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmInformes_FormClosing);
             this.Load += new System.EventHandler(this.FrmInformes_Load);
             this.gpbCreditoDebitoFiscal.ResumeLayout(false);

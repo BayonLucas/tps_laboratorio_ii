@@ -107,18 +107,27 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void cargarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
-            {
-                if (this.compra.IsDisposed)
-                    this.compra = new FrmCompra(this.registroContable);
 
-                this.compra.GetOption = "Cargar";
-                this.compra.MdiParent = this;
-                compra.Show();
-            }
-            else
+            try
             {
-                compra.BringToFront();
+                this.CerrarFormsChilds();
+                if ((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
+                {
+                    if (this.compra.IsDisposed)
+                        this.compra = new FrmCompra(this.registroContable);
+
+                    this.compra.GetOption = "Cargar";
+                    this.compra.MdiParent = this;
+                    compra.Show();
+                }
+                else
+                {
+                    compra.BringToFront();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -129,22 +138,30 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
+            try
             {
-                if(!(this.registroContable.Compras.Count == 0))
+                this.CerrarFormsChilds();
+                if ((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
                 {
-                    if (this.compra.IsDisposed)
-                        this.compra = new FrmCompra(this.registroContable);
+                    if (!(this.registroContable.Compras.Count == 0))
+                    {
+                        if (this.compra.IsDisposed)
+                            this.compra = new FrmCompra(this.registroContable);
 
-                    this.compra.GetOption = "Modificar";
-                    this.compra.MdiParent = this;
-                    compra.Show();
+                        this.compra.GetOption = "Modificar";
+                        this.compra.MdiParent = this;
+                        compra.Show();
+                    }
+                }
+                else
+                {
+                    compra.BringToFront();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                compra.BringToFront();
-            }
+                MessageBox.Show(ex.Message);
+            }  
         }
 
         /// <summary>
@@ -154,21 +171,29 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
+            try
             {
-                if (!(this.registroContable.Compras.Count == 0))
+                this.CerrarFormsChilds();
+                if ((IsFormAlreadyOpen(typeof(FrmCompra))) == null)
                 {
-                    if (this.compra.IsDisposed)
-                        this.compra = new FrmCompra(this.registroContable);
+                    if (!(this.registroContable.Compras.Count == 0))
+                    {
+                        if (this.compra.IsDisposed)
+                            this.compra = new FrmCompra(this.registroContable);
 
-                    this.compra.GetOption = "Eliminar";
-                    this.compra.MdiParent = this;
-                    compra.Show();
+                        this.compra.GetOption = "Eliminar";
+                        this.compra.MdiParent = this;
+                        compra.Show();
+                    }
+                }
+                else
+                {
+                    compra.BringToFront();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                compra.BringToFront();
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -179,18 +204,26 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void emitirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((IsFormAlreadyOpen(typeof(FrmVentas))) == null)
+            try
             {
-                if (this.ventas.IsDisposed)
-                    this.ventas = new FrmVentas(this.registroContable);
+                this.CerrarFormsChilds();
+                if ((IsFormAlreadyOpen(typeof(FrmVentas))) == null)
+                {
+                    if (this.ventas.IsDisposed)
+                        this.ventas = new FrmVentas(this.registroContable);
 
-                this.ventas.GetOption = "Emitir";
-                this.ventas.MdiParent = this;
-                ventas.Show();
+                    this.ventas.GetOption = "Emitir";
+                    this.ventas.MdiParent = this;
+                    ventas.Show();
+                }
+                else
+                {
+                    ventas.BringToFront();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ventas.BringToFront();
+                MessageBox.Show(ex.Message);
             }
         }
         /// <summary>
@@ -200,21 +233,29 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void anularToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((IsFormAlreadyOpen(typeof(FrmVentas))) == null)
+            try
             {
-                if (!(this.registroContable.Ventas.Count == 0))
+                this.CerrarFormsChilds();
+                if ((IsFormAlreadyOpen(typeof(FrmVentas))) == null)
                 {
-                    if (this.ventas.IsDisposed)
-                        this.ventas = new FrmVentas(this.registroContable);
+                    if (!(this.registroContable.Ventas.Count == 0))
+                    {
+                        if (this.ventas.IsDisposed)
+                            this.ventas = new FrmVentas(this.registroContable);
 
-                    this.ventas.GetOption = "Anular";
-                    this.ventas.MdiParent = this;
-                    ventas.Show();
+                        this.ventas.GetOption = "Anular";
+                        this.ventas.MdiParent = this;
+                        ventas.Show();
+                    }
+                }
+                else
+                {
+                    ventas.BringToFront();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                ventas.BringToFront();
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -310,6 +351,7 @@ namespace SistemaContable
         {
             try
             {
+                this.CerrarFormsChilds();
                 if ((IsFormAlreadyOpen(typeof(FrmInformes))) == null)
                 {
                     if (this.informes.IsDisposed)
@@ -394,6 +436,16 @@ namespace SistemaContable
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Cierra todos los formularios que se visualizan en el formMenu
+        /// </summary>
+        public void CerrarFormsChilds()
+        {
+            this.compra.Close();
+            this.ventas.Close();
+            this.informes.Close();
         }
     }
 }

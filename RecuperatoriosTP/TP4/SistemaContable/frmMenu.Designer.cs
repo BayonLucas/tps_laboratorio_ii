@@ -166,7 +166,7 @@ namespace SistemaContable
             this.elminarUsuarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.estasSeguroToolStripMenuItem});
             this.elminarUsuarioToolStripMenuItem.Name = "elminarUsuarioToolStripMenuItem";
-            this.elminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.elminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.elminarUsuarioToolStripMenuItem.Text = "Elminar Usuario";
             // 
             // estasSeguroToolStripMenuItem
@@ -174,7 +174,7 @@ namespace SistemaContable
             this.estasSeguroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.muySeguroToolStripMenuItem});
             this.estasSeguroToolStripMenuItem.Name = "estasSeguroToolStripMenuItem";
-            this.estasSeguroToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.estasSeguroToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.estasSeguroToolStripMenuItem.Text = "Estas seguro?";
             // 
             // muySeguroToolStripMenuItem
@@ -183,20 +183,20 @@ namespace SistemaContable
             this.siToolStripMenuItem,
             this.noToolStripMenuItem});
             this.muySeguroToolStripMenuItem.Name = "muySeguroToolStripMenuItem";
-            this.muySeguroToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.muySeguroToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
             this.muySeguroToolStripMenuItem.Text = "Muy seguro?";
             // 
             // siToolStripMenuItem
             // 
             this.siToolStripMenuItem.Name = "siToolStripMenuItem";
-            this.siToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.siToolStripMenuItem.Size = new System.Drawing.Size(112, 26);
             this.siToolStripMenuItem.Text = "Si";
             this.siToolStripMenuItem.Click += new System.EventHandler(this.siToolStripMenuItem_Click);
             // 
             // noToolStripMenuItem
             // 
             this.noToolStripMenuItem.Name = "noToolStripMenuItem";
-            this.noToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.noToolStripMenuItem.Size = new System.Drawing.Size(112, 26);
             this.noToolStripMenuItem.Text = "No";
             this.noToolStripMenuItem.Click += new System.EventHandler(this.noToolStripMenuItem_Click);
             // 
@@ -205,7 +205,7 @@ namespace SistemaContable
             this.picGif.Image = ((System.Drawing.Image)(resources.GetObject("picGif.Image")));
             this.picGif.Location = new System.Drawing.Point(0, 31);
             this.picGif.Name = "picGif";
-            this.picGif.Size = new System.Drawing.Size(1216, 549);
+            this.picGif.Size = new System.Drawing.Size(1216, 553);
             this.picGif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picGif.TabIndex = 3;
             this.picGif.TabStop = false;

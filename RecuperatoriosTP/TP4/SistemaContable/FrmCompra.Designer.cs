@@ -290,7 +290,7 @@ namespace SistemaContable
             this.lstListaCompras.ItemHeight = 20;
             this.lstListaCompras.Location = new System.Drawing.Point(12, 243);
             this.lstListaCompras.Name = "lstListaCompras";
-            this.lstListaCompras.Size = new System.Drawing.Size(1192, 304);
+            this.lstListaCompras.Size = new System.Drawing.Size(1192, 264);
             this.lstListaCompras.TabIndex = 20;
             this.lstListaCompras.SelectedValueChanged += new System.EventHandler(this.lstListaCompras_SelectedValueChanged);
             // 
@@ -333,7 +333,7 @@ namespace SistemaContable
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1216, 583);
+            this.ClientSize = new System.Drawing.Size(1216, 553);
             this.Controls.Add(this.lblEstadoBoton);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnEliminar);
@@ -345,13 +345,12 @@ namespace SistemaContable
             this.Controls.Add(this.txtNroComprobante);
             this.Controls.Add(this.txtPtoVenta);
             this.Controls.Add(this.dtpFecha);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCompra";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cargar Compra";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmCargarCompra_Load);
             this.gpbEnte.ResumeLayout(false);
             this.gpbEnte.PerformLayout();

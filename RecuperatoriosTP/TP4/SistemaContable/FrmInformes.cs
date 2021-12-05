@@ -37,6 +37,7 @@ namespace SistemaContable
 
         private void FrmInformes_Load(object sender, EventArgs e)
         {
+            this.Dock = DockStyle.Fill;
             try
             {
                 this.nudAño.Minimum = (decimal.Parse(DateTime.Now.Year.ToString()) - 5);
@@ -257,26 +258,6 @@ namespace SistemaContable
             this.cancelTask.Cancel();
         }
 
-        private void cmbConcepto_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            List<Compra> auxFilterListCompras = null;
-            List<Factura> auxFilterListVentas = null;
-            if (this.cmbConcepto.SelectedItem is not null)
-            {
-                if (this.chbMes.Checked == false)
-                {
-                    auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, string.Empty);
-                    auxFilterListVentas = GestorBD.BuscarVentasSegun(this.registroContable.Usuario, this.nudAño.Value, string.Empty);
-
-                }
-                else
-                {
-                    auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, this.cmbMes.Text);
-                    auxFilterListVentas = GestorBD.BuscarVentasSegun(this.registroContable.Usuario, this.nudAño.Value, this.cmbMes.Text);
-                }
-
-            }
-        }
 
         private void cmbMes_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -306,11 +287,8 @@ namespace SistemaContable
 
                 }
 
-
                 this.lstComprasPorConcepto.DataSource = null;
                 this.lstComprasPorConcepto.DataSource = auxFilterListCompras;
-
-
 
                 auxCredFiscal = this.CalcularCreditoFiscal(auxFilterListCompras);
                 this.lblCreditoFiscal.Text = $"El crédito fiscal generado en el período seleccionado es de: ${auxCredFiscal}";
@@ -340,6 +318,25 @@ namespace SistemaContable
         private void Cmbformat(object sender, ListControlConvertEventArgs e)
         {
             e.Value = e.ListItem.ToString().Replace("_", " ");
+        }
+
+        private void cmbConcepto_SelectedValueChanged(object sender, EventArgs e)
+        {
+            List<Compra> auxFilterListCompras = null;
+            if (this.cmbConcepto.SelectedItem is not null)
+            {
+                if (this.chbMes.Checked == false)
+                {
+                    auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, string.Empty);
+
+                }
+                else
+                {
+                    auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, this.cmbMes.Text);
+                }
+                this.lstComprasPorConcepto.DataSource = null;
+                this.lstComprasPorConcepto.DataSource = auxFilterListCompras;
+            }
         }
     }
 }

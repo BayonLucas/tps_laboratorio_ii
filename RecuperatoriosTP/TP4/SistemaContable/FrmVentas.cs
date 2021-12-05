@@ -43,6 +43,7 @@ namespace SistemaContable
 
         private void FrmVentas_Load(object sender, EventArgs e)
         {
+            this.Dock = DockStyle.Fill;
             this.lblRazonSocialUsuario.Text = this.registroContable.Usuario.RazonSocial;
             this.lblCuitUsuario.Text = $"CUIT: {this.registroContable.Usuario.Cuit}";
             this.lblSitFiscalUsuario.Text = $"Situación Fiscal: {this.registroContable.Usuario.SitFiscal.ToString()}"; 
@@ -173,7 +174,6 @@ namespace SistemaContable
             {
                 this.lstListaVentas.DataSource = this.registroContable.Ventas;
             }
-            //this.lstListaVentas.DataSource = this.registroContable.Ventas;
             this.lblError.Visible = false;
             this.dtpFecha.Value = DateTime.Today;
             if(this.GetOption == "Anular")

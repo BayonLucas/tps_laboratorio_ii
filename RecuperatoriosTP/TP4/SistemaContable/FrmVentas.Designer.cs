@@ -107,6 +107,7 @@ namespace SistemaContable
             this.txtPtoVenta.Name = "txtPtoVenta";
             this.txtPtoVenta.Size = new System.Drawing.Size(92, 27);
             this.txtPtoVenta.TabIndex = 5;
+            this.txtPtoVenta.TabStop = false;
             this.txtPtoVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtNroComprobante
@@ -117,6 +118,7 @@ namespace SistemaContable
             this.txtNroComprobante.Name = "txtNroComprobante";
             this.txtNroComprobante.Size = new System.Drawing.Size(134, 27);
             this.txtNroComprobante.TabIndex = 6;
+            this.txtNroComprobante.TabStop = false;
             this.txtNroComprobante.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblRazonSocialReceptor
@@ -152,7 +154,7 @@ namespace SistemaContable
             this.txtRazonSocialReceptor.MaxLength = 24;
             this.txtRazonSocialReceptor.Name = "txtRazonSocialReceptor";
             this.txtRazonSocialReceptor.Size = new System.Drawing.Size(167, 27);
-            this.txtRazonSocialReceptor.TabIndex = 1;
+            this.txtRazonSocialReceptor.TabIndex = 2;
             // 
             // txtCuitReceptor
             // 
@@ -160,7 +162,7 @@ namespace SistemaContable
             this.txtCuitReceptor.MaxLength = 11;
             this.txtCuitReceptor.Name = "txtCuitReceptor";
             this.txtCuitReceptor.Size = new System.Drawing.Size(148, 27);
-            this.txtCuitReceptor.TabIndex = 2;
+            this.txtCuitReceptor.TabIndex = 3;
             this.txtCuitReceptor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeypressValidator);
             // 
             // cmbSitFiscalReceptor
@@ -170,7 +172,7 @@ namespace SistemaContable
             this.cmbSitFiscalReceptor.Location = new System.Drawing.Point(705, 25);
             this.cmbSitFiscalReceptor.Name = "cmbSitFiscalReceptor";
             this.cmbSitFiscalReceptor.Size = new System.Drawing.Size(161, 28);
-            this.cmbSitFiscalReceptor.TabIndex = 3;
+            this.cmbSitFiscalReceptor.TabIndex = 4;
             this.cmbSitFiscalReceptor.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.Cmbformat);
             // 
             // dtpFecha
@@ -215,7 +217,7 @@ namespace SistemaContable
             this.txtImporte.Location = new System.Drawing.Point(61, 59);
             this.txtImporte.Name = "txtImporte";
             this.txtImporte.Size = new System.Drawing.Size(147, 27);
-            this.txtImporte.TabIndex = 4;
+            this.txtImporte.TabIndex = 5;
             this.txtImporte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeypressValidator);
             // 
             // txtTotal
@@ -224,7 +226,7 @@ namespace SistemaContable
             this.txtTotal.Location = new System.Drawing.Point(492, 58);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(156, 27);
-            this.txtTotal.TabIndex = 6;
+            this.txtTotal.TabIndex = 7;
             // 
             // cmbAlicuota
             // 
@@ -233,7 +235,7 @@ namespace SistemaContable
             this.cmbAlicuota.Location = new System.Drawing.Point(265, 59);
             this.cmbAlicuota.Name = "cmbAlicuota";
             this.cmbAlicuota.Size = new System.Drawing.Size(151, 28);
-            this.cmbAlicuota.TabIndex = 5;
+            this.cmbAlicuota.TabIndex = 6;
             this.cmbAlicuota.SelectedIndexChanged += new System.EventHandler(this.cmbAlicuota_SelectedIndexChanged);
             this.cmbAlicuota.SelectedValueChanged += new System.EventHandler(this.cmbAlicuota_SelectedValueChanged);
             // 
@@ -276,7 +278,7 @@ namespace SistemaContable
             this.lstListaVentas.ItemHeight = 20;
             this.lstListaVentas.Location = new System.Drawing.Point(12, 287);
             this.lstListaVentas.Name = "lstListaVentas";
-            this.lstListaVentas.Size = new System.Drawing.Size(1192, 264);
+            this.lstListaVentas.Size = new System.Drawing.Size(1192, 224);
             this.lstListaVentas.TabIndex = 23;
             this.lstListaVentas.SelectedValueChanged += new System.EventHandler(this.lstListaVentas_SelectedValueChanged_1);
             // 
@@ -315,7 +317,7 @@ namespace SistemaContable
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1216, 583);
+            this.ClientSize = new System.Drawing.Size(1216, 553);
             this.Controls.Add(this.gbpEnteReceptor);
             this.Controls.Add(this.gpbDatosVenta);
             this.Controls.Add(this.lstListaVentas);
@@ -329,12 +331,12 @@ namespace SistemaContable
             this.Controls.Add(this.lblSitFiscalUsuario);
             this.Controls.Add(this.lblCuitUsuario);
             this.Controls.Add(this.lblRazonSocialUsuario);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmVentas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Ventas";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmVentas_Load);
             this.gpbDatosVenta.ResumeLayout(false);
             this.gpbDatosVenta.PerformLayout();
