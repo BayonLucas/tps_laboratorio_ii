@@ -1,0 +1,58 @@
+{
+  "Alicuota": 21,
+  "Importe": 13000,
+  "CalculoTotal": 15730,
+  "EnteReceptor": {
+    "RazonSocial": "Tester",
+    "Cuit": "99999999999",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "Concepto": "Bien_de_uso",
+  "PtoVenta": "00023",
+  "NroComprobante": "00032126",
+  "Fecha": "2021-12-05T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "pepes",
+    "Cuit": "32165498712",
+    "SitFiscal": "Consumidor_Final"
+  },
+  "DatosComprobante": "00023-00032126"
+}{
+  "Alicuota": 21,
+  "Importe": 1680,
+  "CalculoTotal": 2032.8,
+  "EnteReceptor": {
+    "RazonSocial": "Tester",
+    "Cuit": "99999999999",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "Concepto": "Servicio",
+  "PtoVenta": "00456",
+  "NroComprobante": "08989898",
+  "Fecha": "2021-12-05T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "Aldanas",
+    "Cuit": "12346167895",
+    "SitFiscal": "Monotributista"
+  },
+  "DatosComprobante": "00456-08989898"
+}{
+  "Alicuota": 27,
+  "Importe": 156000,
+  "CalculoTotal": 198120,
+  "EnteReceptor": {
+    "RazonSocial": "Tester",
+    "Cuit": "99999999999",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "Concepto": "Bien_de_consumo",
+  "PtoVenta": "56374",
+  "NroComprobante": "99985652",
+  "Fecha": "2021-12-05T00:00:00-03:00",
+  "Ente": {
+    "RazonSocial": "Kanon",
+    "Cuit": "66794613852",
+    "SitFiscal": "Responsable_Inscripto"
+  },
+  "DatosComprobante": "56374-99985652"
+}

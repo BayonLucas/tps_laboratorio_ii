@@ -150,52 +150,7 @@ namespace SistemaContable
         /// <param name="e"></param>
         private void nudAño_ValueChanged(object sender, EventArgs e)
         {
-            float auxCredFiscal = 0;
-            float auxDebFiscal = 0;
-
-            List<Compra> auxFilterListCompras = null;
-            List<Factura> auxFilterListVentas = null;
-
-            this.Refrescar();
-            try
-            {
-                if (this.cmbConcepto.SelectedItem is not null)
-                {
-                    if (this.chbMes.Checked == false)
-                    {
-                        auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, string.Empty);
-                        auxFilterListVentas = GestorBD.BuscarVentasSegun(this.registroContable.Usuario, this.nudAño.Value, string.Empty);
-
-                    }
-                    else
-                    {
-                        auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, this.cmbMes.Text);
-                        auxFilterListVentas = GestorBD.BuscarVentasSegun(this.registroContable.Usuario, this.nudAño.Value, this.cmbMes.Text);
-                    }
-
-                }
-
-                this.lstComprasPorConcepto.DataSource = null;
-                this.lstComprasPorConcepto.DataSource = auxFilterListCompras;
-
-                auxCredFiscal = this.CalcularCreditoFiscal(auxFilterListCompras);
-                this.lblCreditoFiscal.Text = $"El crédito fiscal generado en el período seleccionado es de: ${auxCredFiscal}";
-
-                auxDebFiscal = this.CalcularDebitoFiscal(auxFilterListVentas);
-                this.lblDebitoFsical.Text = $"El débito fiscal generado en el período seleccionado es de: ${auxDebFiscal}";
-
-                float auxTotal = auxDebFiscal - auxCredFiscal;
-                this.lblTotalSitFiscal.Text = $"El total acumulado es de: ${auxTotal}";
-                if (auxTotal < 0)
-                {
-                    this.lblAvisoEmergente.Visible = true;
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-           
+            this.ActualizarVistaInformes();
         }
        
         /// <summary>
@@ -258,19 +213,55 @@ namespace SistemaContable
             this.cancelTask.Cancel();
         }
 
-
         private void cmbMes_SelectedValueChanged(object sender, EventArgs e)
         {
-            float auxCredFiscal = 0;
-            float auxDebFiscal = 0;
+            this.ActualizarVistaInformes();
+        }
 
+        /// <summary>
+        /// Reemplaza el "_" por un espacio vacio para una vista mas agradable del item del ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cmbformat(object sender, ListControlConvertEventArgs e)
+        {
+            e.Value = e.ListItem.ToString().Replace("_", " ");
+        }
+
+        private void cmbConcepto_SelectedValueChanged(object sender, EventArgs e)
+        {
             List<Compra> auxFilterListCompras = null;
-            List<Factura> auxFilterListVentas = null;
+            if (this.cmbConcepto.SelectedItem is not null)
+            {
+                if (this.chbMes.Checked == false)
+                {
+                    auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, string.Empty);
 
+                }
+                else
+                {
+                    auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, this.cmbMes.Text);
+                }
+                this.lstComprasPorConcepto.DataSource = null;
+                this.lstComprasPorConcepto.DataSource = auxFilterListCompras;
+            }
+        }
 
-            this.Refrescar();
+        /// <summary>
+        /// Actualiza los datos del informe segun el contexto
+        /// </summary>
+        public void ActualizarVistaInformes()
+        {
             try
             {
+                float auxCredFiscal = 0;
+                float auxDebFiscal = 0;
+
+                List<Compra> auxFilterListCompras = null;
+                List<Factura> auxFilterListVentas = null;
+
+                this.Refrescar();
+
                 if (this.cmbConcepto.SelectedItem is not null)
                 {
                     if (this.chbMes.Checked == false)
@@ -307,36 +298,7 @@ namespace SistemaContable
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
-        /// <summary>
-        /// Reemplaza el "_" por un espacio vacio para una vista mas agradable del item del ComboBox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Cmbformat(object sender, ListControlConvertEventArgs e)
-        {
-            e.Value = e.ListItem.ToString().Replace("_", " ");
-        }
-
-        private void cmbConcepto_SelectedValueChanged(object sender, EventArgs e)
-        {
-            List<Compra> auxFilterListCompras = null;
-            if (this.cmbConcepto.SelectedItem is not null)
-            {
-                if (this.chbMes.Checked == false)
-                {
-                    auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, string.Empty);
-
-                }
-                else
-                {
-                    auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, this.cmbMes.Text);
-                }
-                this.lstComprasPorConcepto.DataSource = null;
-                this.lstComprasPorConcepto.DataSource = auxFilterListCompras;
-            }
-        }
     }
 }
