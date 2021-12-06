@@ -29,7 +29,7 @@ namespace Archivos
         }
 
         /// <summary>
-        /// 
+        /// Genera un archivo txt con la informacion que se le pasa por parametro.
         /// </summary>
         /// <param name="ruta"></param>
         /// <param name="data"></param>
