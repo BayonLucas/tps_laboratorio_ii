@@ -63,7 +63,7 @@ namespace SistemaContable
             this.lblRazonSocialUsuario.AutoSize = true;
             this.lblRazonSocialUsuario.Font = new System.Drawing.Font("Segoe UI", 25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
-            this.lblRazonSocialUsuario.Location = new System.Drawing.Point(13, 13);
+            this.lblRazonSocialUsuario.Location = new System.Drawing.Point(33, 17);
             this.lblRazonSocialUsuario.Name = "lblRazonSocialUsuario";
             this.lblRazonSocialUsuario.Size = new System.Drawing.Size(415, 57);
             this.lblRazonSocialUsuario.TabIndex = 0;
@@ -72,7 +72,7 @@ namespace SistemaContable
             // lblCuitUsuario
             // 
             this.lblCuitUsuario.AutoSize = true;
-            this.lblCuitUsuario.Location = new System.Drawing.Point(13, 70);
+            this.lblCuitUsuario.Location = new System.Drawing.Point(33, 89);
             this.lblCuitUsuario.Name = "lblCuitUsuario";
             this.lblCuitUsuario.Size = new System.Drawing.Size(135, 20);
             this.lblCuitUsuario.TabIndex = 1;
@@ -82,7 +82,7 @@ namespace SistemaContable
             // 
             this.lblSitFiscalUsuario.AutoSize = true;
             this.lblSitFiscalUsuario.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSitFiscalUsuario.Location = new System.Drawing.Point(165, 70);
+            this.lblSitFiscalUsuario.Location = new System.Drawing.Point(185, 89);
             this.lblSitFiscalUsuario.Name = "lblSitFiscalUsuario";
             this.lblSitFiscalUsuario.Size = new System.Drawing.Size(180, 20);
             this.lblSitFiscalUsuario.TabIndex = 2;
@@ -91,7 +91,7 @@ namespace SistemaContable
             // btnEmitir
             // 
             this.btnEmitir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEmitir.Location = new System.Drawing.Point(1037, 13);
+            this.btnEmitir.Location = new System.Drawing.Point(1046, 32);
             this.btnEmitir.Name = "btnEmitir";
             this.btnEmitir.Size = new System.Drawing.Size(132, 50);
             this.btnEmitir.TabIndex = 3;
@@ -102,7 +102,7 @@ namespace SistemaContable
             // txtPtoVenta
             // 
             this.txtPtoVenta.Enabled = false;
-            this.txtPtoVenta.Location = new System.Drawing.Point(658, 56);
+            this.txtPtoVenta.Location = new System.Drawing.Point(656, 75);
             this.txtPtoVenta.MaxLength = 5;
             this.txtPtoVenta.Name = "txtPtoVenta";
             this.txtPtoVenta.Size = new System.Drawing.Size(92, 27);
@@ -113,7 +113,7 @@ namespace SistemaContable
             // txtNroComprobante
             // 
             this.txtNroComprobante.Enabled = false;
-            this.txtNroComprobante.Location = new System.Drawing.Point(756, 56);
+            this.txtNroComprobante.Location = new System.Drawing.Point(754, 75);
             this.txtNroComprobante.MaxLength = 8;
             this.txtNroComprobante.Name = "txtNroComprobante";
             this.txtNroComprobante.Size = new System.Drawing.Size(134, 27);
@@ -124,7 +124,7 @@ namespace SistemaContable
             // lblRazonSocialReceptor
             // 
             this.lblRazonSocialReceptor.AutoSize = true;
-            this.lblRazonSocialReceptor.Location = new System.Drawing.Point(29, 33);
+            this.lblRazonSocialReceptor.Location = new System.Drawing.Point(72, 33);
             this.lblRazonSocialReceptor.Name = "lblRazonSocialReceptor";
             this.lblRazonSocialReceptor.Size = new System.Drawing.Size(97, 20);
             this.lblRazonSocialReceptor.TabIndex = 7;
@@ -133,7 +133,7 @@ namespace SistemaContable
             // lblCuitReceptor
             // 
             this.lblCuitReceptor.AutoSize = true;
-            this.lblCuitReceptor.Location = new System.Drawing.Point(330, 33);
+            this.lblCuitReceptor.Location = new System.Drawing.Point(373, 33);
             this.lblCuitReceptor.Name = "lblCuitReceptor";
             this.lblCuitReceptor.Size = new System.Drawing.Size(47, 20);
             this.lblCuitReceptor.TabIndex = 8;
@@ -142,7 +142,7 @@ namespace SistemaContable
             // lblSitFiscal
             // 
             this.lblSitFiscal.AutoSize = true;
-            this.lblSitFiscal.Location = new System.Drawing.Point(582, 33);
+            this.lblSitFiscal.Location = new System.Drawing.Point(625, 33);
             this.lblSitFiscal.Name = "lblSitFiscal";
             this.lblSitFiscal.Size = new System.Drawing.Size(117, 20);
             this.lblSitFiscal.TabIndex = 9;
@@ -150,7 +150,7 @@ namespace SistemaContable
             // 
             // txtRazonSocialReceptor
             // 
-            this.txtRazonSocialReceptor.Location = new System.Drawing.Point(132, 26);
+            this.txtRazonSocialReceptor.Location = new System.Drawing.Point(175, 26);
             this.txtRazonSocialReceptor.MaxLength = 24;
             this.txtRazonSocialReceptor.Name = "txtRazonSocialReceptor";
             this.txtRazonSocialReceptor.Size = new System.Drawing.Size(167, 27);
@@ -158,7 +158,7 @@ namespace SistemaContable
             // 
             // txtCuitReceptor
             // 
-            this.txtCuitReceptor.Location = new System.Drawing.Point(383, 26);
+            this.txtCuitReceptor.Location = new System.Drawing.Point(426, 26);
             this.txtCuitReceptor.MaxLength = 11;
             this.txtCuitReceptor.Name = "txtCuitReceptor";
             this.txtCuitReceptor.Size = new System.Drawing.Size(148, 27);
@@ -169,7 +169,7 @@ namespace SistemaContable
             // 
             this.cmbSitFiscalReceptor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSitFiscalReceptor.FormattingEnabled = true;
-            this.cmbSitFiscalReceptor.Location = new System.Drawing.Point(705, 25);
+            this.cmbSitFiscalReceptor.Location = new System.Drawing.Point(748, 25);
             this.cmbSitFiscalReceptor.Name = "cmbSitFiscalReceptor";
             this.cmbSitFiscalReceptor.Size = new System.Drawing.Size(161, 28);
             this.cmbSitFiscalReceptor.TabIndex = 4;
@@ -178,7 +178,7 @@ namespace SistemaContable
             // dtpFecha
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFecha.Location = new System.Drawing.Point(516, 13);
+            this.dtpFecha.Location = new System.Drawing.Point(514, 32);
             this.dtpFecha.MinDate = new System.DateTime(1900, 11, 20, 0, 0, 0, 0);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(125, 27);
@@ -188,7 +188,7 @@ namespace SistemaContable
             // lblImporte
             // 
             this.lblImporte.AutoSize = true;
-            this.lblImporte.Location = new System.Drawing.Point(61, 35);
+            this.lblImporte.Location = new System.Drawing.Point(72, 33);
             this.lblImporte.Name = "lblImporte";
             this.lblImporte.Size = new System.Drawing.Size(65, 20);
             this.lblImporte.TabIndex = 14;
@@ -197,7 +197,7 @@ namespace SistemaContable
             // lblAlicuota
             // 
             this.lblAlicuota.AutoSize = true;
-            this.lblAlicuota.Location = new System.Drawing.Point(265, 35);
+            this.lblAlicuota.Location = new System.Drawing.Point(276, 33);
             this.lblAlicuota.Name = "lblAlicuota";
             this.lblAlicuota.Size = new System.Drawing.Size(71, 20);
             this.lblAlicuota.TabIndex = 15;
@@ -206,7 +206,7 @@ namespace SistemaContable
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(492, 35);
+            this.lblTotal.Location = new System.Drawing.Point(503, 33);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(49, 20);
             this.lblTotal.TabIndex = 16;
@@ -214,7 +214,7 @@ namespace SistemaContable
             // 
             // txtImporte
             // 
-            this.txtImporte.Location = new System.Drawing.Point(61, 59);
+            this.txtImporte.Location = new System.Drawing.Point(72, 57);
             this.txtImporte.Name = "txtImporte";
             this.txtImporte.Size = new System.Drawing.Size(147, 27);
             this.txtImporte.TabIndex = 5;
@@ -223,7 +223,7 @@ namespace SistemaContable
             // txtTotal
             // 
             this.txtTotal.Enabled = false;
-            this.txtTotal.Location = new System.Drawing.Point(492, 58);
+            this.txtTotal.Location = new System.Drawing.Point(503, 56);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(156, 27);
             this.txtTotal.TabIndex = 7;
@@ -232,7 +232,7 @@ namespace SistemaContable
             // 
             this.cmbAlicuota.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAlicuota.FormattingEnabled = true;
-            this.cmbAlicuota.Location = new System.Drawing.Point(265, 59);
+            this.cmbAlicuota.Location = new System.Drawing.Point(276, 57);
             this.cmbAlicuota.Name = "cmbAlicuota";
             this.cmbAlicuota.Size = new System.Drawing.Size(151, 28);
             this.cmbAlicuota.TabIndex = 6;
@@ -242,7 +242,7 @@ namespace SistemaContable
             // btnAnular
             // 
             this.btnAnular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAnular.Location = new System.Drawing.Point(1037, 12);
+            this.btnAnular.Location = new System.Drawing.Point(1046, 32);
             this.btnAnular.Name = "btnAnular";
             this.btnAnular.Size = new System.Drawing.Size(132, 51);
             this.btnAnular.TabIndex = 7;
@@ -254,7 +254,7 @@ namespace SistemaContable
             // 
             this.lblError.AutoSize = true;
             this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(997, 70);
+            this.lblError.Location = new System.Drawing.Point(1009, 89);
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(207, 20);
             this.lblError.TabIndex = 21;
@@ -263,7 +263,7 @@ namespace SistemaContable
             // lblNroComprobante
             // 
             this.lblNroComprobante.AutoSize = true;
-            this.lblNroComprobante.Location = new System.Drawing.Point(516, 63);
+            this.lblNroComprobante.Location = new System.Drawing.Point(514, 82);
             this.lblNroComprobante.Name = "lblNroComprobante";
             this.lblNroComprobante.Size = new System.Drawing.Size(136, 20);
             this.lblNroComprobante.TabIndex = 22;
@@ -276,9 +276,9 @@ namespace SistemaContable
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstListaVentas.FormattingEnabled = true;
             this.lstListaVentas.ItemHeight = 20;
-            this.lstListaVentas.Location = new System.Drawing.Point(12, 287);
+            this.lstListaVentas.Location = new System.Drawing.Point(33, 306);
             this.lstListaVentas.Name = "lstListaVentas";
-            this.lstListaVentas.Size = new System.Drawing.Size(1192, 224);
+            this.lstListaVentas.Size = new System.Drawing.Size(1183, 304);
             this.lstListaVentas.TabIndex = 23;
             this.lstListaVentas.SelectedValueChanged += new System.EventHandler(this.lstListaVentas_SelectedValueChanged_1);
             // 
@@ -290,9 +290,9 @@ namespace SistemaContable
             this.gpbDatosVenta.Controls.Add(this.txtImporte);
             this.gpbDatosVenta.Controls.Add(this.txtTotal);
             this.gpbDatosVenta.Controls.Add(this.cmbAlicuota);
-            this.gpbDatosVenta.Location = new System.Drawing.Point(12, 188);
+            this.gpbDatosVenta.Location = new System.Drawing.Point(33, 207);
             this.gpbDatosVenta.Name = "gpbDatosVenta";
-            this.gpbDatosVenta.Size = new System.Drawing.Size(1192, 93);
+            this.gpbDatosVenta.Size = new System.Drawing.Size(1183, 93);
             this.gpbDatosVenta.TabIndex = 24;
             this.gpbDatosVenta.TabStop = false;
             this.gpbDatosVenta.Text = "Datos Venta";
@@ -305,9 +305,9 @@ namespace SistemaContable
             this.gbpEnteReceptor.Controls.Add(this.txtRazonSocialReceptor);
             this.gbpEnteReceptor.Controls.Add(this.txtCuitReceptor);
             this.gbpEnteReceptor.Controls.Add(this.cmbSitFiscalReceptor);
-            this.gbpEnteReceptor.Location = new System.Drawing.Point(13, 106);
+            this.gbpEnteReceptor.Location = new System.Drawing.Point(33, 125);
             this.gbpEnteReceptor.Name = "gbpEnteReceptor";
-            this.gbpEnteReceptor.Size = new System.Drawing.Size(1191, 76);
+            this.gbpEnteReceptor.Size = new System.Drawing.Size(1183, 76);
             this.gbpEnteReceptor.TabIndex = 25;
             this.gbpEnteReceptor.TabStop = false;
             this.gbpEnteReceptor.Text = "Datos Ente Receptor";
@@ -317,7 +317,7 @@ namespace SistemaContable
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1216, 553);
+            this.ClientSize = new System.Drawing.Size(1256, 641);
             this.Controls.Add(this.gbpEnteReceptor);
             this.Controls.Add(this.gpbDatosVenta);
             this.Controls.Add(this.lstListaVentas);

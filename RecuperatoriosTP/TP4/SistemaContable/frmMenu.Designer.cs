@@ -65,7 +65,7 @@ namespace SistemaContable
             this.usuarioToolStripMenuItem});
             this.mtrMenu.Location = new System.Drawing.Point(0, 0);
             this.mtrMenu.Name = "mtrMenu";
-            this.mtrMenu.Size = new System.Drawing.Size(1216, 28);
+            this.mtrMenu.Size = new System.Drawing.Size(1258, 28);
             this.mtrMenu.TabIndex = 1;
             this.mtrMenu.Text = "menuStrip1";
             // 
@@ -205,7 +205,7 @@ namespace SistemaContable
             this.picGif.Image = ((System.Drawing.Image)(resources.GetObject("picGif.Image")));
             this.picGif.Location = new System.Drawing.Point(0, 31);
             this.picGif.Name = "picGif";
-            this.picGif.Size = new System.Drawing.Size(1216, 553);
+            this.picGif.Size = new System.Drawing.Size(1256, 641);
             this.picGif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picGif.TabIndex = 3;
             this.picGif.TabStop = false;
@@ -215,7 +215,7 @@ namespace SistemaContable
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1216, 583);
+            this.ClientSize = new System.Drawing.Size(1258, 672);
             this.Controls.Add(this.picGif);
             this.Controls.Add(this.mtrMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

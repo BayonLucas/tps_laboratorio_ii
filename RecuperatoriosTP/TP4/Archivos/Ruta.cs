@@ -27,5 +27,25 @@ namespace Archivos
                 throw new Exception("No se pudo generar la ruta", ex);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ruta"></param>
+        /// <param name="data"></param>
+        public static void GenerarTxt(string path, string info, bool append)
+        {
+            try
+            {
+                using (StreamWriter streamWriter = new StreamWriter(path, append))
+                {
+                    streamWriter.WriteLine(info);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -70,39 +70,46 @@ namespace Test
 
             // Serializar Json y XML
 
-            foreach (Compra item in registro.Compras)
+            try
             {
-                JsonSerial.SerializarJson<Compra>(Ruta.GenerarRuta("TestSerialCompras.Json"), item);
+                foreach (Compra item in registro.Compras)
+                {
+                    JsonSerial.SerializarJson<Compra>(Ruta.GenerarRuta("TestSerialCompras.Json"), item);
+                }
+                foreach (Factura item in registro.Ventas)
+                {
+                    JsonSerial.SerializarJson<Factura>(Ruta.GenerarRuta("TestSerialVentas.Json"), item);
+                }
+                if(File.Exists("TestSerialCompras.Json") && File.Exists("TestSerialVentas.Json"))
+                {
+                    Console.WriteLine("Serialización Json Exitosa");
+                    Console.WriteLine($"La ruta del Json Compras es: {Path.GetFullPath("TestSerialCompras.Json")}");
+                    Console.WriteLine($"La ruta del Json Ventas es: {Path.GetFullPath("TestSerialVentas.Json")}");
+                    Console.WriteLine("");
+                }
+                foreach (Compra item in registro.Compras)
+                {
+                    XmlSerial.SerializarXml<Compra>(item, "TestSerialCompras.xml");
+                }
+                foreach (Factura item in registro.Ventas)
+                {
+                    XmlSerial.SerializarXml<Factura>(item, "TestSerialVentas.xml");
+                }
+                if (File.Exists("TestSerialCompras.xml") && File.Exists("TestSerialVentas.xml"))
+                {
+                    Console.WriteLine("Serialización XML Exitosa");
+                    Console.WriteLine($"La ruta del xml Compras es: {Path.GetFullPath("TestSerialCompras.xml")}");
+                    Console.WriteLine($"La ruta del xml Ventas es: {Path.GetFullPath("TestSerialVentas.xml")}");
+                    Console.WriteLine("");
+                }
+                Console.WriteLine("<-----------PRESIONE UNA TECLA PARA CONTINUAR----------->");
+                Console.ReadKey();
+                Console.Clear();
             }
-            foreach (Factura item in registro.Ventas)
+            catch(Exception ex)
             {
-                JsonSerial.SerializarJson<Factura>(Ruta.GenerarRuta("TestSerialVentas.Json"), item);
+                Console.WriteLine(ex.Message);
             }
-            if(File.Exists("TestSerialCompras.Json") && File.Exists("TestSerialVentas.Json"))
-            {
-                Console.WriteLine("Serialización Json Exitosa");
-                Console.WriteLine($"La ruta del Json Compras es: {Path.GetFullPath("TestSerialCompras.Json")}");
-                Console.WriteLine($"La ruta del Json Ventas es: {Path.GetFullPath("TestSerialVentas.Json")}");
-                Console.WriteLine("");
-            }
-            foreach (Compra item in registro.Compras)
-            {
-                XmlSerial.SerializarXml<Compra>(item, "TestSerialCompras.xml");
-            }
-            foreach (Factura item in registro.Ventas)
-            {
-                XmlSerial.SerializarXml<Factura>(item, "TestSerialVentas.xml");
-            }
-            if (File.Exists("TestSerialCompras.xml") && File.Exists("TestSerialVentas.xml"))
-            {
-                Console.WriteLine("Serialización XML Exitosa");
-                Console.WriteLine($"La ruta del xml Compras es: {Path.GetFullPath("TestSerialCompras.xml")}");
-                Console.WriteLine($"La ruta del xml Ventas es: {Path.GetFullPath("TestSerialVentas.xml")}");
-                Console.WriteLine("");
-            }
-            Console.WriteLine("<-----------PRESIONE UNA TECLA PARA CONTINUAR----------->");
-            Console.ReadKey();
-            Console.Clear();
 
         }
     }

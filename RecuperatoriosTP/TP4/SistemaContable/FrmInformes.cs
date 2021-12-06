@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Entidades;
 using Archivos;
 using System.Threading;
+using System.IO;
 
 namespace SistemaContable
 {
@@ -40,15 +41,25 @@ namespace SistemaContable
             this.Dock = DockStyle.Fill;
             try
             {
+                float porcBienDeUso = this.CarcularPorcentaje(EConcepto.Bien_de_uso.ToString());
+                float porcServicio = this.CarcularPorcentaje(EConcepto.Servicio.ToString());
+                float porcBienDeConsumo = this.CarcularPorcentaje(EConcepto.Bien_de_consumo.ToString());
+                float porcVarios = this.CarcularPorcentaje(EConcepto.Varios.ToString());
+
                 this.nudAño.Minimum = (decimal.Parse(DateTime.Now.Year.ToString()) - 5);
                 this.nudAño.Maximum = (decimal.Parse(DateTime.Now.Year.ToString()));
                 this.cmbConcepto.DataSource = Enum.GetValues(typeof(EConcepto));
                 this.Refrescar();
 
-                this.prbBienDeUso.Value = (int)this.CarcularPorcentaje(EConcepto.Bien_de_uso.ToString());
-                this.prbServicios.Value = (int)this.CarcularPorcentaje(EConcepto.Servicio.ToString());
-                this.prbBienDeConsumo.Value = (int)this.CarcularPorcentaje(EConcepto.Bien_de_consumo.ToString());
-                this.prbVarios.Value = (int)this.CarcularPorcentaje(EConcepto.Varios.ToString());
+                this.prbBienDeUso.Value = (int)porcBienDeUso;
+                this.lblBienDeUso.Text = $"Bien de Uso: %{(porcBienDeUso.ToString("0.##"))}";
+                this.prbServicios.Value = (int)porcServicio;
+                this.lblServicios.Text = $"Servicios: %{porcServicio.ToString("0.##")}";
+                this.prbBienDeConsumo.Value = (int)porcBienDeConsumo;
+                this.lblBienDeConsumo.Text = $"Bien de Consumo: %{porcBienDeConsumo.ToString("0.##")}";
+                this.prbVarios.Value = (int)porcVarios;
+                this.lblVarios.Text = $"Varios: %{porcVarios.ToString("0.##")}";
+
 
                 Gif += ApagarGif;
                 this.IntroInformes = new Task(() => this.CargarGif(token));
@@ -82,7 +93,7 @@ namespace SistemaContable
                             contadorPorConcepto++;
                         }
                     }
-                    total = (float)contadorPorConcepto / this.registroContable.Compras.Count * 100;
+                    total = (float)((float)contadorPorConcepto / (float)this.registroContable.Compras.Count) * 100;
                 }
             }
             catch (Exception)
@@ -159,7 +170,7 @@ namespace SistemaContable
         public void Refrescar()
         {
             this.lblCreditoFiscal.Text = "El crédito fiscal generado en el período seleccionado es de: $0";
-            this.lblCreditoFiscal.Text = "El débito fiscal generado en el período seleccionado es de: $0";
+            this.lblDebitoFsical.Text = "El débito fiscal generado en el período seleccionado es de: $0";
             this.lblTotalSitFiscal.Text = "El total acumulado es de: $0";
             this.lblAvisoEmergente.Visible = false;
             this.lstComprasPorConcepto.DataSource = null;
@@ -285,7 +296,7 @@ namespace SistemaContable
                 this.lblCreditoFiscal.Text = $"El crédito fiscal generado en el período seleccionado es de: ${auxCredFiscal}";
 
                 auxDebFiscal = this.CalcularDebitoFiscal(auxFilterListVentas);
-                this.lblCreditoFiscal.Text = $"El débito fiscal generado en el período seleccionado es de: ${auxDebFiscal}";
+                this.lblDebitoFsical.Text = $"El débito fiscal generado en el período seleccionado es de: ${auxDebFiscal}";
 
                 float auxTotal = auxDebFiscal - auxCredFiscal;
                 this.lblTotalSitFiscal.Text = $"El total acumulado es de: ${auxTotal}";
@@ -300,5 +311,52 @@ namespace SistemaContable
             }
         }
 
+        private void btnExportarTxt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                List<Compra> auxFilterListCompras = new List<Compra>();
+                string path;
+
+                sb.AppendLine("**********************************************************************************************************");
+                sb.AppendLine(this.registroContable.Usuario.RazonSocial);
+                sb.AppendLine($"{this.registroContable.Usuario.Cuit} - {this.registroContable.Usuario.SitFiscal}");
+                sb.AppendLine($"\nLista de Compras Por Concepto: {(EConcepto)this.cmbConcepto.SelectedItem}\n");
+                sb.AppendLine("Fecha - Razon Social | CUIT | Situacion Fiscal - ptoVenta-nroComprobante - Total - Concepto - CUIT Receptor");
+
+                if (this.chbMes.Checked == false)
+                {
+                    auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, string.Empty);
+                    path = $"InformeCompras{this.nudAño.Value}.txt";
+                }
+                else
+                {
+                    auxFilterListCompras = GestorBD.BuscarComprasSegun(this.registroContable.Usuario, (EConcepto)this.cmbConcepto.SelectedItem, this.nudAño.Value, this.cmbMes.Text);
+                    path = $"InformeCompras{this.nudAño.Value}-{this.cmbMes.Text}.txt";
+                }
+
+                foreach(Compra item in auxFilterListCompras)
+                {
+                    sb.AppendLine(item.MostrarDatos());
+                }
+                sb.AppendLine("\n**********************************************************************************************************");
+
+                Ruta.GenerarTxt(Ruta.GenerarRuta(path), sb.ToString(), false);
+                if (File.Exists(path))
+                {
+                    MessageBox.Show($"El txt del Informe se creó con exito.\n La direccion donde se encuentra es: {Path.GetFullPath(path)}");
+                }
+                else
+                {
+                    MessageBox.Show("No se ha podido generar el archivo txt");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show("No se ha podido generar el archivo txt");
+            }
+        }
     }
 }

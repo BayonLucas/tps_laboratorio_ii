@@ -43,6 +43,7 @@ namespace SistemaContable
             this.chbMes = new System.Windows.Forms.CheckBox();
             this.picGif = new System.Windows.Forms.PictureBox();
             this.gpbGastos = new System.Windows.Forms.GroupBox();
+            this.btnExportarTxt = new System.Windows.Forms.Button();
             this.lstComprasPorConcepto = new System.Windows.Forms.ListBox();
             this.cmbConcepto = new System.Windows.Forms.ComboBox();
             this.lblVarios = new System.Windows.Forms.Label();
@@ -71,7 +72,7 @@ namespace SistemaContable
             this.gpbCreditoDebitoFiscal.Controls.Add(this.nudAño);
             this.gpbCreditoDebitoFiscal.Controls.Add(this.cmbMes);
             this.gpbCreditoDebitoFiscal.Controls.Add(this.chbMes);
-            this.gpbCreditoDebitoFiscal.Location = new System.Drawing.Point(12, 12);
+            this.gpbCreditoDebitoFiscal.Location = new System.Drawing.Point(31, 43);
             this.gpbCreditoDebitoFiscal.Name = "gpbCreditoDebitoFiscal";
             this.gpbCreditoDebitoFiscal.Size = new System.Drawing.Size(1192, 220);
             this.gpbCreditoDebitoFiscal.TabIndex = 0;
@@ -193,15 +194,16 @@ namespace SistemaContable
             // picGif
             // 
             this.picGif.Image = ((System.Drawing.Image)(resources.GetObject("picGif.Image")));
-            this.picGif.Location = new System.Drawing.Point(-1, 0);
+            this.picGif.Location = new System.Drawing.Point(-2, -1);
             this.picGif.Name = "picGif";
-            this.picGif.Size = new System.Drawing.Size(1220, 565);
+            this.picGif.Size = new System.Drawing.Size(1258, 643);
             this.picGif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picGif.TabIndex = 4;
             this.picGif.TabStop = false;
             // 
             // gpbGastos
             // 
+            this.gpbGastos.Controls.Add(this.btnExportarTxt);
             this.gpbGastos.Controls.Add(this.lstComprasPorConcepto);
             this.gpbGastos.Controls.Add(this.cmbConcepto);
             this.gpbGastos.Controls.Add(this.lblVarios);
@@ -212,16 +214,25 @@ namespace SistemaContable
             this.gpbGastos.Controls.Add(this.lblBienDeConsumo);
             this.gpbGastos.Controls.Add(this.lblServicios);
             this.gpbGastos.Controls.Add(this.lblBienDeUso);
-            this.gpbGastos.Location = new System.Drawing.Point(12, 238);
+            this.gpbGastos.Location = new System.Drawing.Point(31, 269);
             this.gpbGastos.Name = "gpbGastos";
             this.gpbGastos.Size = new System.Drawing.Size(1192, 333);
             this.gpbGastos.TabIndex = 2;
             this.gpbGastos.TabStop = false;
             this.gpbGastos.Text = "Informe de Gastos Anuales por conceptos ";
             // 
+            // btnExportarTxt
+            // 
+            this.btnExportarTxt.Location = new System.Drawing.Point(1075, 19);
+            this.btnExportarTxt.Name = "btnExportarTxt";
+            this.btnExportarTxt.Size = new System.Drawing.Size(111, 34);
+            this.btnExportarTxt.TabIndex = 9;
+            this.btnExportarTxt.Text = "Exportar a txt";
+            this.btnExportarTxt.UseVisualStyleBackColor = true;
+            this.btnExportarTxt.Click += new System.EventHandler(this.btnExportarTxt_Click);
+            // 
             // lstComprasPorConcepto
             // 
-            this.lstComprasPorConcepto.Enabled = false;
             this.lstComprasPorConcepto.FormattingEnabled = true;
             this.lstComprasPorConcepto.ItemHeight = 20;
             this.lstComprasPorConcepto.Location = new System.Drawing.Point(275, 63);
@@ -253,28 +264,28 @@ namespace SistemaContable
             // 
             this.prbVarios.Location = new System.Drawing.Point(16, 274);
             this.prbVarios.Name = "prbVarios";
-            this.prbVarios.Size = new System.Drawing.Size(253, 29);
+            this.prbVarios.Size = new System.Drawing.Size(235, 29);
             this.prbVarios.TabIndex = 6;
             // 
             // prbBienDeConsumo
             // 
             this.prbBienDeConsumo.Location = new System.Drawing.Point(16, 202);
             this.prbBienDeConsumo.Name = "prbBienDeConsumo";
-            this.prbBienDeConsumo.Size = new System.Drawing.Size(253, 29);
+            this.prbBienDeConsumo.Size = new System.Drawing.Size(235, 29);
             this.prbBienDeConsumo.TabIndex = 5;
             // 
             // prbServicios
             // 
             this.prbServicios.Location = new System.Drawing.Point(16, 130);
             this.prbServicios.Name = "prbServicios";
-            this.prbServicios.Size = new System.Drawing.Size(253, 29);
+            this.prbServicios.Size = new System.Drawing.Size(235, 29);
             this.prbServicios.TabIndex = 4;
             // 
             // prbBienDeUso
             // 
             this.prbBienDeUso.Location = new System.Drawing.Point(16, 63);
             this.prbBienDeUso.Name = "prbBienDeUso";
-            this.prbBienDeUso.Size = new System.Drawing.Size(253, 29);
+            this.prbBienDeUso.Size = new System.Drawing.Size(235, 29);
             this.prbBienDeUso.TabIndex = 3;
             // 
             // lblBienDeConsumo
@@ -308,7 +319,7 @@ namespace SistemaContable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1216, 553);
+            this.ClientSize = new System.Drawing.Size(1256, 641);
             this.Controls.Add(this.picGif);
             this.Controls.Add(this.gpbGastos);
             this.Controls.Add(this.gpbCreditoDebitoFiscal);
@@ -355,5 +366,6 @@ namespace SistemaContable
         private System.Windows.Forms.ListBox lstComprasPorConcepto;
         private System.Windows.Forms.Label lblAvisoEmergente;
         private System.Windows.Forms.PictureBox picGif;
+        private System.Windows.Forms.Button btnExportarTxt;
     }
 }
